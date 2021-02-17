@@ -34,7 +34,7 @@ class MailDog():
             cnt = self.content_data.img_cnt
         self.cnt = cnt
         self.breed = breed
-        self.session = smtplib.SMTP('smtp.gmail.com')
+        self.session = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         self.session.starttls()
         self._login_mail_server()
     
