@@ -1,1 +1,1 @@
-python3 maildog.py run_everyday 00:39
+python3 maildog.py run_everyday 00:47

@@ -1,15 +1,21 @@
+import os
+import time
 import smtplib
-
 from random import choice
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+
+import fire
+import daemon
+from daemon import pidfile
+import schedule
+
 from option import Option, get_logger
 from string import Template  
 from fetchdog import FetchDog
-import time
-import fire
-import schedule
 
+pid_file = '/var/run/maildog.pid'
 
 class MailDog():
     def __init__(self):
@@ -108,12 +114,6 @@ class MailDog():
         last, first = breed.split("/")
         return f'{first} {last}'
     
-    def run_everyday(self, send_time):
-        schedule.every().day.at(send_time).do(self.random)
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
-    
     def random(self):
         self._logger.info("Hi, I am MailDog! You got a Random dog email!")
         self._init()
@@ -125,6 +125,40 @@ class MailDog():
         self._init(breed, cnt)
         self._make_content()
         self._send_email()
+    
+    def run_everyday(self, send_time):
+        
+        def run():
+            # schedule.every().day.at(send_time).do(self.random)
+            schedule.every(10).second.do(self.random)
+            while True:
+                schedule.run_pending()
+                time.sleep(1)
+                print('ture')
+                
+            return
+        
+        def start_daemon():
+            print('start_daemon')
+            with daemon.DaemonContext(
+                    working_directory = '/tmp',
+                    umask = 0o002,
+                    pidfile = pidfile.TimeoutPIDLockFile(pid_file),
+                ) as context:
+                run()
+            return
+        
+        start_daemon()
+    
+    def stop_run_everyday(self):
+        pid = '999999'
+        f = open(pid_file, 'r')
+        for line in f:
+            pid = line = line.strip()
+        f.close()
+        cmd = 'kill '+ pid
+        os.system(cmd)
+    
         
 if __name__ == '__main__':
     fire.Fire(MailDog)
