@@ -2,4 +2,4 @@ schedule
 fire
 ujson
 requests
-demon
+python-daemon
