@@ -6,7 +6,9 @@ from email.mime.multipart import MIMEMultipart
 from option import Option, get_logger
 from string import Template  
 from fetchdog import FetchDog
+import time
 import fire
+import schedule
 
 
 class MailDog():
@@ -104,7 +106,13 @@ class MailDog():
             return breed
         last, first = breed.split("/")
         return f'{first} {last}'
-        
+    
+    def run_everyday(self, send_time):
+        schedule.every().day.at(send_time).do(self.random)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+    
     def random(self):
         self._logger.info("Hi, I am MailDog! You got a Random dog email!")
         self._init()
