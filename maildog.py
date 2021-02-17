@@ -6,6 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from option import Option, get_logger
 from string import Template  
 from fetchdog import FetchDog
+import fire
 
 
 class MailDog():
@@ -21,7 +22,13 @@ class MailDog():
         self.img_tags = ""
         self.content_data = Option('content.json')
     
-    def _init(self):
+    def _init(self, breed=None, cnt=None):
+        if not breed:
+            breed = self.fd.get_random_breed()
+        if not cnt:
+            cnt = self.content_data.img_cnt
+        self.cnt = cnt
+        self.breed = breed
         self.session = smtplib.SMTP('smtp.gmail.com')
         self.session.starttls()
         self._login_mail_server()
@@ -34,13 +41,12 @@ class MailDog():
         self.session.login(self._opt.my_email, self._opt.password)
     
     def _get_template(self):
-        breed = self.fd.get_random_breed()
-        img_urls = self.fd.get_img_url_by_breed(breed, self.content_data.img_cnt)
+        img_urls = self.fd.get_img_url_by_breed(self.breed, self.cnt)
         while not img_urls:
-            breed = self.fd.get_random_breed()
-            img_urls = self.fd.get_img_url_by_breed(breed, self.content_data.img_cnt)
+            self.breed = self.fd.get_random_breed()
+            img_urls = self.fd.get_img_url_by_breed()
         self._make_img_tags(img_urls)
-        real_breed = self._get_breed_full_name(breed) 
+        real_breed = self._get_breed_full_name(self.breed) 
         template = Template(
             """
                 <html>
@@ -99,14 +105,17 @@ class MailDog():
         last, first = breed.split("/")
         return f'{first} {last}'
         
-            
-        
-    def run(self):
-        self._logger.info("Hi, I am MailDog!")
+    def random(self):
+        self._logger.info("Hi, I am MailDog! You got a Random dog email!")
         self._init()
         self._make_content()
         self._send_email()
         
+    def breed(self, breed="labrador", cnt=8):
+        self._logger.info(f"Hi, I am MailDog! You got a {breed} email!")
+        self._init(breed, cnt)
+        self._make_content()
+        self._send_email()
+        
 if __name__ == '__main__':
-    md = MailDog()
-    md.run()
+    fire.Fire(MailDog)

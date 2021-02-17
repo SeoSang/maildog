@@ -1,0 +1,1 @@
+python3 maildog.py random
