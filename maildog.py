@@ -97,8 +97,9 @@ class MailDog():
         if not self.content:
             self._logger.error("No Contents!")
             return
-        self.session.sendmail(self._opt.my_email, self._opt.target_email, self.content.as_string())
-        self._logger.info("Sending Email complete!")
+        for target_email in self._opt.target_emails:
+            self.session.sendmail(self._opt.my_email, target_email, self.content.as_string())
+            self._logger.info("Sending Email complete!")
         
     @staticmethod
     def _get_breed_full_name(breed):
