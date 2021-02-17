@@ -22,6 +22,9 @@ class FetchDog():
     """Fetch all breeds which can get from api.
     """
     response = requests.get(ALL_BREEDS)
+    while response.status_code != 200:
+      response = requests.get(ALL_BREEDS)
+        
     temp = ujson.loads(response.text)
     for breed, sub_breeds in temp['message'].items():
       if len(sub_breeds) == 0:
@@ -52,6 +55,8 @@ class FetchDog():
       
     url = f'https://dog.ceo/api/breed/{breed}/images/random/{count}'
     response = requests.get(url)
+    while response.status_code != 200:
+      response = requests.get(url)
     temp = ujson.loads(response.text)
     img_urls = temp.get("message", [])
     if isinstance(img_urls, str):
@@ -65,6 +70,8 @@ class FetchDog():
     """Get img_url by random. 
     """
     response = requests.get(RANDOM_DOG + '/' + str(count))
+    while response.status_code != 200:
+      response = requests.get(RANDOM_DOG + '/' + str(count))
     temp = ujson.loads(response.text)
     result = temp.get("message", [])
     if isinstance(result, str):

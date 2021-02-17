@@ -1,4 +1,3 @@
-import os
 import time
 import smtplib
 from random import choice
@@ -7,8 +6,6 @@ from email.mime.multipart import MIMEMultipart
 
 
 import fire
-import daemon
-from daemon import pidfile
 import schedule
 
 from option import Option, get_logger
@@ -127,37 +124,11 @@ class MailDog():
         self._send_email()
     
     def run_everyday(self, send_time):
-        
-        def run():
-            # schedule.every().day.at(send_time).do(self.random)
-            schedule.every(10).second.do(self.random)
-            while True:
-                schedule.run_pending()
-                time.sleep(1)
-                print('ture')
-                
-            return
-        
-        def start_daemon():
-            print('start_daemon')
-            with daemon.DaemonContext(
-                    working_directory = '/tmp',
-                    umask = 0o002,
-                    pidfile = pidfile.TimeoutPIDLockFile(pid_file),
-                ) as context:
-                run()
-            return
-        
-        start_daemon()
-    
-    def stop_run_everyday(self):
-        pid = '999999'
-        f = open(pid_file, 'r')
-        for line in f:
-            pid = line = line.strip()
-        f.close()
-        cmd = 'kill '+ pid
-        os.system(cmd)
+        # schedule.every().day.at(send_time).do(self.random)
+        schedule.every(10).seconds.do(self.random)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
     
         
 if __name__ == '__main__':
