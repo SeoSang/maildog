@@ -35,7 +35,6 @@ class MailDog():
         self.cnt = cnt
         self.breed = breed
         self.session = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        self.session.starttls()
         self._login_mail_server()
     
     def _load_parameter(self):
@@ -124,8 +123,7 @@ class MailDog():
         self._send_email()
     
     def run_everyday(self, send_time):
-        # schedule.every().day.at(send_time).do(self.random)
-        schedule.every(10).seconds.do(self.random)
+        schedule.every().day.at(send_time).do(self.random)
         while True:
             schedule.run_pending()
             time.sleep(1)

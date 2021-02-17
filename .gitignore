@@ -1,5 +1,9 @@
-
+# configure
 conf*
 conf.json
 
+# log
+nohup.out
+
+# cache
 __pycache__
