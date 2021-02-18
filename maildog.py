@@ -123,6 +123,8 @@ class MailDog():
         self._send_email()
     
     def run_everyday(self, send_time):
+        send_time = str(send_time)
+        self._logger.info(f'send_time = {send_time}')
         schedule.every().day.at(send_time).do(self.random)
         while True:
             schedule.run_pending()
