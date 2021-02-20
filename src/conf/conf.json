@@ -1,0 +1,6 @@
+{
+    "my_email": "myeamil@naver.com",
+    "password": "email_password",
+    "target_emails" : ["email1@naver.com", "email2@naver.com"],
+    "target_name" : "Friends_name"
+}

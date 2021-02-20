@@ -14,7 +14,7 @@ class FetchDog():
   def __init__(self):
     self.breeds = []
     self._logger = get_logger('MailDog')
-    self.contents = Option('content.json')
+    self.contents = Option('conf/content.json')
     self._get_all_breeds()
     
   

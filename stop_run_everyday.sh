@@ -1,1 +1,0 @@
-python3 maildog.py stop_run_everyday

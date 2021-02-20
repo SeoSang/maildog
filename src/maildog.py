@@ -25,7 +25,7 @@ class MailDog():
             ]
         self.content = None
         self.img_tags = ""
-        self.content_data = Option('content.json')
+        self.content_data = Option('conf/content.json')
     
     def _init(self, breed=None, cnt=None):
         if not breed:
@@ -38,7 +38,7 @@ class MailDog():
         self._login_mail_server()
     
     def _load_parameter(self):
-        self._opt =Option('conf.json') 
+        self._opt =Option('conf/conf.json') 
         self._logger = get_logger('MailDog')
     
     def _login_mail_server(self):
