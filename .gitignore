@@ -7,3 +7,9 @@ nohup.out
 
 # cache
 __pycache__
+
+# CI/CD
+Jenkinsfile
+
+# for test
+test.py

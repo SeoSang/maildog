@@ -2,8 +2,6 @@
 [![MIT License][license-shield]][license-url]
 [![Python-version][python-icon]][python-url]
 
-
-
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
@@ -27,6 +25,7 @@
 </p>
 
 # Table of Contents
+
 - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
     - [Reference](#reference)
@@ -39,8 +38,8 @@
   - [License](#license)
   - [Contact](#contact)
 
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 Fetch a cute dog images, and send email to your friends automatically.
@@ -59,16 +58,15 @@ It is a simple program made by an individual alone.
 
 An email that looks like this will be sent to the target email address !
 
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 ### Prerequisites
 
- 
-* Install python
-* Email IMAP preferences
-  * [See here](https://support.google.com/mail/answer/7126229?hl=en)
+- Install python
+- Email IMAP preferences
+  - [See here](https://support.google.com/mail/answer/7126229?hl=en)
 
 > If you want to execute everyday automatically, recommends running on Linux or Mac OS.
 
@@ -86,39 +84,47 @@ An email that looks like this will be sent to the target email address !
    $ pip install -r requirements.txt
    ```
 4. Edit configuration `src/conf`
-    
-    `conf.json`
-    ``` json
-    {
-        "my_email": "myeamil@naver.com",
-        "password": "email_password",
-        "target_emails" : ["email1@naver.com", "email2@naver.com"],
-        "target_name" : "Friends_name"
-    }
-    ```
-    `content.json`
-    ``` json
-    {
-        "text": [
-            "안녕하세요!, 저는 %s 입니다!",
-            "멍멍!! - %s",
-            "오늘의 댕댕이 %s 를 소개합니다!",
-            "바우와우 ! 바우와우 ! - %s",
-            "반가워~ 나는 %s 야!",
-            "오늘의 강아지는 바로바로 ~~~~ %s",
-            "오늘밤 주인공은 나야 나! - %s",
-            "%s 가 당신에게 말을 걸어요! (멍멍!)",
-            "강아지를 사랑하는 당신에게 ... %s 를 보냅니다.",
-            "%s 의 러브레터 도착!"
-        ],
-        "target_name": "김망디",
-        "img_cnt": 4
-    }
-    ```
- - `%s` will be put a breed of dog images.
 
+   `conf.json`
+
+   ```json
+   {
+     "my_email": "myeamil@naver.com",
+     "password": "email_password",
+     "target_emails": ["email1@naver.com", "email2@naver.com"],
+     "target_name": "Friends_name"
+   }
+   ```
+
+   `content.json`
+
+   ```json
+   {
+     "text": [
+       "안녕하세요!, 저는 %s 입니다!",
+       "멍멍!! - %s",
+       "오늘의 댕댕이 %s 를 소개합니다!",
+       "바우와우 ! 바우와우 ! - %s",
+       "반가워~ 나는 %s 야!",
+       "오늘의 강아지는 바로바로 ~~~~ %s",
+       "오늘밤 주인공은 나야 나! - %s",
+       "%s 가 당신에게 말을 걸어요! (멍멍!)",
+       "강아지를 사랑하는 당신에게 ... %s 를 보냅니다.",
+       "%s 의 러브레터 도착!"
+     ],
+     "target_name": "김망디",
+     "breed_to_exclude": ["cotondetulear"],
+     "breed_to_select": [],
+     "img_cnt": 4
+   }
+   ```
+
+- `%s` will be put a breed of dog images.
+- `breed_to_exclude` : The breed that you don't want to mail.
+- `breed_to_select` : If you want to send only certain breeds, activate this option. If it is [], this option will be disabled.
 
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 - Send email by random breed once
@@ -153,20 +159,22 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License.
 
-
 <!-- CONTACT -->
+
 ## Contact
 
 SeoSang
+
 - Blog : https://programming119.tistory.com
 - Site : https://i-am-seo-sang.vercel.app/
 - Email : ddrrpg@naver.com
 
-[seosang-icon]: https://img.shields.io/static/v1?label=madeby&message=seosang&color=blue 
+[seosang-icon]: https://img.shields.io/static/v1?label=madeby&message=seosang&color=blue
 [seosang-url]: https://github.com/SeoSang
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg
 [license-url]: #license

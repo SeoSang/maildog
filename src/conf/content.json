@@ -10,5 +10,7 @@
     " 치아아 말고 나 %s도 봐주세여"
   ],
   "target_name": "김마림바",
+  "breed_to_exclude": ["cotondetulear"],
+  "breed_to_select": [],
   "img_cnt": 6
 }

@@ -33,6 +33,13 @@ class FetchDog():
         for sub_breed in sub_breeds:
           self.breeds.append(f'{breed}/{sub_breed}')
 
+  def filter_by_conf(self):
+    if self.contents.breed_to_select: # select breed only in 'breed_to_select' 
+      self.breeds = list(filter(lambda x: x in self.contents.breed_to_select, self.breeds))
+    else:
+      self.breeds = list(filter(lambda x: x not in self.contents.breed_to_exclude, self.breeds))
+    print(breeds)
+
   def get_random_breed(self):
     random_breed = choice(self.breeds)
     self._logger.info(random_breed)
@@ -78,6 +85,12 @@ class FetchDog():
       result = [result]
     return result
 
+  @staticmethod
+  def _get_breed_full_name(breed):
+      if not "/" in breed:
+          return breed
+      last, first = breed.split("/")
+      return f'{first} {last}'
 
 
 if __name__ == '__main__':
