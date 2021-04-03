@@ -1,1 +1,3 @@
-python3 maildog.py random
+#!/bin/bash
+
+python3 ./src/maildog.py random

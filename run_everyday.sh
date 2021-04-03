@@ -1,1 +1,3 @@
-python3 maildog.py run_everyday 22:30
+#!/bin/bash
+
+python3 ./src/maildog.py run_everyday 22:30
