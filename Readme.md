@@ -180,3 +180,7 @@ SeoSang
 [license-url]: #license
 [python-icon]: https://img.shields.io/static/v1?label=python&message=>=3.6&color=yellow
 [python-url]: https://docs.python.org/3/
+
+---
+
+Thank you.
