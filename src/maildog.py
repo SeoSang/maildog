@@ -83,7 +83,7 @@ class MailDog():
 
     def _make_content(self):
         today_heart = choice(self.hearts)
-        title = f'<{today_heart}오늘의 강아지 도착{today_heart}>'
+        title = f'<{today_heart}{self.content_data.title}{today_heart}>'
         template = self._get_template()
         self.content = MIMEMultipart()
         self.content.attach(MIMEText(template, 'html'))

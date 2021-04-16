@@ -13,3 +13,4 @@ Jenkinsfile
 
 # for test
 test.py
+src/conf/conf.json

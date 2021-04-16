@@ -1,16 +1,26 @@
 {
+  "title": "귀여운 강아지 도착",
   "text": [
     "멍멍!! - %s",
     "오늘의 댕댕이 %s 를 소개합니다!",
     "바우와우 ! 바우와우 ! - %s",
     "%s 가 당신에게 말을 걸어요! (멍멍!)",
     "김단비님의 주인님이 맞으신가요?.. 저는 %s에요..",
-    "난 너무 예뻐 ! - %s",
-    "난 너무 매력있어~ - %s",
-    " 치아아 말고 나 %s도 봐주세여"
+    "난 %s 에요, 단비 엉아랑 친해지고 싶어요...!",
+    "치아아는 아니지만 귀여운 %s",
+    "치아아 말고 나 %s도 봐주세여"
   ],
   "target_name": "김마림바",
+  "filter": true,
   "breed_to_exclude": ["cotondetulear"],
-  "breed_to_select": [],
+  "breed_to_select": [
+    "akita",
+    "cockapoo",
+    "shiba",
+    "shihtzu",
+    "maltese",
+    "pomeranian",
+    "chihuahua"
+  ],
   "img_cnt": 6
 }

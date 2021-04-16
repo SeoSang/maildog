@@ -32,13 +32,15 @@ class FetchDog():
       else:
         for sub_breed in sub_breeds:
           self.breeds.append(f'{breed}/{sub_breed}')
+    if self.contents.filter:
+      self._filter_by_conf()
 
-  def filter_by_conf(self):
-    if self.contents.breed_to_select: # select breed only in 'breed_to_select' 
+  def _filter_by_conf(self):
+    if self.contents.breed_to_select: # select breed only in 'breed_to_select'
       self.breeds = list(filter(lambda x: x in self.contents.breed_to_select, self.breeds))
     else:
       self.breeds = list(filter(lambda x: x not in self.contents.breed_to_exclude, self.breeds))
-    print(breeds)
+    print("[INFO] filtered = ", self.breeds)
 
   def get_random_breed(self):
     random_breed = choice(self.breeds)
@@ -95,4 +97,4 @@ class FetchDog():
 
 if __name__ == '__main__':
   fd = FetchDog()
-  fd._get_all_breeds()
+  print(fd.breeds)
