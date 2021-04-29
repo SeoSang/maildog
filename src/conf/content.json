@@ -14,13 +14,15 @@
   "filter": true,
   "breed_to_exclude": ["cotondetulear"],
   "breed_to_select": [
-    "akita",
-    "cockapoo",
     "shiba",
     "shihtzu",
     "maltese",
     "pomeranian",
-    "chihuahua"
+    "chihuahua",
+    "chow",
+    "dachshund",
+    "pug",
+    "mix"
   ],
   "img_cnt": 6
 }
