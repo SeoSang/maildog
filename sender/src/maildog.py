@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+import os
 import time
 import smtplib
 from random import choice
@@ -25,7 +28,7 @@ class MailDog():
             ]
         self.content = None
         self.img_tags = ""
-        self.content_data = Option('src/conf/content.json')
+        self.content_data = Option(f'{os.path.dirname(os.path.realpath(__file__))}/conf/content.json')
 
     def _init(self, breed=None, cnt=None):
         if not breed:
@@ -38,7 +41,7 @@ class MailDog():
         self._login_mail_server()
 
     def _load_parameter(self):
-        self._opt =Option('src/conf/conf.json')
+        self._opt =Option(f'{os.path.dirname(os.path.realpath(__file__))}/conf/conf.json')
         self._logger = get_logger('MailDog')
 
     def _login_mail_server(self):

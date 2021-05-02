@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+import os
 from random import choice, randint
 
 import ujson
@@ -14,7 +16,7 @@ class FetchDog():
   def __init__(self):
     self.breeds = []
     self._logger = get_logger('MailDog')
-    self.contents = Option('src/conf/content.json')
+    self.contents = Option(f'{os.path.dirname(os.path.realpath(__file__))}/conf/content.json')
     self._get_all_breeds()
 
 
