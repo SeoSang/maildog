@@ -18,3 +18,7 @@ src/conf/conf.json
 # secret
 
 secrets/
+
+# module
+
+node_modules/

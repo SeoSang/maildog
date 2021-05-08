@@ -15,8 +15,6 @@ from option import Option, get_logger
 from string import Template
 from fetchdog import FetchDog
 
-pid_file = '/var/run/maildog.pid'
-
 class MailDog():
     def __init__(self):
         self._load_parameter()

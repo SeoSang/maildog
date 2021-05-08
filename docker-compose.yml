@@ -6,23 +6,24 @@ services:
     build:
       context: ./sender
       dockerfile: Dockerfile
+    environment:
+      PYTHONUNBUFFERED: 1
     volumes:
       - ./sender:/app
-    command:
-      - python3 ./src/maildog.py run_everyday 22:30
+    command: ["python3", "/app/src/maildog.py", "run_everyday", "22:30"]
   db:
     build:
       context: ./db
       dockerfile: Dockerfile
     container_name: mongodb
-    environment: # 환경변수를 정의합니다.
+    environment:
       MONGO_INITDB_DATABASE: admin
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongodb_root_password
       MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongodb_root_username
       MONGO_DATABASE: maildog
       MONGO_USERNAME_FILE: /run/secrets/mongodb_username
       MONGO_PASSWORD_FILE: /run/secrets/mongodb_password
-    volumes: # container -> local로 mount할 수 있습니다.
+    volumes:
       - type: bind
         source: ./db # local 경로
         target: /db # container 내부에서의 경로
