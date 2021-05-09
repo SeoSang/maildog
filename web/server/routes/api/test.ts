@@ -8,4 +8,9 @@ router.get('/', async (ctx) => {
   ctx.state = StatusCodes.OK
 })
 
+router.get('/test', async (ctx) => {
+  ctx.body = { message: 'test' }
+  ctx.state = StatusCodes.OK
+})
+
 export default router.routes()
