@@ -50,6 +50,7 @@
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.1",
     "@types/koa": "^2.13.1",
     "@types/koa-morgan": "^1.0.4",
     "@types/koa-mount": "^4.0.0",
@@ -64,6 +65,7 @@
     "babel-plugin-styled-components": "^1.12.0",
     "eslint-config-yceffort": "0.0.5",
     "husky": "^6.0.0",
+    "jest": "^27.1.1",
     "lint-staged": "^11.0.0",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
