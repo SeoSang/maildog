@@ -1,6 +1,6 @@
-import { Button } from '@chakra-ui/button'
-import { Heading } from '@chakra-ui/layout'
 import Image from 'next/image'
+import { useState } from 'react'
+import MainForm from 'src/components/MainForm'
 import styled from 'styled-components'
 
 const MainImageContainer = styled.div`
@@ -32,12 +32,7 @@ export default function Index() {
           objectFit="cover"
           quality={100}
         />
-        <TitleContainer>
-          <Heading as="h1" size="4xl" mb="4">
-            Maildog!
-          </Heading>
-          <Button size="lg">둘러보기</Button>
-        </TitleContainer>
+        <TitleContainer>{<MainForm />}</TitleContainer>
       </MainImageContainer>
     </>
   )
