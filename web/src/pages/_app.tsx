@@ -4,7 +4,6 @@ import CSSReset from '@chakra-ui/css-reset'
 import { ThemeProvider } from '@chakra-ui/system'
 import theme from '@chakra-ui/theme'
 
-import myTheme from './theme'
 // import 'normalize.css'
 
 function App({ Component, pageProps }: AppProps) {
