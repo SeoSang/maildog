@@ -1,9 +1,7 @@
-const customRule = require('./naming-convention')
-
 module.exports = {
   extends: ['eslint-config-yceffort/typescript'],
   rules: {
-    '@typescript-eslint/naming-convention': customRule.extendedRules,
+    '@typescript-eslint/naming-convention': ['off'],
     'react/react-in-jsx-scope': ['off'],
     'prettier/prettier': [
       'error',
