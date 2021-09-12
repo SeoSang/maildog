@@ -6,9 +6,9 @@ export const createBreedsTable = async () => {
     console.log('breeds already exists')
     return
   }
-  db.schema.createTable('breeds', (tbl) => {
+  await db.schema.createTable('breeds', (tbl) => {
     tbl.text('id').unique().notNullable().primary()
-    tbl.text('name').notNullable()
+    tbl.text('name').notNullable().unique()
     tbl.text('temperament')
     tbl.text('life_span')
     tbl.text('alt_names')

@@ -16,29 +16,29 @@ export interface DogImage {
 }
 
 export interface BreedParams {
-  id: string
+  id: number
   name: string
   temperament: string
   life_span: string
-  alt_names: string
-  wikipedia_url: string
   origin: string
   weight: Weight
-  country_code: string
   height: Height
+  alt_names?: string
+  country_code?: string
+  wikipedia_url?: string
 }
 
 export interface BreedForDBParams {
-  id: string
+  id: number
   name: string
   temperament: string
   life_span: string
-  alt_names: string
-  wikipedia_url: string
   origin: string
   weight_imperial: string
   weight_metric: string
-  country_code: string
   height_imperial: string
   height_metric: string
+  alt_names?: string
+  country_code?: string
+  wikipedia_url?: string
 }

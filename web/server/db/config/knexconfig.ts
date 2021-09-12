@@ -6,18 +6,21 @@ export const config = {
     connection: {
       filename: path.resolve(__dirname, './dev.sqlite3'),
     },
+    useNullAsDefault: true,
   },
   test: {
     client: 'sqlite3',
     connection: {
       filename: path.resolve(__dirname, './dev.sqlite3'),
     },
+    useNullAsDefault: true,
   },
   production: {
     client: 'sqlite3',
     connection: {
       filename: path.resolve(__dirname, './prod.sqlite3'),
     },
+    useNullAsDefault: true,
   },
 }
 

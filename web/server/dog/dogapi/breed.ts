@@ -1,7 +1,7 @@
 import { upsert } from '../../db/breed'
 import { BreedParams, BreedForDBParams, Weight, Height } from './type'
 export class Breed implements BreedParams {
-  id: string
+  id: number
 
   name: string
 
@@ -9,28 +9,33 @@ export class Breed implements BreedParams {
 
   life_span: string
 
-  alt_names: string
-
-  wikipedia_url: string
-
   origin: string
 
   weight: Weight
 
-  country_code: string
-
   height: Height
 
+  country_code?: string
+
+  alt_names?: string
+
+  wikipedia_url?: string
+
   constructor(breed: BreedForDBParams | BreedParams) {
-    this.id = breed.id
+    this.id = Number(breed.id)
     this.name = breed.name
-    this.alt_names = breed.alt_names
     this.temperament = breed.temperament
     this.life_span = breed.life_span
     this.origin = breed.origin
-    this.wikipedia_url = breed.wikipedia_url
-    this.country_code = breed.country_code
-
+    if (breed.alt_names) {
+      this.alt_names = breed.alt_names
+    }
+    if (breed.country_code) {
+      this.country_code = breed.country_code
+    }
+    if (breed.wikipedia_url) {
+      this.wikipedia_url = breed.wikipedia_url
+    }
     this.weight = isDBBreed(breed)
       ? {
           imperial: breed.weight_imperial,
@@ -46,13 +51,16 @@ export class Breed implements BreedParams {
   }
 
   async saveToDB() {
-    upsert({
+    const targetBreed: any = {
       ...this,
-      weight_imperial: this.weight.imperial,
-      weight_metric: this.weight.metric,
-      height_imperial: this.height.imperial,
-      height_metric: this.height.metric,
-    })
+      weight_imperial: this.weight?.imperial,
+      weight_metric: this.weight?.metric,
+      height_imperial: this.height?.imperial,
+      height_metric: this.height?.metric,
+    }
+    delete targetBreed?.weight
+    delete targetBreed?.height
+    return upsert(targetBreed)
   }
 }
 

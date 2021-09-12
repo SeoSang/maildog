@@ -7,16 +7,15 @@ let knexConfig
 switch (process.env.NODE_ENV) {
   case 'production':
     knexConfig = config.production
-    console.log('production!!!')
     break
   case 'test':
     knexConfig = config.test
-    console.log('test!!!')
     break
   default:
     knexConfig = config.development
-    console.log('development!!!')
     break
 }
+
+console.log(`db가 연결됩니다. (환경 : ${process.env.NODE_ENV})`)
 
 export const db = knex(knexConfig)
