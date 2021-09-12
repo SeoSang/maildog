@@ -1,8 +1,8 @@
-import { BreedForDB } from 'server/dog/dogapi/breed'
+import { BreedForDBParams } from 'server/dog/dogapi/type'
 
 import { db } from './knex'
 
-export const upsert = async (BreedForDB: BreedForDB) => {
+export const upsert = async (BreedForDB: BreedForDBParams) => {
   const prev = await db('breeds').where({ id: BreedForDB.id })
   return prev
     ? db('breeds').where({ id: BreedForDB.id }).update(BreedForDB)

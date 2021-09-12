@@ -15,7 +15,7 @@ export interface DogImage {
   width: number
 }
 
-export interface Breed {
+export interface BreedParams {
   id: string
   name: string
   temperament: string
@@ -28,7 +28,7 @@ export interface Breed {
   height: Height
 }
 
-export interface BreedForDB {
+export interface BreedForDBParams {
   id: string
   name: string
   temperament: string
