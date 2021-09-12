@@ -9,7 +9,7 @@ const temperamentAnswers = [
   ['Outgoing', 'Friendly', 'Alert', 'Confident', 'Intelligent', 'Courageous'],
 ]
 
-describe('temperament parse test', () => {
+describe('dogapi/parse.ts test', () => {
   test('temperament parse test', () => {
     temperamentExamples.forEach((temperamentExample, i) => {
       expect(parseTemperaments(temperamentExample)).toStrictEqual(

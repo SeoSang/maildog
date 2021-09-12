@@ -22,3 +22,5 @@ secrets/
 # module
 
 node_modules/
+
+.env

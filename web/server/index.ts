@@ -8,8 +8,11 @@ import morgan from 'koa-morgan'
 import mount from 'koa-mount'
 import Router from 'koa-router'
 import next from 'next'
+import dotenv from 'dotenv'
 
 import api from './routes/api'
+
+dotenv.config()
 
 const port = parseInt(process.env.PORT || '3000', 10)
 const dev = process.env.NODE_ENV !== 'production'
