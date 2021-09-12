@@ -19,5 +19,8 @@ export const createBreedsTable = async () => {
     tbl.text('height_imperial')
     tbl.text('height_metric')
     tbl.text('country_code')
+    tbl.text('bred_for')
+    tbl.text('breed_group')
+    tbl.json('image')
   })
 }

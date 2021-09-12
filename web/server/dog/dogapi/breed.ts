@@ -1,5 +1,5 @@
 import { upsert } from '../../db/breed'
-import { BreedParams, BreedForDBParams, Weight, Height } from './type'
+import { BreedParams, BreedForDBParams, Weight, Height, DogImage } from './type'
 export class Breed implements BreedParams {
   id: number
 
@@ -21,6 +21,12 @@ export class Breed implements BreedParams {
 
   wikipedia_url?: string
 
+  bred_for?: string
+
+  breed_group?: string
+
+  image?: DogImage
+
   constructor(breed: BreedForDBParams | BreedParams) {
     this.id = Number(breed.id)
     this.name = breed.name
@@ -35,6 +41,15 @@ export class Breed implements BreedParams {
     }
     if (breed.wikipedia_url) {
       this.wikipedia_url = breed.wikipedia_url
+    }
+    if (breed.bred_for) {
+      this.bred_for = breed.bred_for
+    }
+    if (breed.breed_group) {
+      this.breed_group = breed.breed_group
+    }
+    if (breed.image) {
+      this.image = isDBBreed(breed) ? JSON.parse(breed.image) : breed.image
     }
     this.weight = isDBBreed(breed)
       ? {
@@ -57,6 +72,7 @@ export class Breed implements BreedParams {
       weight_metric: this.weight?.metric,
       height_imperial: this.height?.imperial,
       height_metric: this.height?.metric,
+      image: JSON.stringify(this.image),
     }
     delete targetBreed?.weight
     delete targetBreed?.height

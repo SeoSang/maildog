@@ -26,6 +26,9 @@ export interface BreedParams {
   alt_names?: string
   country_code?: string
   wikipedia_url?: string
+  bred_for?: string
+  breed_group?: string
+  image?: DogImage
 }
 
 export interface BreedForDBParams {
@@ -41,4 +44,7 @@ export interface BreedForDBParams {
   alt_names?: string
   country_code?: string
   wikipedia_url?: string
+  bred_for?: string
+  breed_group?: string
+  image?: string
 }
