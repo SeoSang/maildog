@@ -1,8 +1,8 @@
-import { BreedForDBParams } from 'server/dog/dogapi/type'
+import { BreedDBParams } from 'server/dog/dogapi/type'
 
 import { db } from './knex'
 
-export const upsert = async (BreedForDB: BreedForDBParams) => {
+export const upsert = async (BreedForDB: BreedDBParams) => {
   const result = await db('breeds').insert(BreedForDB).onConflict('id').merge()
   return result
 }

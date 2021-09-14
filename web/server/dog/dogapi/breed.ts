@@ -1,5 +1,5 @@
 import { upsert } from '../../db/breed'
-import { BreedParams, BreedForDBParams, Weight, Height, DogImage } from './type'
+import { BreedParams, Weight, Height, DogImage, BreedDBParams } from './type'
 export class Breed implements BreedParams {
   id: number
 
@@ -27,7 +27,7 @@ export class Breed implements BreedParams {
 
   image?: DogImage
 
-  constructor(breed: BreedForDBParams | BreedParams) {
+  constructor(breed: BreedParams | BreedDBParams) {
     this.id = Number(breed.id)
     this.name = breed.name
     this.temperament = breed.temperament
@@ -51,37 +51,21 @@ export class Breed implements BreedParams {
     if (breed.image) {
       this.image = isDBBreed(breed) ? JSON.parse(breed.image) : breed.image
     }
-    this.weight = isDBBreed(breed)
-      ? {
-          imperial: breed.weight_imperial,
-          metric: breed.weight_metric,
-        }
-      : breed.weight
-    this.height = isDBBreed(breed)
-      ? {
-          imperial: breed.height_imperial,
-          metric: breed.height_metric,
-        }
-      : breed.height
+    this.weight = isDBBreed(breed) ? JSON.parse(breed.weight) : breed.weight
+    this.height = isDBBreed(breed) ? JSON.parse(breed.height) : breed.height
   }
 
   async saveToDB() {
-    const targetBreed: any = {
+    const targetBreed: BreedDBParams = {
       ...this,
-      weight_imperial: this.weight?.imperial,
-      weight_metric: this.weight?.metric,
-      height_imperial: this.height?.imperial,
-      height_metric: this.height?.metric,
+      weight: JSON.stringify(this.weight),
+      height: JSON.stringify(this.height),
       image: JSON.stringify(this.image),
     }
-    delete targetBreed?.weight
-    delete targetBreed?.height
     return upsert(targetBreed)
   }
 }
 
-function isDBBreed(
-  breed: BreedForDBParams | BreedParams,
-): breed is BreedForDBParams {
-  return (breed as BreedParams)?.weight === undefined
+function isDBBreed(breed: BreedParams | BreedDBParams): breed is BreedDBParams {
+  return typeof breed.image === 'string'
 }

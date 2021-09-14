@@ -15,6 +15,8 @@ export interface DogImage {
   width: number
 }
 
+export type JsonParam = 'weight' | 'height' | 'image'
+
 export interface BreedParams {
   id: number
   name: string
@@ -31,20 +33,8 @@ export interface BreedParams {
   image?: DogImage
 }
 
-export interface BreedForDBParams {
-  id: number
-  name: string
-  temperament: string
-  life_span: string
-  origin: string
-  weight_imperial: string
-  weight_metric: string
-  height_imperial: string
-  height_metric: string
-  alt_names?: string
-  country_code?: string
-  wikipedia_url?: string
-  bred_for?: string
-  breed_group?: string
+export interface BreedDBParams extends Omit<BreedParams, JsonParam> {
+  weight: string
+  height: string
   image?: string
 }
