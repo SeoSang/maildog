@@ -22,3 +22,17 @@ export const createBreedsTable = async () => {
     tbl.json('image')
   })
 }
+
+export const createUsersTable = async () => {
+  const exist = await db.schema.hasTable('users')
+  if (exist) {
+    console.log('users already exists')
+    return
+  }
+  await db.schema.createTable('users', (tbl) => {
+    tbl.text('email').notNullable().unique().primary()
+    tbl.text('breeds').notNullable()
+    tbl.integer('priority').notNullable()
+    tbl.text('cron')
+  })
+}

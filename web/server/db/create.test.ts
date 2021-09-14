@@ -1,8 +1,11 @@
 import { find } from './breed'
-import { createBreedsTable } from './create'
+import { createBreedsTable, createUsersTable } from './create'
 
-test('create breed table', async () => {
+test('create breeds table', async () => {
   await createBreedsTable()
+})
+test('create users table', async () => {
+  await createUsersTable()
 })
 test('is table exists', async () => {
   const a = await find()
