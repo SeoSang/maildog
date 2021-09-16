@@ -1,4 +1,4 @@
-import { find } from './breed'
+import { findAll } from './breed'
 import { createBreedsTable, createUsersTable } from './create'
 
 test('create breeds table', async () => {
@@ -8,6 +8,6 @@ test('create users table', async () => {
   await createUsersTable()
 })
 test('is table exists', async () => {
-  const a = await find()
+  const a = await findAll()
   console.log(a)
 })

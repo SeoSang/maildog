@@ -7,7 +7,7 @@ export const upsert = async (BreedForDB: BreedDBParams) => {
   return result
 }
 
-export const find = async () => {
+export const findAll = async () => {
   return db('breeds')
 }
 
