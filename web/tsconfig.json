@@ -4,7 +4,6 @@
     "module": "commonjs",
     "jsx": "preserve",
     "lib": ["dom", "es6"],
-    "baseUrl": ".",
     "moduleResolution": "node",
     "strict": true,
     "allowJs": true,
@@ -20,7 +19,12 @@
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "typeRoots": ["./typings", "./node_modules/@types"]
+    "typeRoots": ["./typings", "./node_modules/@types"],
+    "baseUrl": ".",
+    "paths": {
+      "@": ["/"],
+      "@/*": ["./*"]
+    }
   },
   "exclude": ["dist", ".next", "out", "next.config.js"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

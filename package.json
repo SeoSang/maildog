@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@egjs/react-grid": "^1.5.0"
+  }
+}
