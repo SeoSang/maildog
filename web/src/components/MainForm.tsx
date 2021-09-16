@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react'
 
+import DogForm from './DogForm'
 import EmailForm from './EmailForm'
 import Hello from './Hello'
 
 const FIRST_PAGE = 1
-const MAX_PAGE = 2
+const MAX_PAGE = 3
 
 const MainForm = () => {
   const [page, setPage] = useState<number>(FIRST_PAGE)
@@ -20,6 +21,8 @@ const MainForm = () => {
       return <Hello nextPage={nextPage} />
     case 2:
       return <EmailForm nextPage={nextPage} prevPage={prevPage} />
+    case 3:
+      return <DogForm />
     default:
       return <></>
   }
