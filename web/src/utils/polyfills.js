@@ -1,8 +1,8 @@
-import 'core-js/features/set'
-import 'core-js/features/map'
-import 'core-js/features/symbol'
-import 'core-js/features/array'
-import 'core-js/features/object'
+require('core-js/features/set')
+require('core-js/features/map')
+require('core-js/features/symbol')
+require('core-js/features/array')
+require('core-js/features/object')
 
 function addCustomEventPolyfill() {
   if (typeof window.CustomEvent === 'function') {
