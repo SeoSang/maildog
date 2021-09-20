@@ -6,16 +6,9 @@ import {
   Input,
   Button,
 } from '@chakra-ui/react'
-import styled from 'styled-components'
 
 import PageContainer from './PageContainer'
-
-const FormContainer = styled.div`
-  background-color: whitesmoke;
-  padding: 2rem;
-  border-radius: 13%;
-  box-shadow: 5px 5px 5px gray;
-`
+import { WrapToCard } from '../style'
 
 type Props = {
   nextPage: () => void
@@ -40,7 +33,7 @@ const EmailForm = (pageButtons: Props) => {
   }
 
   return (
-    <FormContainer>
+    <WrapToCard>
       <FormControl id="email">
         <FormLabel>Email address</FormLabel>
         <Input
@@ -56,7 +49,7 @@ const EmailForm = (pageButtons: Props) => {
         </Button>
       </FormControl>
       <PageContainer {...pageButtons} />
-    </FormContainer>
+    </WrapToCard>
   )
 }
 

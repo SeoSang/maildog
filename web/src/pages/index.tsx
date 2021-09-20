@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useState } from 'react'
 import MainForm from 'src/components/MainForm'
 import styled from 'styled-components'
 
@@ -13,10 +12,12 @@ const MainImageContainer = styled.div`
   justify-content: center;
 `
 const TitleContainer = styled.div`
+  width: 80%;
   display: flex;
   flex-direction: column;
   text-align: center;
 `
+
 const MainImage: any = styled(Image)`
   z-index: -1;
   opacity: 0.6;
@@ -32,7 +33,9 @@ export default function Index() {
           objectFit="cover"
           quality={100}
         />
-        <TitleContainer>{<MainForm />}</TitleContainer>
+        <TitleContainer>
+          <MainForm />
+        </TitleContainer>
       </MainImageContainer>
     </>
   )
