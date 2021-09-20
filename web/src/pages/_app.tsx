@@ -2,7 +2,8 @@ import React from 'react'
 import { AppProps } from 'next/app'
 import CSSReset from '@chakra-ui/css-reset'
 import { ThemeProvider } from '@chakra-ui/system'
-import theme from '@chakra-ui/theme'
+
+import { theme } from '../style/theme'
 
 // import 'normalize.css'
 

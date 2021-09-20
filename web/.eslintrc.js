@@ -2,7 +2,9 @@ module.exports = {
   extends: ['eslint-config-yceffort/typescript'],
   rules: {
     '@typescript-eslint/naming-convention': ['off'],
+    '@typescript-eslint/no-unused-vars': 'error',
     'react/react-in-jsx-scope': ['off'],
+    'no-unused-vars': 'off',
     'prettier/prettier': [
       'error',
       {
@@ -21,6 +23,7 @@ module.exports = {
       plugins: ['jest'],
       rules: {
         'jest/no-disabled-tests': 'warn',
+        'jest/no-unused-vars': 'warn',
         'jest/no-focused-tests': 'error',
         'jest/no-identical-title': 'error',
         'jest/prefer-to-have-length': 'warn',
