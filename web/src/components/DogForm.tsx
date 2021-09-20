@@ -34,13 +34,16 @@ const DogForm = ({ windowWidth, windowHeight }: Props) => {
     console.log({ windowWidth, windowHeight })
     switch (true) {
       case windowWidth > 1200:
+        setGridRowRange({ min: 4, max: 5 })
         break
       case windowWidth > 992:
+        setGridRowRange({ min: 3, max: 4 })
         break
       case windowWidth > 768:
+        setGridRowRange({ min: 2, max: 3 })
         break
-      case windowWidth > 1200:
-        break
+      default:
+        setGridRowRange({ min: 2, max: 2 })
     }
   }, [windowWidth, windowHeight])
 
