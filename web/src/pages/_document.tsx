@@ -9,7 +9,7 @@ import Document, {
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
-import theme from './theme'
+import { theme } from '../style/theme'
 
 interface Props {
   styleTags: any

@@ -24,6 +24,8 @@ type RowRange = {
   max: number
 }
 
+// TODO : 이미지 미리 로드하거나, 로딩 바 구현하기
+
 const DogForm = ({ windowWidth, windowHeight }: Props) => {
   const [loading, setLoading] = useState(false)
   const [breeds, setBreeds] = useState<Breed[]>([])
@@ -31,7 +33,6 @@ const DogForm = ({ windowWidth, windowHeight }: Props) => {
   const [gridRowRange, setGridRowRange] = useState<RowRange>({ min: 3, max: 4 })
 
   useEffect(() => {
-    console.log({ windowWidth, windowHeight })
     switch (true) {
       case windowWidth > 1200:
         setGridRowRange({ min: 4, max: 5 })
