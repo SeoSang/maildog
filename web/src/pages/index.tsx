@@ -2,6 +2,8 @@ import Image from 'next/image'
 import MainForm from 'src/components/MainForm'
 import styled from 'styled-components'
 
+import useMainFormContext from '../hooks/useMainFormContext'
+
 const MainImageContainer = styled.div`
   display: flex;
   width: 100vw;
@@ -22,9 +24,11 @@ const MainImage: any = styled(Image)`
   z-index: -1;
   opacity: 0.6;
 `
+
 export default function Index() {
+  const { FormContext, formValues } = useMainFormContext()
   return (
-    <>
+    <FormContext.Provider value={formValues}>
       <MainImageContainer>
         <MainImage
           src="/main.jpg"
@@ -37,6 +41,6 @@ export default function Index() {
           <MainForm />
         </TitleContainer>
       </MainImageContainer>
-    </>
+    </FormContext.Provider>
   )
 }
