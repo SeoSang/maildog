@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
   FormControl,
   FormLabel,
@@ -9,6 +9,7 @@ import {
 
 import PageContainer from './PageContainer'
 import { WrapToCard } from '../style'
+import { MainFormContext } from '../hooks/useMainFormContext'
 
 type Props = {
   nextPage: () => void
@@ -24,12 +25,17 @@ const isValidEmail = (email: string): boolean => {
 }
 
 const EmailForm = (pageButtons: Props) => {
-  const [email, setEmail] = useState<string>('')
+  const { email, setEmail } = useContext(MainFormContext)
+  const [emailChecked, setEmailChecked] = useState(false)
 
   const onClickRegisterButton = () => {
+    // TODO : 토스트로 바꾸기 alert
     if (!isValidEmail(email)) {
       alert('올바르지 않은 이메일입니다.')
+      return
     }
+    alert('사용가능한 이메일입니다.')
+    setEmailChecked(true)
   }
 
   return (
@@ -48,7 +54,10 @@ const EmailForm = (pageButtons: Props) => {
           Register
         </Button>
       </FormControl>
-      <PageContainer {...pageButtons} />
+      <PageContainer
+        prevPage={pageButtons.prevPage}
+        nextPage={emailChecked ? pageButtons.nextPage : undefined}
+      />
     </WrapToCard>
   )
 }
