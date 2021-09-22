@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react'
+import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 import styled from 'styled-components'
 
 import { MainFormContext } from '../hooks/useMainFormContext'
@@ -31,7 +32,9 @@ const InputModal = () => {
   }
   return (
     <Container>
-      <Button onClick={onClickTrigger}>trigger</Button>
+      <Button onClick={onClickTrigger}>
+        {visible ? <ViewOffIcon /> : <ViewIcon />}
+      </Button>
       <InputTable variant="simple" style={{ opacity: visible ? 1 : 0 }}>
         <Thead>
           <Tr>
