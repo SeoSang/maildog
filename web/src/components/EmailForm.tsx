@@ -43,7 +43,7 @@ const EmailForm = (pageButtons: Props) => {
             setEmail(e.target.value)
           }}
         />
-        <FormHelperText>We'll never share your email.</FormHelperText>
+        <FormHelperText>We will never share your email.</FormHelperText>
         <Button style={{ marginTop: '0.5rem' }} onClick={onClickRegisterButton}>
           Register
         </Button>

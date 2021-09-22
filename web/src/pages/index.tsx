@@ -26,9 +26,9 @@ const MainImage: any = styled(Image)`
 `
 
 export default function Index() {
-  const { FormContext, formValues } = useMainFormContext()
+  const { MainFormContext, formValues } = useMainFormContext()
   return (
-    <FormContext.Provider value={formValues}>
+    <MainFormContext.Provider value={formValues}>
       <MainImageContainer>
         <MainImage
           src="/main.jpg"
@@ -41,6 +41,6 @@ export default function Index() {
           <MainForm />
         </TitleContainer>
       </MainImageContainer>
-    </FormContext.Provider>
+    </MainFormContext.Provider>
   )
 }

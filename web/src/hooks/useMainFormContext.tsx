@@ -1,54 +1,82 @@
-import { Breed } from '@/server/dog/dogapi/breed'
 import React, { createContext, useState, useCallback, useMemo } from 'react'
+import { Breed } from '@/server/dog/dogapi/breed'
+import { useToast } from '@chakra-ui/react'
 
-type FormData = {
-  email: string
-  selectedBreeds: Breed[]
-}
+import { SELECTED_BREEDS_MAX } from '../constants'
 
 type FormContextValues = {
-  formData: FormData
-  setEmail: (email: string) => void
-  setSelectedBreeds: (breeds: Breed[]) => void
+  email: string
+  selectedBreeds: Breed[]
+  setEmail: React.Dispatch<React.SetStateAction<string>>
+  setSelectedBreeds: React.Dispatch<React.SetStateAction<Breed[]>>
+  addSelectedBreeds: (breed: Breed) => void
+  removeSelectedBreeds: (breed: Breed) => void
 }
 
-const defaultFormValues: FormData = {
+export const MainFormContext = createContext({
   email: '',
   selectedBreeds: [],
-}
-
-const FormContext: React.Context<FormContextValues> = createContext({
-  formData: defaultFormValues,
   setEmail: (_: string) => {},
   setSelectedBreeds: (_: Breed[]) => {},
-})
+  addSelectedBreeds: (_: Breed) => {},
+  removeSelectedBreeds: (_: Breed) => {},
+} as FormContextValues)
 
 const useMainFormContext = () => {
-  const [formData, setFormData] = useState<FormData>(defaultFormValues)
+  const [email, setEmail] = useState<string>('')
+  const [selectedBreeds, setSelectedBreeds] = useState<Breed[]>([])
 
-  const setEmail = useCallback(
-    (email: string) => {
-      setFormData({ ...formData, email })
+  const toast = useToast()
+
+  const addSelectedBreeds = useCallback(
+    (breed: Breed) => {
+      if (selectedBreeds.includes(breed)) {
+        toast({ status: 'error', description: 'Already Selcted!' })
+        return
+      }
+      if (selectedBreeds.length >= SELECTED_BREEDS_MAX) {
+        toast({
+          status: 'error',
+          description: `You can choose up to ${SELECTED_BREEDS_MAX}.`,
+        })
+        return
+      }
+      setSelectedBreeds((prev) => [...prev, breed])
     },
-    [formData],
+    [selectedBreeds, setSelectedBreeds, toast],
   )
-  const setSelectedBreeds = useCallback(
-    (breeds: Breed[]) => {
-      setFormData({ ...formData, selectedBreeds: breeds })
+
+  const removeSelectedBreeds = useCallback(
+    (breed: Breed) => {
+      if (!selectedBreeds.includes(breed)) {
+        toast({ status: 'error', description: 'Not exist in selected breeds!' })
+        return
+      }
+      setSelectedBreeds((prev) => prev.filter((b) => b.id !== breed.id))
     },
-    [formData],
+    [selectedBreeds, setSelectedBreeds, toast],
   )
 
   const formValues = useMemo(
     () => ({
-      formData,
+      email,
+      selectedBreeds,
       setEmail,
       setSelectedBreeds,
+      addSelectedBreeds,
+      removeSelectedBreeds,
     }),
-    [formData, setEmail, setSelectedBreeds],
+    [
+      email,
+      selectedBreeds,
+      setEmail,
+      setSelectedBreeds,
+      addSelectedBreeds,
+      removeSelectedBreeds,
+    ],
   )
 
-  return { FormContext, formValues }
+  return { MainFormContext, formValues }
 }
 
 export default useMainFormContext

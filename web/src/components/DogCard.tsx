@@ -1,10 +1,10 @@
+import React, { useContext, useState, useEffect } from 'react'
 import { Breed } from '@/server/dog/dogapi/breed'
-import { Text, Tooltip, useToast } from '@chakra-ui/react'
-import React, { useContext, useState } from 'react'
-import { useEffect } from 'react'
+import { Tooltip, useToast } from '@chakra-ui/react'
 import styled from 'styled-components'
+
 import { SELECTED_BREEDS_MAX } from '../constants'
-import { DogContext } from './DogForm'
+import { MainFormContext } from '../hooks/useMainFormContext'
 
 type ImageContainerProps = {
   clicked: boolean
@@ -32,7 +32,7 @@ const DogCard = ({ breed }: { breed: Breed }) => {
     selectedBreeds,
     addSelectedBreeds,
     removeSelectedBreeds,
-  } = useContext(DogContext)
+  } = useContext(MainFormContext)
 
   useEffect(() => {
     setClicked(false)
