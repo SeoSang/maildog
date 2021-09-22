@@ -8,6 +8,6 @@ export const WrapToCard = styled.div`
   background-color: ${(props: WrapToCardPropsType) =>
     props.bgColor ?? 'whitesmoke'};
   padding: 2rem;
-  border-radius: 13%;
+  border-radius: 20px;
   box-shadow: 5px 5px 5px gray;
 `

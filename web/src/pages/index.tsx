@@ -1,8 +1,9 @@
 import Image from 'next/image'
-import MainForm from 'src/components/MainForm'
 import styled from 'styled-components'
+import MainForm from 'src/components/MainForm'
 
 import useMainFormContext from '../hooks/useMainFormContext'
+import InputModal from '../components/InputModal'
 
 const MainImageContainer = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ export default function Index() {
   const { MainFormContext, formValues } = useMainFormContext()
   return (
     <MainFormContext.Provider value={formValues}>
+      <InputModal />
       <MainImageContainer>
         <MainImage
           src="/main.jpg"

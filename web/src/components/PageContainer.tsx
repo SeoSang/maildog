@@ -12,8 +12,8 @@ const PageContainerDiv = styled.div`
 `
 
 type Props = {
-  nextPage: () => void
-  prevPage: () => void
+  nextPage?: () => void
+  prevPage?: () => void
 }
 
 const PageContainer = ({ nextPage, prevPage }: Props) => {

@@ -6,13 +6,17 @@ import { FlexDiv } from '../style/div'
 
 type Props = {
   selectedBreeds: Breed[]
+  includeTitle?: boolean
 }
 
-const SelectedDogListCard = ({ selectedBreeds }: Props) => {
+const SelectedDogListCard = ({
+  selectedBreeds,
+  includeTitle = true,
+}: Props) => {
   return (
     <div style={{ position: 'sticky' }}>
       <FlexDiv direction="row">
-        <Button variant="ghost">Selected</Button>
+        {includeTitle && <Button variant="ghost">Selected</Button>}
         <Stack
           style={{ border: '1mm solid gray', padding: 5, borderRadius: '5px' }}
           spacing={2}
