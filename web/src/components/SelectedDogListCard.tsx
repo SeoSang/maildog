@@ -1,6 +1,8 @@
-import { Breed } from '@/server/dog/dogapi/breed'
-import { Button, Stack } from '@chakra-ui/react'
 import React from 'react'
+import { Breed } from '@/server/dog/dogapi/breed'
+import { Badge, Button, Stack } from '@chakra-ui/react'
+
+import { FlexDiv } from '../style/div'
 
 type Props = {
   selectedBreeds: Breed[]
@@ -8,15 +10,24 @@ type Props = {
 
 const SelectedDogListCard = ({ selectedBreeds }: Props) => {
   return (
-    <Stack spacing={2} direction="row" align="center">
-      {selectedBreeds.map((breed, i) => {
-        return (
-          <Button colorScheme="teal" size="xs" key={`selectedDog_button_${i}`}>
-            {breed.name}
-          </Button>
-        )
-      })}
-    </Stack>
+    <div style={{ position: 'sticky' }}>
+      <FlexDiv direction="row">
+        <Button variant="ghost">Selected</Button>
+        <Stack
+          style={{ border: '1mm solid gray', padding: 5, borderRadius: '5px' }}
+          spacing={2}
+          direction="row"
+          align="center">
+          {selectedBreeds.map((breed, i) => {
+            return (
+              <Badge colorScheme="green" key={`selectedDog_badge${i}`}>
+                {breed.name}
+              </Badge>
+            )
+          })}
+        </Stack>
+      </FlexDiv>
+    </div>
   )
 }
 
