@@ -1,8 +1,22 @@
 import React from 'react'
 import { Breed } from '@/server/dog/dogapi/breed'
 import { Badge, Button, Stack } from '@chakra-ui/react'
+import styled from 'styled-components'
 
 import { FlexDiv } from '../style/div'
+import useResponisveWidth from '../hooks/useResponisveWidth'
+
+const Container = styled.div`
+  position: sticky;
+  top: 10px;
+  z-index: 10;
+  padding: 5px;
+  margin-bottom: 5px;
+  overflow-x: auto;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  box-shadow: 1px 1px 1px gray;
+`
 
 type Props = {
   selectedBreeds: Breed[]
@@ -13,14 +27,18 @@ const SelectedDogListCard = ({
   selectedBreeds,
   includeTitle = true,
 }: Props) => {
+  const { isLargerThanLG } = useResponisveWidth()
   return (
-    <div style={{ position: 'sticky' }}>
+    <Container>
       <FlexDiv direction="row">
         {includeTitle && <Button variant="ghost">Selected</Button>}
         <Stack
-          style={{ border: '1mm solid gray', padding: 5, borderRadius: '5px' }}
+          style={{
+            padding: 5,
+            marginBottom: '3px',
+          }}
           spacing={2}
-          direction="row"
+          direction={isLargerThanLG ? 'row' : 'column'}
           align="center">
           {selectedBreeds.map((breed, i) => {
             return (
@@ -31,7 +49,7 @@ const SelectedDogListCard = ({
           })}
         </Stack>
       </FlexDiv>
-    </div>
+    </Container>
   )
 }
 

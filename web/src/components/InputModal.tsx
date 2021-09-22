@@ -5,12 +5,13 @@ import styled from 'styled-components'
 
 import { MainFormContext } from '../hooks/useMainFormContext'
 import SelectedDogListCard from './SelectedDogListCard'
+import { ResponsiveWidth } from '../style/theme'
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 3;
+  z-index: 100;
 `
 
 const InputTable = styled(Table)`
@@ -19,6 +20,16 @@ const InputTable = styled(Table)`
   background-color: antiquewhite;
   border-radius: 10px;
   margin-top: 10px;
+
+  width: 360px !important;
+
+  @media (min-width: ${ResponsiveWidth.md}px) {
+    width: 760px !important;
+  }
+
+  @media (min-width: ${ResponsiveWidth.xl}px) {
+    width: 1000px !important;
+  }
 `
 
 /**
@@ -35,7 +46,9 @@ const InputModal = () => {
       <Button onClick={onClickTrigger}>
         {visible ? <ViewOffIcon /> : <ViewIcon />}
       </Button>
-      <InputTable variant="simple" style={{ opacity: visible ? 1 : 0 }}>
+      <InputTable
+        variant="simple"
+        style={{ opacity: visible ? 1 : 0, display: visible ? '' : 'none' }}>
         <Thead>
           <Tr>
             <Th>Column</Th>

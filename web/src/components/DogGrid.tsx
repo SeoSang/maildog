@@ -41,6 +41,7 @@ const DogGrid = ({ breeds, windowWidth, windowHeight }: Props) => {
   return (
     <JustifiedGrid
       className="container"
+      style={{ height: '100%' }}
       gap={5}
       defaultDirection={'end'}
       columnRange={[gridRowRange.min, gridRowRange.max]}

@@ -7,18 +7,21 @@ import InputModal from '../components/InputModal'
 
 const MainImageContainer = styled.div`
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   font-size: 30px;
   z-index: -1;
   align-items: center;
   justify-content: center;
+  /* background-color: pink; */
 `
 const TitleContainer = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 `
 
 const MainImage: any = styled(Image)`

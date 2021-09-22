@@ -8,11 +8,23 @@ import { WrapToCard } from '../style'
 import DogGrid from './DogGrid'
 import SelectedDogListCard from './SelectedDogListCard'
 import { MainFormContext } from '../hooks/useMainFormContext'
+import { ResponsiveWidth } from '../style/theme'
 
 const IMAGE_PER_PAGE = 20
 
 const GridContainer = styled.div`
-  width: 80%;
+  width: 90%;
+  margin: 15px;
+
+  @media (min-width: ${ResponsiveWidth.md}px) {
+    width: 85%;
+    margin: 22px;
+  }
+
+  @media (min-width: ${ResponsiveWidth.xl}px) {
+    width: 80%;
+    margin: 30px;
+  }
 `
 // TODO : 이미지 미리 로드하거나, 로딩 바 구현하기
 // TODO : 페이지 몇페이지인지 표시
@@ -71,6 +83,7 @@ const DogForm = () => {
       <WrapToCard>
         <Alert
           status="info"
+          fontSize={{ base: '14px', md: '20px', lg: '28px' }}
           style={{ marginBottom: '0.5rem', borderRadius: '15px' }}>
           <AlertIcon />
           Pick your favorite breeds
