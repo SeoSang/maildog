@@ -24,7 +24,13 @@ const ImageContainer = styled.div`
   }
 `
 
-const DogCard = ({ breed }: { breed: Breed }) => {
+const DogCard = ({
+  breed,
+  clickable = true,
+}: {
+  breed: Breed
+  clickable?: boolean
+}) => {
   const toast = useToast()
 
   const [clicked, setClicked] = useState(false)
@@ -36,12 +42,16 @@ const DogCard = ({ breed }: { breed: Breed }) => {
 
   useEffect(() => {
     setClicked(false)
-    if (selectedBreeds?.includes(breed)) {
+    console.log({ selectedBreeds })
+    if (selectedBreeds?.some((b) => b.id === breed.id)) {
       setClicked(true)
     }
-  }, [breed, breed?.name, selectedBreeds])
+  }, [breed, breed?.name, selectedBreeds, clickable])
 
   const onClickContainer = () => {
+    if (!clickable) {
+      return
+    }
     if (clicked) {
       setClicked((prev) => !prev)
       removeSelectedBreeds(breed)
@@ -68,7 +78,7 @@ const DogCard = ({ breed }: { breed: Breed }) => {
         key={`breed_${breed.id}`}
         data-grid-content-offset="5"
         onClick={onClickContainer}
-        clicked={clicked}>
+        clicked={clickable && clicked}>
         <img
           src={breed.image?.url}
           style={{ width: '100%' }}

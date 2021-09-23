@@ -7,6 +7,7 @@ import DogCard from './DogCard'
 
 type Props = {
   breeds: Breed[]
+  clickable?: boolean
   windowWidth?: number
   windowHeight?: number
 }
@@ -16,7 +17,7 @@ type RowRange = {
   max: number
 }
 
-const DogGrid = ({ breeds, windowWidth, windowHeight }: Props) => {
+const DogGrid = ({ breeds, windowWidth, windowHeight, clickable }: Props) => {
   const [gridRowRange, setGridRowRange] = useState<RowRange>({ min: 3, max: 4 })
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const DogGrid = ({ breeds, windowWidth, windowHeight }: Props) => {
       isCroppedSize={false}
       displayedRow={-1}>
       {breeds?.map((breed, i) => (
-        <DogCard breed={breed} key={`DogCard_${i}`} />
+        <DogCard breed={breed} key={`DogCard_${i}`} clickable={clickable} />
       ))}
     </JustifiedGrid>
   )

@@ -58,11 +58,11 @@ const useMainFormContext = () => {
 
   const removeSelectedBreeds = useCallback(
     (breed: Breed) => {
-      if (!selectedBreeds.includes(breed)) {
-        toast({ status: 'error', description: 'Not exist in selected breeds!' })
+      if (selectedBreeds.some((b) => b.id === breed.id)) {
+        setSelectedBreeds((prev) => prev.filter((b) => b.id !== breed.id))
         return
       }
-      setSelectedBreeds((prev) => prev.filter((b) => b.id !== breed.id))
+      toast({ status: 'error', description: 'Not exist in selected breeds!' })
     },
     [selectedBreeds, setSelectedBreeds, toast],
   )

@@ -1,4 +1,11 @@
-import { Alert, AlertIcon, Badge, Button, Spinner } from '@chakra-ui/react'
+import {
+  Alert,
+  AlertIcon,
+  Badge,
+  Button,
+  Spinner,
+  useToast,
+} from '@chakra-ui/react'
 import React, { useContext, useEffect, useState } from 'react'
 import beAxios from 'src/utils/axios'
 import { Breed } from 'server/dog/dogapi/breed'
@@ -34,34 +41,49 @@ const DogForm = () => {
   const [breeds, setBreeds] = useState<Breed[]>([])
   const [dogPage, setDogPages] = useState<number>(0)
 
-  const { selectedBreeds } = useContext(MainFormContext)
+  const { selectedBreeds, nextPage } = useContext(MainFormContext)
 
-  const getAllBreedsData = async () => {
-    setLoading(true)
-    const res = await beAxios('/dog')
-    console.log(res.data)
-    setBreeds(res.data.breeds)
-    setLoading(false)
-    return res.data
-  }
+  const toast = useToast()
 
-  const nextPage = () => {
+  useEffect(() => {
+    const getAllBreedsData = async () => {
+      setLoading(true)
+      const res = await beAxios('/dog')
+      console.log(res.data)
+      setBreeds(res.data.breeds)
+      setLoading(false)
+      return res.data
+    }
+    getAllBreedsData()
+  }, [])
+
+  const nextDogs = () => {
     if (dogPage * IMAGE_PER_PAGE >= breeds.length) {
       return
     }
     setDogPages((prev) => prev + 1)
   }
 
-  const prevPage = () => {
+  const prevDogs = () => {
     if (dogPage === 0) {
       return
     }
     setDogPages((prev) => prev - 1)
   }
 
-  useEffect(() => {
-    getAllBreedsData()
-  }, [])
+  const onClickFinishButton = () => {
+    if (selectedBreeds.length === 0) {
+      toast({
+        status: 'error',
+        description: `Please pick your breeds.`,
+      })
+    }
+    toast({
+      status: 'success',
+      description: `You choose ${selectedBreeds.length} breeds`,
+    })
+    nextPage()
+  }
 
   if (loading) {
     return (
@@ -93,13 +115,15 @@ const DogForm = () => {
             ?.slice(dogPage * IMAGE_PER_PAGE, (dogPage + 1) * IMAGE_PER_PAGE)
             .filter((breed) => breed.image?.url)}
         />
-        <Button onClick={prevPage} variant="outline">
+        <Button onClick={prevDogs} variant="outline">
           ◀️
         </Button>
-        <Button onClick={nextPage} variant="outline">
+        <Button onClick={nextDogs} variant="outline">
           ▶️
         </Button>
-        {selectedBreeds.length !== 0 && <Button>Finish</Button>}
+        {selectedBreeds.length !== 0 && (
+          <Button onClick={onClickFinishButton}>Finish</Button>
+        )}
         <br />
         <Badge variant="outline" colorScheme="green">
           {dogPage + 1}
