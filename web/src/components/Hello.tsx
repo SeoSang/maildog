@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button } from '@chakra-ui/button'
 import { Heading } from '@chakra-ui/layout'
 
-type Props = {
-  nextPage: () => void
-}
+import { MainFormContext } from '../hooks/useMainFormContext'
 
-const Hello = ({ nextPage }: Props) => {
+const Hello = () => {
+  const { nextPage } = useContext(MainFormContext)
   return (
     <>
       <Heading as="h1" size="4xl" mb="4">

@@ -1,28 +1,23 @@
-import React, { useCallback, useState } from 'react'
+import React, { useContext } from 'react'
 
+import { MainFormContext } from '../hooks/useMainFormContext'
+import CheckDog from './CheckDog'
 import DogForm from './DogForm'
 import EmailForm from './EmailForm'
 import Hello from './Hello'
 
-const FIRST_PAGE = 1
-const MAX_PAGE = 3
-
 const MainForm = () => {
-  const [page, setPage] = useState<number>(FIRST_PAGE)
-  const nextPage = useCallback(() => {
-    setPage((prevPage) => Math.min(MAX_PAGE, prevPage + 1))
-  }, [setPage])
-  const prevPage = useCallback(() => {
-    setPage((prevPage) => Math.max(FIRST_PAGE, prevPage - 1))
-  }, [setPage])
+  const { page } = useContext(MainFormContext)
 
   switch (page) {
     case 1:
-      return <Hello nextPage={nextPage} />
+      return <Hello />
     case 2:
-      return <EmailForm nextPage={nextPage} prevPage={prevPage} />
+      return <EmailForm />
     case 3:
       return <DogForm />
+    case 4:
+      return <CheckDog />
     default:
       return <></>
   }

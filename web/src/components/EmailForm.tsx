@@ -11,11 +11,6 @@ import PageContainer from './PageContainer'
 import { WrapToCard } from '../style'
 import { MainFormContext } from '../hooks/useMainFormContext'
 
-type Props = {
-  nextPage: () => void
-  prevPage: () => void
-}
-
 const isValidEmail = (email: string): boolean => {
   // eslint-disable-next-line no-useless-escape
   const mail_format = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -24,8 +19,9 @@ const isValidEmail = (email: string): boolean => {
   )
 }
 
-const EmailForm = (pageButtons: Props) => {
-  const { email, setEmail } = useContext(MainFormContext)
+const EmailForm = () => {
+  const { email, setEmail, prevPage, nextPage } = useContext(MainFormContext)
+  // TODO : 이메일 체크 백엔드로 받기
   const [emailChecked, setEmailChecked] = useState(false)
 
   const onClickRegisterButton = () => {
@@ -55,8 +51,8 @@ const EmailForm = (pageButtons: Props) => {
         </Button>
       </FormControl>
       <PageContainer
-        prevPage={pageButtons.prevPage}
-        nextPage={emailChecked ? pageButtons.nextPage : undefined}
+        prevPage={prevPage}
+        nextPage={emailChecked ? nextPage : undefined}
       />
     </WrapToCard>
   )
