@@ -1,0 +1,134 @@
+swagger: '2.0'
+info:
+  description: 'MailDog 의 자체 API 문서'
+  version: '1.0.0'
+  title: 'MailDog'
+  termsOfService: 'https://github.com/SeoSang/maildog'
+  contact:
+    email: 'ddrrpg@naver.com'
+  license:
+    name: 'MIT'
+    url: 'https://opensource.org/licenses/MIT'
+host: '미정'
+basePath: '/'
+tags:
+  - name: 'dog'
+    description: 'dog 관련 도메인'
+  - name: 'user'
+    description: '유저 도메인'
+schemes:
+  - 'http'
+paths:
+  /api/dog:
+    get:
+      tags:
+        - 'dog'
+      summary: 'breeds 정보 전부 반환'
+      description: '모든 breeds의 데이터를 반환합니다.'
+      operationId: ''
+      responses:
+        '200':
+          description: '성공'
+          schema:
+            type: 'array'
+            items:
+              type: object
+              $ref: '#/definitions/breeds'
+        '500':
+          description: '서버 에러'
+          schema:
+            type: 'object'
+            properties:
+              alertText:
+                type: string
+                description: '에러 내용'
+definitions:
+  breeds:
+    type: 'object'
+    properties:
+      id:
+        type: 'number'
+      name:
+        type: 'string'
+      temperament:
+        type: 'string'
+      life_span:
+        type: 'string'
+      alt_names:
+        type: 'string'
+      wikipedia_url:
+        type: 'string'
+      origin:
+        type: 'string'
+      country_code:
+        type: 'string'
+      bred_for:
+        type: 'string'
+      bred_group:
+        type: 'string'
+      weight:
+        $ref: '#/definitions/weight'
+      height:
+        $ref: '#/definitions/height'
+      image:
+        $ref: '#/definitions/image'
+  users:
+    type: 'object'
+    properties:
+      id:
+        type: 'number'
+      email:
+        type: 'string'
+        format: 'email'
+      breeds:
+        type: 'string'
+      name:
+        type: 'string'
+      created_at:
+        type: 'string'
+        format: 'date-time'
+  cron:
+    type: 'object'
+    properties:
+      id:
+        type: 'number'
+      user_id:
+        type: 'number'
+      expressions:
+        type: 'string'
+      count:
+        $ref: '#/definitions/count'
+  weight:
+    type: 'object'
+    properties:
+      imperial:
+        type: 'string'
+      metric:
+        type: 'string'
+  height:
+    type: 'object'
+    properties:
+      imperial:
+        type: 'string'
+      metric:
+        type: 'string'
+  image:
+    type: 'object'
+    properties:
+      id:
+        type: 'string'
+      height:
+        type: 'number'
+      url:
+        type: 'string'
+      width:
+        type: 'number'
+  count:
+    type: 'object'
+    properties:
+      breed_id:
+        type: 'number'
+        description: '몇개의 이미지를 보낼 것인지'
+      breed_id2:
+        type: 'number'
+        description: '몇개의 이미지를 보낼 것인지'
