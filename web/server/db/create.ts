@@ -30,9 +30,29 @@ export const createUsersTable = async () => {
     return
   }
   await db.schema.createTable('users', (tbl) => {
-    tbl.text('email').notNullable().unique().primary()
+    tbl.increments() // id auto_increment
+    tbl.timestamps() // created_at
+    tbl.text('email').notNullable().unique()
     tbl.text('breeds').notNullable()
-    tbl.integer('priority').notNullable()
-    tbl.text('cron')
+    tbl.text('name')
+    tbl.integer('priority').defaultTo(2)
+    tbl.boolean('valid').notNullable().defaultTo(true)
+  })
+}
+
+export const createCronsTable = async () => {
+  const exist = await db.schema.hasTable('crons')
+  if (exist) {
+    console.log('crons already exists')
+    return
+  }
+  await db.schema.createTable('crons', (tbl) => {
+    tbl.increments() // id auto_increment
+    tbl.timestamps() // created_at
+    tbl.integer('user_id').references('id').inTable('users')
+    tbl.text('expressions').notNullable()
+    tbl.json('count')
+    tbl.integer('priority').defaultTo(2)
+    tbl.boolean('valid').notNullable().defaultTo(true)
   })
 }
