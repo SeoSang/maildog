@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import { parseBreedDataToDictionary, parseTemperaments } from './parse'
+import breedsJSON from '../../db/breeds.json'
+import { Breed } from './breed'
 
 const temperamentExamples = [
   'Aloof, Clownish, Dignified, Independent, Happy',
@@ -11,6 +13,9 @@ const temperamentAnswers = [
   ['Outgoing', 'Friendly', 'Alert', 'Confident', 'Intelligent', 'Courageous'],
 ]
 
+test('json import test', () => {
+  console.log(breedsJSON)
+})
 test('temperament parse test', () => {
   temperamentExamples.forEach((temperamentExample, i) => {
     expect(parseTemperaments(temperamentExample)).toStrictEqual(
@@ -19,11 +24,7 @@ test('temperament parse test', () => {
   })
 })
 test('parse local breeds json to id-name Dictionary', async () => {
-  const rawBreeds = fs.readFileSync(
-    path.resolve(__dirname, '../../db/breeds.json'),
-  )
-  const breeds = JSON.parse(rawBreeds.toString())
-
+  const breeds = breedsJSON.map((b) => new Breed(b))
   const idToNameBreeds = parseBreedDataToDictionary(breeds)
   fs.writeFileSync(
     path.resolve(__dirname, '../../db/idToNameBreeds.json'),
@@ -40,10 +41,7 @@ test('parse local breeds json to id-name Dictionary', async () => {
 })
 
 test('parse local breeds json to name-id Dictionary', async () => {
-  const rawBreeds = fs.readFileSync(
-    path.resolve(__dirname, '../../db/breeds.json'),
-  )
-  const breeds = JSON.parse(rawBreeds.toString())
+  const breeds = breedsJSON.map((b) => new Breed(b))
 
   const nameToIdBreeds = parseBreedDataToDictionary(breeds, false)
   fs.writeFileSync(
