@@ -58,3 +58,5 @@ test('parse local breeds json to name-id Dictionary', async () => {
   console.log(nameToIdBreeds[testBreed])
   expect(nameToIdBreeds[testBreed] === resultJSON[testBreed])
 })
+
+// FIXME : https://stackoverflow.com/questions/49996456/importing-json-file-in-typescript
