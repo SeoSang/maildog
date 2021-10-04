@@ -20,11 +20,11 @@ export type JsonParam = 'weight' | 'height' | 'image'
 export interface BreedParams {
   id: number
   name: string
-  temperament: string
-  life_span: string
-  origin: string
-  weight: Weight
-  height: Height
+  temperament?: string
+  life_span?: string
+  origin?: string
+  weight?: Weight
+  height?: Height
   alt_names?: string
   country_code?: string
   wikipedia_url?: string

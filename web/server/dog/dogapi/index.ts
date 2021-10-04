@@ -4,6 +4,7 @@ import { Breed } from './breed'
 import daxios from './interceptor'
 import { BreedParams } from './type'
 
+// TODO : api 대신 json 바탕으로 보기
 export const getAllBreeds = async (): Promise<BreedParams[]> => {
   if (process.env.NODE_ENV === 'test') {
     const fs = require('fs')
@@ -15,6 +16,9 @@ export const getAllBreeds = async (): Promise<BreedParams[]> => {
   const res = await daxios.get('/breeds')
   return res.data
 }
+
+// TODO:  ID 바탕으로 Breed 반환
+export const getBreedsById = async (): Promise<any> => {}
 
 export const upsertAllBreedsInfoToDB = async () => {
   const breeds = await getAllBreeds()

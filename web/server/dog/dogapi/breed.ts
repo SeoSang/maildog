@@ -5,15 +5,15 @@ export class Breed implements BreedParams {
 
   name: string
 
-  temperament: string
+  temperament?: string
 
-  life_span: string
+  life_span?: string
 
-  origin: string
+  origin?: string
 
-  weight: Weight
+  weight?: Weight
 
-  height: Height
+  height?: Height
 
   country_code?: string
 
