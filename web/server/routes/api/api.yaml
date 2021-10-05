@@ -84,6 +84,10 @@ definitions:
         type: 'string'
       name:
         type: 'string'
+      priority:
+        type: 'number'
+      valid:
+        type: 'boolean'
       created_at:
         type: 'string'
         format: 'date-time'
@@ -98,6 +102,11 @@ definitions:
         type: 'string'
       count:
         $ref: '#/definitions/count'
+      valid:
+        type: 'boolean'
+      created_at:
+        type: 'string'
+        format: 'date-time'
   weight:
     type: 'object'
     properties:
