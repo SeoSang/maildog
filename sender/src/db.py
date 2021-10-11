@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import pprint
 
 from pathlib import Path
 from pathlib import PurePosixPath
@@ -17,11 +18,11 @@ class DB():
   
   def get_breeds_data_by_name(self, breed):
     result = self.db.execute("SELECT * FROM breeds WHERE name = :name" , { "name": breed })
-    breeds = result
+    breeds = result.fetchall()
     return breeds
     
   def run(self):
-    self.get_breed_data_by_name('Akita')
+    pprint.pprint(self.get_breeds_data_by_name('Akita'))
   
 if __name__=='__main__':
   db = DB()
