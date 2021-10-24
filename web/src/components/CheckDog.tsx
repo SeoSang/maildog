@@ -7,6 +7,7 @@ import DogGrid from './DogGrid'
 import { MainFormContext } from '../hooks/useMainFormContext'
 import { ResponsiveWidth } from '../style/theme'
 import { FlexDiv } from '../style/div'
+import beAxios from '../utils/axios'
 
 const GridContainer = styled.div`
   width: 90%;
@@ -24,7 +25,19 @@ const GridContainer = styled.div`
 `
 
 const CheckDog = () => {
-  const { selectedBreeds, nextPage, prevPage } = useContext(MainFormContext)
+  const { selectedBreeds, email, nextPage, prevPage } = useContext(
+    MainFormContext,
+  )
+
+  const onClickYes = async () => {
+    try {
+
+      await beAxios.post('/user/dog', {
+        selectedBreeds,
+        email,
+      })
+    }
+  }
   return (
     <GridContainer>
       <WrapToCard>
