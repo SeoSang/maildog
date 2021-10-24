@@ -2,16 +2,19 @@ import beAxios from '../../utils/axios'
 
 export type CronInfo = {}
 
-export const updateCron = async ({
-  cronId,
-  selectedBreeds,
+export const registerCron = async ({
+  email,
+  userId,
+  breedIds,
 }: {
-  cronId: number
-  selectedBreeds: string[]
+  email: string
+  userId: number
+  breedIds: number[]
 }): Promise<CronInfo> => {
   try {
-    const result = await beAxios.put(`/cron/${cronId}`, {
-      selectedBreeds,
+    const result = await beAxios.post(`/user/${userId}/cron`, {
+      breedIds,
+      email,
     })
     return result?.data
   } catch (e) {
@@ -20,19 +23,16 @@ export const updateCron = async ({
   }
 }
 
-export const registerCron = async ({
-  email,
-  userId,
-  selectedBreeds,
+export const updateCron = async ({
+  cronId,
+  breedIds,
 }: {
-  email: string
-  userId: number
-  selectedBreeds: string[]
+  cronId: number
+  breedIds: number[]
 }): Promise<CronInfo> => {
   try {
-    const result = await beAxios.post(`/user/${userId}/cron`, {
-      selectedBreeds,
-      email,
+    const result = await beAxios.put(`/cron/${cronId}`, {
+      breedIds,
     })
     return result?.data
   } catch (e) {

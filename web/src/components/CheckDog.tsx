@@ -7,7 +7,7 @@ import DogGrid from './DogGrid'
 import { MainFormContext } from '../hooks/useMainFormContext'
 import { ResponsiveWidth } from '../style/theme'
 import { FlexDiv } from '../style/div'
-import beAxios from '../utils/axios'
+import { registerCron } from '../request/cron'
 
 const GridContainer = styled.div`
   width: 90%;
@@ -29,15 +29,16 @@ const CheckDog = () => {
     MainFormContext,
   )
 
+  // TODO : 컴퍼넌트에 적용
   const onClickYes = async () => {
-    try {
-
-      await beAxios.post('/user/dog', {
-        selectedBreeds,
-        email,
-      })
-    }
+    await registerCron({
+      email,
+      breedIds: selectedBreeds.map((breed) => breed.id),
+      userId: 1,
+    })
   }
+
+  console.log(onClickYes)
   return (
     <GridContainer>
       <WrapToCard>
