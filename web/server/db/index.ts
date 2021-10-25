@@ -51,14 +51,14 @@ export abstract class KnexRepository<T> implements BaseRepository<T> {
     return this.qb.where(item).select()
   }
 
+  findAll(limit: number): Promise<T[]> {
+    return this.qb.limit(limit)
+  }
+
   findById(id: string | Partial<T>): Promise<T> {
     return typeof id === 'string'
       ? this.qb.where('id', id).first()
       : this.qb.where(id).first()
-  }
-
-  findAll(limit: number): Promise<T[]> {
-    return this.qb.limit(limit)
   }
 
   async exist(id: string | Partial<T>) {
@@ -75,5 +75,9 @@ export abstract class KnexRepository<T> implements BaseRepository<T> {
     const exist = await query.first()
 
     return exist!.count !== 0
+  }
+
+  destroy() {
+    this.destroy()
   }
 }
