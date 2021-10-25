@@ -1,5 +1,9 @@
-import { findAll } from './breed'
-import { createBreedsTable, createUsersTable, createCronsTable } from './create'
+import { findAll } from '../breed'
+import {
+  createBreedsTable,
+  createUsersTable,
+  createCronsTable,
+} from '../create'
 
 test('create breeds table', async () => {
   await createBreedsTable()
