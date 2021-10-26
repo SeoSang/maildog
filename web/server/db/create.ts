@@ -33,8 +33,9 @@ export const createUsersTable = async () => {
     tbl.increments() // id auto_increment
     tbl.timestamps() // created_at
     tbl.text('email').notNullable().unique()
-    tbl.text('breeds').notNullable()
     tbl.text('name')
+    tbl.text('phone')
+    tbl.text('favorite')
     tbl.integer('priority').defaultTo(2)
     tbl.boolean('valid').notNullable().defaultTo(true)
   })

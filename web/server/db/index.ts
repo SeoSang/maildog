@@ -1,22 +1,29 @@
 import type { Knex } from 'knex'
 
+export type DeleteResult = 1 | 0
 interface Writer<T> {
-  create(item: Omit<T, 'id'>): Promise<T>
-  createMany(item: Omit<T, 'id'>[]): Promise<T[]>
-  update(id: string, item: Partial<T>): Promise<boolean>
+  create(item: Omit<T, 'id'>): Promise<T | undefined>
+  createMany(item: Omit<T, 'id'>[]): Promise<boolean>
+  update(id: number, item: Partial<T>): Promise<boolean>
   upsert(item: Partial<T>): Promise<T[]>
-  delete(id: string): Promise<boolean>
+  delete(column: string, value: any): Promise<DeleteResult>
+  deleteById(id: number): Promise<boolean>
 }
 interface Reader<T> {
   find(item: Partial<T>): Promise<T[]>
   findAll(limit: number): Promise<T[]>
-  findById(id: string | Partial<T>): Promise<T>
-  exist(id: string | Partial<T>): Promise<boolean>
+  findById(id: number | Partial<T>): Promise<T>
+  exist(id: number | Partial<T>): Promise<boolean>
 }
 
 type BaseRepository<T> = Writer<T> & Reader<T>
 
-export abstract class KnexRepository<T> implements BaseRepository<T> {
+interface TimeStampData {
+  created_at?: Knex.Raw | string
+}
+
+export abstract class KnexRepository<T extends TimeStampData>
+  implements BaseRepository<T> {
   // eslint-disable-next-line no-useless-constructor
   constructor(readonly knex: Knex, readonly tableName: string) {}
 
@@ -25,17 +32,35 @@ export abstract class KnexRepository<T> implements BaseRepository<T> {
     return this.knex(this.tableName)
   }
 
-  async create(item: Omit<T, 'id'>): Promise<T> {
-    const [output] = await this.qb.insert<T>(item).returning('*')
-
-    return output as Promise<T>
+  // FIXME : 성능 개선 가능인 부분
+  async create(item: Omit<T, 'id'>): Promise<T | undefined> {
+    if (!item.created_at) {
+      item.created_at = this.knex.fn.now()
+    }
+    try {
+      const [id] = await this.qb.insert(item)
+      const result = await this.findById(id)
+      return result
+    } catch (e) {
+      console.error(e)
+      return undefined
+    }
   }
 
-  createMany(items: T[]): Promise<T[]> {
-    return this.qb.insert<T>(items) as Promise<T[]>
+  async createMany(items: Omit<T, 'id'>[]): Promise<boolean> {
+    const includingTimeStampItems = items.map((item) =>
+      item.created_at ? item : { ...item, created_at: new Date() },
+    )
+    try {
+      await this.qb.insert<T>(includingTimeStampItems)
+      return true
+    } catch (e) {
+      console.error(e)
+      return false
+    }
   }
 
-  update(id: string, item: Partial<T>): Promise<boolean> {
+  update(id: number, item: Partial<T>): Promise<boolean> {
     return this.qb.where('id', id).update(item)
   }
 
@@ -43,7 +68,11 @@ export abstract class KnexRepository<T> implements BaseRepository<T> {
     return this.qb.insert<T>(item).onConflict('id').merge()
   }
 
-  delete(id: string): Promise<boolean> {
+  delete(column: string, value: any): Promise<DeleteResult> {
+    return this.qb.where(column, value).del()
+  }
+
+  deleteById(id: number): Promise<boolean> {
     return this.qb.where('id', id).del()
   }
 
@@ -55,18 +84,18 @@ export abstract class KnexRepository<T> implements BaseRepository<T> {
     return this.qb.limit(limit)
   }
 
-  findById(id: string | Partial<T>): Promise<T> {
-    return typeof id === 'string'
+  findById(id: number | Partial<T>): Promise<T> {
+    return typeof id === 'number'
       ? this.qb.where('id', id).first()
       : this.qb.where(id).first()
   }
 
-  async exist(id: string | Partial<T>) {
+  async exist(id: number | Partial<T>) {
     const query = this.qb.select<[{ count: number }]>(
       this.knex.raw('COUNT(*)::integer as count'),
     )
 
-    if (typeof id !== 'string') {
+    if (typeof id !== 'number') {
       query.where(id)
     } else {
       query.where('id', id)

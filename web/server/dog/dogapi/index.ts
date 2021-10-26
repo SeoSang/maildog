@@ -9,7 +9,7 @@ export const getAllBreeds = async (): Promise<BreedParams[]> => {
   if (process.env.NODE_ENV === 'test') {
     const fs = require('fs')
     const rawBreeds = await fs.readFileSync(
-      path.resolve(__dirname, '../../db/breeds.json'),
+      path.resolve(__dirname, '../../db/json/breeds.json'),
     )
     return JSON.parse(rawBreeds)
   }
