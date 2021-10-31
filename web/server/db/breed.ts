@@ -15,13 +15,17 @@ class BreedRepository extends KnexRepository<Breed> {
     return breeds.map((breed) => new Breed(breed))
   }
 
-  async findById(id: string): Promise<Breed> {
+  async findById(id: number): Promise<Breed> {
     const breed = await super.findById(id)
     return new Breed(breed)
   }
 
-  async create(item: Omit<Breed, 'id'>): Promise<Breed> {
-    return new Breed(await super.create(item))
+  async create(item: Omit<Breed, 'id'>): Promise<Breed | undefined> {
+    const result = await super.create(item)
+    if (result) {
+      return new Breed(result)
+    }
+    return undefined
   }
 }
 

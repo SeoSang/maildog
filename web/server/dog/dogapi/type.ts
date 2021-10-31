@@ -1,3 +1,5 @@
+import { Knex } from 'knex'
+
 export interface Weight {
   imperial: string
   metric: string
@@ -31,6 +33,7 @@ export interface BreedParams {
   bred_for?: string
   breed_group?: string
   image?: DogImage
+  created_at?: Knex.Raw | string
 }
 
 export interface BreedDBParams extends Omit<BreedParams, JsonParam> {
