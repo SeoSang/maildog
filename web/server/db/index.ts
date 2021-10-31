@@ -33,18 +33,13 @@ export abstract class KnexRepository<T extends TimeStampData>
   }
 
   // FIXME : 성능 개선 가능인 부분
-  async create(item: Omit<T, 'id'>): Promise<T | undefined> {
+  async create(item: Omit<T, 'id'>): Promise<T> {
     if (!item.created_at) {
       item.created_at = this.knex.fn.now()
     }
-    try {
-      const [id] = await this.qb.insert(item)
-      const result = await this.findById(id)
-      return result
-    } catch (e) {
-      console.error(e)
-      return undefined
-    }
+    const [id] = await this.qb.insert(item)
+    const result = await this.findById(id)
+    return result
   }
 
   async createMany(items: Omit<T, 'id'>[]): Promise<boolean> {

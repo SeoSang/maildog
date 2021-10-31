@@ -1,21 +1,28 @@
 import { userRepository } from '../user'
 
+const DUMMY_USER = {
+  email: 'dummy@naver.com',
+  password: 'password',
+  name: '항상 존재하는 더미유저',
+  favorite: 'Akita',
+  phone: '01000000000',
+}
+
 describe('user repository test', () => {
   test('insert dummy user', async () => {
-    await userRepository.delete('name', '서상테스트')
-    const result = await userRepository.create({
-      email: 'ddrrpg@naver.com',
-      name: '서상테스트',
-      favorite: 'Akita',
-      phone: '01051094539',
-    })
+    let [prevDummyUser] = await userRepository.find({ email: DUMMY_USER.email })
+    if (!prevDummyUser) {
+      prevDummyUser = await userRepository.create(DUMMY_USER)
+    }
 
-    expect(result?.name).toBe('서상테스트')
+    expect(prevDummyUser?.name).toBe(DUMMY_USER.name)
+    expect(prevDummyUser?.favorite).toBe(DUMMY_USER.favorite)
+    expect(prevDummyUser?.phone).toBe(DUMMY_USER.phone)
   })
   test('created_at should not be null', async () => {
-    await userRepository.delete('email', 'dummy@naver.com')
+    await userRepository.delete('email', 'dummy2@naver.com')
     const result = await userRepository.create({
-      email: 'dummy@naver.com',
+      email: 'dummy2@naver.com',
     })
 
     expect(result?.created_at).toBeTruthy()
@@ -26,12 +33,14 @@ describe('user repository test', () => {
     const results = await userRepository.createMany([
       {
         email: 'ddrrpg2@naver.com',
+        password: 'password',
         name: '서상테스트',
         favorite: 'Akita',
         phone: '01051094539',
       },
       {
         email: 'ddrrpg3@naver.com',
+        password: 'password',
         name: '서상테스트',
         favorite: 'Akita',
         phone: '01051094539',
@@ -50,5 +59,22 @@ describe('user repository test', () => {
       userRepository.delete('email', 'ddrrpg3@naver.com'),
     ])
     expect(results.every((val) => val === 1 || val === 0)).toBeTruthy()
+  })
+
+  test('whether to except password when find', async () => {
+    const [user] = await userRepository.find({ email: DUMMY_USER.email })
+    if (!user) {
+      console.error('no dummy user for test')
+      return
+    }
+    expect(user.password).toBeFalsy()
+  })
+
+  test('salted password validate test', async () => {
+    const validateResult = await userRepository.validate(
+      DUMMY_USER.email,
+      DUMMY_USER.password,
+    )
+    expect(validateResult).toBe(true)
   })
 })

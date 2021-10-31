@@ -34,6 +34,7 @@ export const createUsersTable = async () => {
     tbl.timestamps() // created_at
     tbl.text('email').notNullable().unique()
     tbl.text('name')
+    tbl.text('password').notNullable()
     tbl.text('phone')
     tbl.text('favorite')
     tbl.integer('priority').defaultTo(2)
