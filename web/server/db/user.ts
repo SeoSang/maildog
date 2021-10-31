@@ -20,7 +20,7 @@ const exceptPassword = (userInfo: UserInfo) => {
 class UserRepository extends KnexRepository<UserInfo> {
   async find(item: Partial<UserInfo>): Promise<UserInfo[]> {
     const users = await super.find(item)
-    return users ? users.map((user) => exceptPassword(user)) : []
+    return users?.length !== 0 ? users.map((user) => exceptPassword(user)) : []
   }
 
   async findAll(limit: number): Promise<UserInfo[]> {
@@ -44,7 +44,7 @@ class UserRepository extends KnexRepository<UserInfo> {
 
   async validate(email: string, password: string): Promise<UserValidateResult> {
     const [user] = await super.find({ email })
-    if (!user.password) {
+    if (!user?.password) {
       console.error('유저가 없거나 패스워드 데이터가 없습니다.')
       return {
         code: 'NOT_EXIST',

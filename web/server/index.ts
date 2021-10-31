@@ -37,10 +37,10 @@ async function main() {
   }
 
   router.get('/', renderNext('/'))
+  router.get('/login', renderNext('/login'))
   router.get('/image', renderNext('/public'))
 
   router.get('/hello', renderNext('/hello/world'))
-
   app
     .use(morgan('combined'))
     .use(serve(staticDirPath))

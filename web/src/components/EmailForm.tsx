@@ -10,28 +10,28 @@ import {
 import PageContainer from './PageContainer'
 import { WrapToCard } from '../style'
 import { MainFormContext } from '../hooks/useMainFormContext'
-
-const isValidEmail = (email: string): boolean => {
-  // eslint-disable-next-line no-useless-escape
-  const mail_format = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  return Boolean(
-    email.match(mail_format) && email.match(mail_format)?.length !== 0,
-  )
-}
+import beAxios from '../utils/axios'
+import { isValidEmail } from '../utils'
 
 const EmailForm = () => {
   const { email, setEmail, prevPage, nextPage } = useContext(MainFormContext)
   // TODO : 이메일 체크 백엔드로 받기
   const [emailChecked, setEmailChecked] = useState(false)
 
-  const onClickRegisterButton = () => {
+  const onClickRegisterButton = async () => {
     // TODO : 토스트로 바꾸기 alert
     if (!isValidEmail(email)) {
-      alert('올바르지 않은 이메일입니다.')
+      alert('Wrong e-mail format.')
       return
     }
-    alert('사용가능한 이메일입니다.')
-    setEmailChecked(true)
+    try {
+      const res = await beAxios.post('/user/email', { email })
+      alert(res.data.message)
+      setEmailChecked(true)
+    } catch (e: any) {
+      alert(e.response.data.message)
+      setEmailChecked(false)
+    }
   }
 
   return (
@@ -43,11 +43,12 @@ const EmailForm = () => {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value)
+            setEmailChecked(false)
           }}
         />
         <FormHelperText>We will never share your email.</FormHelperText>
         <Button style={{ marginTop: '0.5rem' }} onClick={onClickRegisterButton}>
-          Register
+          Resgister
         </Button>
       </FormControl>
       <PageContainer

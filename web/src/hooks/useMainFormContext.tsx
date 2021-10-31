@@ -1,15 +1,18 @@
 import React, { createContext, useState, useCallback, useMemo } from 'react'
 import { Breed } from '@/server/dog/dogapi/breed'
+import { UserInfo } from '@/server/types/user'
 import { useToast } from '@chakra-ui/react'
 
 import { SELECTED_BREEDS_MAX } from '../constants'
 
 type FormContextValues = {
   page: number
+  user: UserInfo | null
   email: string
   prevPage: () => void
   nextPage: () => void
   selectedBreeds: Breed[]
+  setUser: React.Dispatch<React.SetStateAction<UserInfo | null>>
   setEmail: React.Dispatch<React.SetStateAction<string>>
   setSelectedBreeds: React.Dispatch<React.SetStateAction<Breed[]>>
   addSelectedBreeds: (breed: Breed) => void
@@ -18,10 +21,12 @@ type FormContextValues = {
 
 export const MainFormContext = createContext({
   page: 1,
+  user: null,
   email: '',
   prevPage: () => {},
   nextPage: () => {},
   selectedBreeds: [],
+  setUser: (_: UserInfo) => {},
   setEmail: (_: string) => {},
   setSelectedBreeds: (_: Breed[]) => {},
   addSelectedBreeds: (_: Breed) => {},
@@ -32,8 +37,9 @@ const FIRST_PAGE = 1
 const MAX_PAGE = 4
 
 const useMainFormContext = () => {
-  const [email, setEmail] = useState<string>('')
   const [page, setPage] = useState<number>(1)
+  const [user, setUser] = useState<UserInfo | null>(null)
+  const [email, setEmail] = useState<string>('')
   const [selectedBreeds, setSelectedBreeds] = useState<Breed[]>([])
 
   const toast = useToast()
@@ -78,8 +84,10 @@ const useMainFormContext = () => {
   const formValues = useMemo(
     () => ({
       page,
+      user,
       email,
       selectedBreeds,
+      setUser,
       setEmail,
       prevPage,
       nextPage,
@@ -89,8 +97,10 @@ const useMainFormContext = () => {
     }),
     [
       page,
+      user,
       email,
       selectedBreeds,
+      setUser,
       setEmail,
       prevPage,
       nextPage,

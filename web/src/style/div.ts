@@ -16,6 +16,7 @@ interface FlexDivProps {
   align?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
   margin?: string
   padding?: string
+  gap?: string
 }
 
 export const FlexDiv = styled.div`
@@ -28,4 +29,12 @@ export const FlexDiv = styled.div`
   background: ${(p: FlexDivProps) => p.background};
   margin: ${(p: FlexDivProps) => (p.margin ? p.margin : 'auto')};
   padding: ${(p: FlexDivProps) => (p.padding ? p.padding : 'auto')};
+  gap: ${(p: FlexDivProps) => (p.gap ? p.gap : 'none')};
+`
+
+export const BackgroundDiv = styled.div`
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #ffc0cb;
+  background-image: linear-gradient(45deg, #ffc0cb 22%, #81f7f2 98%);
 `
