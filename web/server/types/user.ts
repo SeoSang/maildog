@@ -3,6 +3,7 @@ export type UserInfo = {
   email: string
   name?: string
   phone?: string
+  password?: string
   favorite?: string
   priority?: number
   valid?: boolean

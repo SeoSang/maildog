@@ -14,54 +14,45 @@ router.get('/', async (ctx) => {
 // TODO : load User
 router.get('/:userId', async (ctx) => {
   const { userId } = ctx.params
-  try {
-    const user = await userRepository.findById(Number(userId))
-    if (user) {
-      ctx.body = {
-        user,
-        message: '유저 정보 로드에 성공하였습니다.'
-      }
-      ctx.status = 200
+  const user = await userRepository.findById(Number(userId))
+  if (user) {
+    ctx.body = {
+      user,
+      message: '유저 정보 로드에 성공하였습니다.',
     }
-    else {
-      ctx.body = {
-        user,
-        message: '존재하지 않는 유저입니다!'
-      }
-      ctx.status = 404
+    ctx.status = 200
+  } else {
+    ctx.body = {
+      user,
+      message: '존재하지 않는 유저입니다!',
     }
+    ctx.status = 404
   }
 })
 
 router.get('/register', async (ctx) => {
   const { email, name, phone, favorite, password } = ctx.request.body
-  try {
-    const [user] = await userRepository.find({ email })
-    if (user) {
-      ctx.body = {
-        user,
-        message: '존재하는 이메일입니다.',
-      }
-      ctx.status = 404
-      return
-    }
-    const newUser = await userRepository.create({
-      email,
-      name,
-      phone,
-      password,
-      favorite,
-    })
+  const [user] = await userRepository.find({ email })
+  if (user) {
     ctx.body = {
-      user: newUser,
-      message: '회원가입이 완료되었습니다!',
+      user,
+      message: '존재하는 이메일입니다.',
     }
-    ctx.status = 200
+    ctx.status = 404
     return
-  } catch (e) {
-    ctx.body = { message: '서버 에러가 발생했습니다.' }
-    ctx.status = 500
   }
+  const newUser = await userRepository.create({
+    email,
+    name,
+    phone,
+    password,
+    favorite,
+  })
+  ctx.body = {
+    user: newUser,
+    message: '회원가입이 완료되었습니다!',
+  }
+  ctx.status = 200
 })
 
 router.post('/email', async (ctx) => {
@@ -80,7 +71,6 @@ router.post('/email', async (ctx) => {
     }
     ctx.status = 200
   }
-  console.log(user)
 })
 
 // TODO : register Cron

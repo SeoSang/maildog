@@ -20,12 +20,9 @@ class BreedRepository extends KnexRepository<Breed> {
     return new Breed(breed)
   }
 
-  async create(item: Omit<Breed, 'id'>): Promise<Breed | undefined> {
+  async create(item: Omit<Breed, 'id'>): Promise<Breed> {
     const result = await super.create(item)
-    if (result) {
-      return new Breed(result)
-    }
-    return undefined
+    return new Breed(result)
   }
 }
 
