@@ -8,6 +8,14 @@ const DUMMY_USER = {
   phone: '01000000000',
 }
 
+const DUMMY_USER_5 = {
+  email: 'dummy5@naver.com',
+  password: 'password',
+  name: '수정용 더미유저',
+  favorite: 'Akita',
+  phone: '01000000005',
+}
+
 describe('user repository test', () => {
   test('insert dummy user', async () => {
     let [prevDummyUser] = await userRepository.find({ email: DUMMY_USER.email })
@@ -75,6 +83,13 @@ describe('user repository test', () => {
       DUMMY_USER.email,
       DUMMY_USER.password,
     )
-    expect(validateResult).toBe(true)
+    expect(validateResult?.user?.email).toBe(DUMMY_USER.email)
+  })
+
+  test('user update test', async () => {
+    await userRepository.delete('email', DUMMY_USER_5.email)
+    const user = await userRepository.create(DUMMY_USER_5)
+    const result = await userRepository.update(user.id, { name: '수정' })
+    expect(result.name).toBe('수정')
   })
 })

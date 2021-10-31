@@ -4,7 +4,7 @@ export type DeleteResult = 1 | 0
 interface Writer<T> {
   create(item: Omit<T, 'id'>): Promise<T | undefined>
   createMany(item: Omit<T, 'id'>[]): Promise<boolean>
-  update(id: number, item: Partial<T>): Promise<boolean>
+  update(id: number, item: Partial<T>): Promise<T>
   upsert(item: Partial<T>): Promise<T[]>
   delete(column: string, value: any): Promise<DeleteResult>
   deleteById(id: number): Promise<boolean>
@@ -55,8 +55,9 @@ export abstract class KnexRepository<T extends TimeStampData>
     }
   }
 
-  update(id: number, item: Partial<T>): Promise<boolean> {
-    return this.qb.where('id', id).update(item)
+  async update(id: number, item: Partial<T>): Promise<T> {
+    await this.qb.where('id', id).update(item)
+    return this.findById(id)
   }
 
   upsert(item: Partial<T>): Promise<T[]> {
