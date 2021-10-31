@@ -26,6 +26,56 @@ router.get('/', async (ctx) => {
   ctx.state = StatusCodes.OK
 })
 
+router.get('/register', async (ctx) => {
+  const { email, name, phone, favorite, password } = ctx.request.body
+  const [user] = await userRepository.find({ email })
+  if (user) {
+    ctx.body = {
+      user,
+      message: '존재하는 이메일입니다.',
+    }
+    ctx.status = 404
+    return
+  }
+  const newUser = await userRepository.create({
+    email,
+    name,
+    phone,
+    password,
+    favorite,
+  })
+  ctx.body = {
+    user: newUser,
+    message: '회원가입이 완료되었습니다!',
+  }
+  ctx.status = 200
+})
+
+router.post('/email', async (ctx) => {
+  const { email } = ctx.request.body
+  const [user] = await userRepository.find({ email })
+  if (user) {
+    ctx.body = {
+      message: 'Already exists.',
+    }
+    ctx.status = 404
+  } else {
+    ctx.body = {
+      message: 'You can use this email.',
+    }
+    ctx.status = 200
+  }
+})
+
+// TODO : register Cron
+router.post('/:id/cron', async (ctx) => {
+  const { cronId } = ctx.params
+  // ctx.body = { message: 'test' }
+  console.log(cronId)
+  ctx.body = { message: 'test' }
+  ctx.state = StatusCodes.OK
+})
+
 // 유저 로드
 router.get('/:id', numericIdValidator, async (ctx) => {
   const { id } = ctx.params
@@ -100,58 +150,6 @@ router.put('/:id', numericIdValidator, async (ctx) => {
     message: '유저 업데이트에 성공했습니다.',
   }
   ctx.status = 200
-})
-
-router.get('/register', async (ctx) => {
-  const { email, name, phone, favorite, password } = ctx.request.body
-  const [user] = await userRepository.find({ email })
-  if (user) {
-    ctx.body = {
-      user,
-      message: '존재하는 이메일입니다.',
-    }
-    ctx.status = 404
-    return
-  }
-  const newUser = await userRepository.create({
-    email,
-    name,
-    phone,
-    password,
-    favorite,
-  })
-  ctx.body = {
-    user: newUser,
-    message: '회원가입이 완료되었습니다!',
-  }
-  ctx.status = 200
-})
-
-router.post('/email', async (ctx) => {
-  const { email } = ctx.request.body
-  const [user] = await userRepository.find({ email })
-  if (user) {
-    ctx.body = {
-      user,
-      message: '존재하는 이메일입니다.',
-    }
-    ctx.status = 404
-  } else {
-    ctx.body = {
-      user: null,
-      message: '사용 가능한 이메일입니다.',
-    }
-    ctx.status = 200
-  }
-})
-
-// TODO : register Cron
-router.post('/:id/cron', async (ctx) => {
-  const { cronId } = ctx.params
-  // ctx.body = { message: 'test' }
-  console.log(cronId)
-  ctx.body = { message: 'test' }
-  ctx.state = StatusCodes.OK
 })
 
 export default router.routes()
