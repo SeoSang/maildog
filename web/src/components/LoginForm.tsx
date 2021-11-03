@@ -36,8 +36,9 @@ const LoginForm: React.FC<Props> = ({ setUser }) => {
 
     const user = await loginUser({ email, password })
     if (user) {
+      alert('Login Success!')
       setUser(user)
-      window.localStorage.setItem('userName', JSON.stringify(user))
+      window.localStorage.setItem('godliamUser', JSON.stringify(user))
     }
   }
 

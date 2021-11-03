@@ -110,7 +110,7 @@ const useMainFormContext = () => {
     ],
   )
 
-  return { MainFormContext, formValues }
+  return { MainFormContext, formValues, setUser }
 }
 
 export default useMainFormContext

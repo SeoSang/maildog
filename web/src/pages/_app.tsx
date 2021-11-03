@@ -1,16 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AppProps } from 'next/app'
 import CSSReset from '@chakra-ui/css-reset'
 import { ThemeProvider } from '@chakra-ui/system'
+import Koa from 'koa'
+import { UserInfo } from '@/server/types/user'
+import { isNotEmptyObject, parseJSON } from '@/src/utils/objectUtils'
 
 import { theme } from '../style/theme'
 import useMainFormContext from '../hooks/useMainFormContext'
 
 // import 'normalize.css'
 
-function App({ Component, pageProps }: AppProps) {
-  const { MainFormContext, formValues } = useMainFormContext()
-  // const user = useQuery(cookie)
+type ServerProps = {
+  user: UserInfo
+}
+
+function App({ Component, pageProps, user }: AppProps & ServerProps) {
+  const { MainFormContext, formValues, setUser } = useMainFormContext()
+  useEffect(() => {
+    if (user) {
+      setUser(user)
+      return
+    }
+    const localUser = window.localStorage.getItem('godliamUser')
+    localUser && setUser(parseJSON(localUser))
+  }, [setUser, user])
 
   return (
     <ThemeProvider theme={theme}>
@@ -28,9 +42,15 @@ function App({ Component, pageProps }: AppProps) {
 
 export default App
 
-export async function getServerSideProps(context: any) {
-  console.log(context)
-  return {
-    props: {},
+App.getInitialProps = async (ctx: Koa.Context) => {
+  const userString = ctx.ctx.req.headers.user
+  try {
+    if (userString && isNotEmptyObject(parseJSON(userString))) {
+      return { user: parseJSON(userString) }
+    }
+  } catch (e) {
+    console.log(e)
+    return {}
   }
+  return {}
 }

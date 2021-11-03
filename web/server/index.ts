@@ -9,6 +9,8 @@ import mount from 'koa-mount'
 import Router from 'koa-router'
 import next from 'next'
 import dotenv from 'dotenv'
+import CryptoJS from 'crypto-js'
+import { CONSTANT_KEY_PASSWORD_ENCRYPT } from '@/server/types/constant'
 
 import api from './routes/api'
 
@@ -31,13 +33,19 @@ async function main() {
     return (ctx: Koa.Context) => {
       ctx.res.statusCode = 200
       ctx.respond = false
-      console.log({ cookies: ctx.cookies.get('ming') })
-
+      const userInfoString = ctx.cookies.get('godliam')
+      if (userInfoString) {
+        ctx.req.headers.user = CryptoJS.AES.decrypt(
+          userInfoString,
+          CONSTANT_KEY_PASSWORD_ENCRYPT.toString(),
+        ).toString(CryptoJS.enc.Utf8)
+      }
       nextApp.render(ctx.req, ctx.res, route, { ...ctx.prarams, ...ctx.query })
     }
   }
 
   router.get('/', renderNext('/'))
+  router.get('/user', renderNext('/user'))
   router.get('/login', renderNext('/login'))
   router.get('/image', renderNext('/public'))
 
