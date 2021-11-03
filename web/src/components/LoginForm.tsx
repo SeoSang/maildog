@@ -1,30 +1,27 @@
 import React, { useState } from 'react'
 import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Input,
   Button,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Input,
 } from '@chakra-ui/react'
 import { UserInfo } from '@/server/types/user'
+import { loginUser } from '@/src/request/user'
 
 import { WrapToCard } from '../style'
-import beAxios from '../utils/axios'
 import { FlexDiv } from '../style/div'
-import { alertErrorMessage, isValidEmail } from '../utils'
+import { isValidEmail } from '../utils'
 
 type Props = {
-  setUser: React.Dispatch<React.SetStateAction<UserInfo | null>>
+  setUser: (user: UserInfo) => void
 }
 
 const isValidData = (email: string, password: string): boolean => {
   if (email.trim().length === 0 || password.trim().length === 0) {
     return false
   }
-  if (!isValidEmail(email)) {
-    return false
-  }
-  return true
+  return isValidEmail(email)
 }
 
 const LoginForm: React.FC<Props> = ({ setUser }) => {
@@ -36,16 +33,11 @@ const LoginForm: React.FC<Props> = ({ setUser }) => {
     }
     setEmail(email.trim())
     setPassword(password.trim())
-    try {
-      const res = await beAxios.post('/user', {
-        email: email.trim(),
-        password: password.trim(),
-      })
-      const user = res.data
+
+    const user = await loginUser({ email, password })
+    if (user) {
       setUser(user)
-      alert(res.data.message)
-    } catch (e: any) {
-      alertErrorMessage(e)
+      window.localStorage.setItem('userName', JSON.stringify(user))
     }
   }
 

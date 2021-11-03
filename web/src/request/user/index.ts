@@ -1,22 +1,23 @@
-import beAxios from '../../utils/axios'
+import { alertErrorMessage } from '@/src/utils'
+import { UserInfo } from '@/server/types/user'
 
-export type UserInfo = {}
+import beAxios from '../../utils/axios'
 
 export const registerUser = async ({
   email,
   ...etc
 }: {
   email: string
-}): Promise<UserInfo> => {
+}): Promise<UserInfo | null> => {
   try {
     const result = await beAxios.post(`/user`, {
       email,
       ...etc,
     })
     return result?.data
-  } catch (e) {
-    console.error(e)
-    return {}
+  } catch (e: any) {
+    alertErrorMessage(e)
+    return null
   }
 }
 
@@ -27,7 +28,7 @@ export const updateUser = async ({
 }: {
   email: string
   userId: number
-}): Promise<UserInfo> => {
+}): Promise<UserInfo | null> => {
   try {
     const result = await beAxios.put(`/user/${userId}`, {
       email,
@@ -36,6 +37,45 @@ export const updateUser = async ({
     return result?.data
   } catch (e) {
     console.error(e)
-    return {}
+    return null
+  }
+}
+
+export const loginUser = async ({
+  email,
+  password,
+}: {
+  email: string
+  password: string
+}): Promise<UserInfo | null> => {
+  try {
+    const result = await beAxios.post(`/user`, {
+      email: email.trim(),
+      password: password.trim(),
+    })
+    return result?.data
+  } catch (e: any) {
+    alertErrorMessage(e)
+    return null
+  }
+}
+
+export const loadUser = async ({
+  email,
+  userId,
+  ...etc
+}: {
+  email: string
+  userId: number
+}): Promise<UserInfo | null> => {
+  try {
+    const result = await beAxios.put(`/user/${userId}`, {
+      email,
+      ...etc,
+    })
+    return result?.data
+  } catch (e: any) {
+    alertErrorMessage(e)
+    return null
   }
 }

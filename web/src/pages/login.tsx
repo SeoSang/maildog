@@ -9,7 +9,7 @@ const Login = () => {
 
   return (
     <BackgroundDiv>
-      <LoginForm setUser={setUser}></LoginForm>
+      <LoginForm setUser={setUser} />
     </BackgroundDiv>
   )
 }
