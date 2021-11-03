@@ -51,7 +51,7 @@ class UserRepository extends KnexRepository<UserInfo> {
       }
     }
     return bcrypt.compareSync(password, user.password)
-      ? { code: 'SUCCESS', user }
+      ? { code: 'SUCCESS', user: { ...user, password: undefined } }
       : { code: 'WRONG_PASSWORD' }
   }
 }

@@ -3,8 +3,7 @@ import { Next, ParameterizedContext } from 'koa'
 import httpStatus from 'http-status'
 import Router from 'koa-router'
 import { StatusCodes } from 'http-status-codes'
-import { CONSTANT_KEY_PASSWORD_ENCRYPT } from '@/server/types/constant'
-import CryptoJS from 'crypto-js'
+import { encryptObject } from '@/src/utils/encrypt'
 
 import { userRepository } from '../../db/user'
 
@@ -119,10 +118,7 @@ router.post('/', numericIdValidator, async (ctx) => {
     if (!user?.id) {
       return
     }
-    const encryptedUserId = CryptoJS.AES.encrypt(
-      JSON.stringify(user),
-      CONSTANT_KEY_PASSWORD_ENCRYPT.toString(),
-    ).toString()
+    const encryptedUserId = encryptObject(user)
     ctx.cookies.set('godliam', encryptedUserId)
   } else {
     ctx.body = {

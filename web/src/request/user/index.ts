@@ -53,7 +53,7 @@ export const loginUser = async ({
       email: email.trim(),
       password: password.trim(),
     })
-    return result?.data
+    return result?.data.user
   } catch (e: any) {
     alertErrorMessage(e)
     return null

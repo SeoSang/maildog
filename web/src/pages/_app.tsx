@@ -5,6 +5,7 @@ import { ThemeProvider } from '@chakra-ui/system'
 import Koa from 'koa'
 import { UserInfo } from '@/server/types/user'
 import { isNotEmptyObject, parseJSON } from '@/src/utils/objectUtils'
+import { decryptToUser } from '@/src/utils/encrypt'
 
 import { theme } from '../style/theme'
 import useMainFormContext from '../hooks/useMainFormContext'
@@ -23,7 +24,8 @@ function App({ Component, pageProps, user }: AppProps & ServerProps) {
       return
     }
     const localUser = window.localStorage.getItem('godliamUser')
-    localUser && setUser(parseJSON(localUser))
+    localUser && setUser(decryptToUser(localUser))
+    // console.log(decryptToUser(localUser))
   }, [setUser, user])
 
   return (

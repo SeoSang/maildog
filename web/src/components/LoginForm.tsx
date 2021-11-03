@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { UserInfo } from '@/server/types/user'
 import { loginUser } from '@/src/request/user'
+import { encryptObject } from '@/src/utils/encrypt'
 
 import { WrapToCard } from '../style'
 import { FlexDiv } from '../style/div'
@@ -38,7 +39,7 @@ const LoginForm: React.FC<Props> = ({ setUser }) => {
     if (user) {
       alert('Login Success!')
       setUser(user)
-      window.localStorage.setItem('godliamUser', JSON.stringify(user))
+      window.localStorage.setItem('godliamUser', encryptObject(user))
     }
   }
 
