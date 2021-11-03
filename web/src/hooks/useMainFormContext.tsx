@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback, useMemo } from 'react'
+import React, { createContext, useCallback, useMemo, useState } from 'react'
 import { Breed } from '@/server/dog/dogapi/breed'
 import { UserInfo } from '@/server/types/user'
 import { useToast } from '@chakra-ui/react'
@@ -12,7 +12,7 @@ type FormContextValues = {
   prevPage: () => void
   nextPage: () => void
   selectedBreeds: Breed[]
-  setUser: React.Dispatch<React.SetStateAction<UserInfo | null>>
+  setUser: (user: UserInfo) => void
   setEmail: React.Dispatch<React.SetStateAction<string>>
   setSelectedBreeds: React.Dispatch<React.SetStateAction<Breed[]>>
   addSelectedBreeds: (breed: Breed) => void

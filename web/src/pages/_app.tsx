@@ -10,6 +10,7 @@ import useMainFormContext from '../hooks/useMainFormContext'
 
 function App({ Component, pageProps }: AppProps) {
   const { MainFormContext, formValues } = useMainFormContext()
+  // const user = useQuery(cookie)
 
   return (
     <ThemeProvider theme={theme}>
@@ -26,3 +27,10 @@ function App({ Component, pageProps }: AppProps) {
 }
 
 export default App
+
+export async function getServerSideProps(context: any) {
+  console.log(context)
+  return {
+    props: {},
+  }
+}

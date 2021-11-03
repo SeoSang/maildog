@@ -31,6 +31,7 @@ async function main() {
     return (ctx: Koa.Context) => {
       ctx.res.statusCode = 200
       ctx.respond = false
+      console.log({ cookies: ctx.cookies.get('ming') })
 
       nextApp.render(ctx.req, ctx.res, route, { ...ctx.prarams, ...ctx.query })
     }

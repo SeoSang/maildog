@@ -60,19 +60,9 @@ export const loginUser = async ({
   }
 }
 
-export const loadUser = async ({
-  email,
-  userId,
-  ...etc
-}: {
-  email: string
-  userId: number
-}): Promise<UserInfo | null> => {
+export const loadUser = async (userId: number): Promise<UserInfo | null> => {
   try {
-    const result = await beAxios.put(`/user/${userId}`, {
-      email,
-      ...etc,
-    })
+    const result = await beAxios.get(`/user/${userId}`)
     return result?.data
   } catch (e: any) {
     alertErrorMessage(e)

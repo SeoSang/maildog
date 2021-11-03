@@ -100,21 +100,21 @@ router.get('/:id', numericIdValidator, async (ctx) => {
 
 // User Login
 router.post('/', numericIdValidator, async (ctx) => {
-  console.log('first')
   const { email, password } = ctx.request.body
-  const user = await userRepository.validate(email, password)
-  if (user?.code === 'NOT_EXIST') {
+  const { user, code } = await userRepository.validate(email, password)
+  if (code === 'NOT_EXIST') {
     ctx.body = {
       user,
       message: 'Not existed e-mail.',
     }
     ctx.status = httpStatus.NOT_FOUND
-  } else if (user?.code === 'SUCCESS') {
+  } else if (code === 'SUCCESS') {
     ctx.body = {
       user,
       message: 'Login Success.',
     }
     ctx.status = httpStatus.OK
+    ctx.cookies.set('godliam', user?.id.toString())
   } else {
     ctx.body = {
       user,
