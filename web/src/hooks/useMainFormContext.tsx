@@ -13,7 +13,7 @@ type FormContextValues = {
   prevPage: () => void
   nextPage: () => void
   selectedBreeds: Breed[]
-  setUser: (user: UserInfo) => void
+  setUser: (user: UserInfo | null) => void
   setEmail: React.Dispatch<React.SetStateAction<string>>
   setSelectedBreeds: React.Dispatch<React.SetStateAction<Breed[]>>
   addSelectedBreeds: (breed: Breed) => void
@@ -28,7 +28,7 @@ export const MainFormContext = createContext({
   prevPage: () => {},
   nextPage: () => {},
   selectedBreeds: [],
-  setUser: (_: UserInfo) => {},
+  setUser: (_: UserInfo | null) => {},
   setEmail: (_: string) => {},
   setSelectedBreeds: (_: Breed[]) => {},
   addSelectedBreeds: (_: Breed) => {},

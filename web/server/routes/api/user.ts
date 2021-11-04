@@ -129,6 +129,12 @@ router.post('/', numericIdValidator, async (ctx) => {
   }
 })
 
+// User Logout
+router.post('/logout', async (ctx) => {
+  ctx.cookies.set('godliam', '')
+  ctx.status = httpStatus.OK
+})
+
 // 유저 수정
 router.put('/:id', numericIdValidator, async (ctx) => {
   const { id } = ctx.params

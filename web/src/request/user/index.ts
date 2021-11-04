@@ -60,6 +60,16 @@ export const loginUser = async ({
   }
 }
 
+export const logoutUser = async () => {
+  try {
+    await beAxios.post(`/user/logout`)
+    alert('Logout Success!')
+  } catch (e: any) {
+    alertErrorMessage(e)
+    return null
+  }
+}
+
 export const loadUser = async (userId: number): Promise<UserInfo | null> => {
   try {
     const result = await beAxios.get(`/user/${userId}`)
