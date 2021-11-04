@@ -9,6 +9,7 @@ type FormContextValues = {
   page: number
   user: UserInfo | null
   email: string
+  isLogined: boolean
   prevPage: () => void
   nextPage: () => void
   selectedBreeds: Breed[]
@@ -22,6 +23,7 @@ type FormContextValues = {
 export const MainFormContext = createContext({
   page: 1,
   user: null,
+  isLogined: false,
   email: '',
   prevPage: () => {},
   nextPage: () => {},
@@ -81,11 +83,14 @@ const useMainFormContext = () => {
     setPage((prevPage) => Math.min(MAX_PAGE, prevPage + 1))
   }, [setPage])
 
+  const isLogined = useMemo(() => user !== null && !!user.id, [user])
+
   const formValues = useMemo(
     () => ({
       page,
       user,
       email,
+      isLogined,
       selectedBreeds,
       setUser,
       setEmail,
@@ -99,6 +104,7 @@ const useMainFormContext = () => {
       page,
       user,
       email,
+      isLogined,
       selectedBreeds,
       setUser,
       setEmail,

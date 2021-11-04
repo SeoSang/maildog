@@ -9,6 +9,7 @@ import {
 import { UserInfo } from '@/server/types/user'
 import { loginUser } from '@/src/request/user'
 import { encryptObject } from '@/src/utils/encrypt'
+import { useRouter } from 'next/router'
 
 import { WrapToCard } from '../style'
 import { FlexDiv } from '../style/div'
@@ -26,8 +27,11 @@ const isValidData = (email: string, password: string): boolean => {
 }
 
 const LoginForm: React.FC<Props> = ({ setUser }) => {
+  const router = useRouter()
+
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
   const onClickLoginButton = async () => {
     if (!isValidData(email, password)) {
       alert('Wrong data format')
@@ -40,6 +44,7 @@ const LoginForm: React.FC<Props> = ({ setUser }) => {
       alert('Login Success!')
       setUser(user)
       window.localStorage.setItem('godliamUser', encryptObject(user))
+      router.push('/')
     }
   }
 

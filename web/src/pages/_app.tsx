@@ -45,7 +45,7 @@ function App({ Component, pageProps, user }: AppProps & ServerProps) {
 export default App
 
 App.getInitialProps = async (ctx: Koa.Context) => {
-  const userString = ctx.ctx.req.headers.user
+  const userString = ctx?.ctx?.req?.headers?.user
   try {
     if (userString && isNotEmptyObject(parseJSON(userString))) {
       return { user: parseJSON(userString) }

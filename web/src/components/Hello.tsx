@@ -7,7 +7,7 @@ import { MainFormContext } from '../hooks/useMainFormContext'
 import { FlexDiv } from '../style/div'
 
 const Hello = () => {
-  const { nextPage } = useContext(MainFormContext)
+  const { nextPage, isLogined } = useContext(MainFormContext)
 
   return (
     <>
@@ -15,12 +15,20 @@ const Hello = () => {
         Maildog!
       </Heading>
       <FlexDiv gap="6px">
-        <Button size="lg" onClick={nextPage}>
-          Register
-        </Button>
-        <Link href={'login'}>
-          <Button size="lg">Login</Button>
-        </Link>
+        {!isLogined ? (
+          <>
+            <Button size="lg" onClick={nextPage}>
+              Register
+            </Button>
+            <Link href={'login'}>
+              <Button size="lg">Login</Button>
+            </Link>
+          </>
+        ) : (
+          <Button size="lg" onClick={nextPage}>
+            Start
+          </Button>
+        )}
       </FlexDiv>
     </>
   )
