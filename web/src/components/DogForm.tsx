@@ -20,6 +20,7 @@ import { ResponsiveWidth } from '../style/theme'
 const IMAGE_PER_PAGE = 20
 
 const GridContainer = styled.div`
+  z-index: 1;
   width: 90%;
   margin: 15px;
 

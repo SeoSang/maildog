@@ -37,7 +37,6 @@ const fadeIn = keyframes`
 `
 
 const MainImage: any = styled(Image)`
-  z-index: 0;
   animation: ${fadeIn} 8s;
   -moz-animation: ${fadeIn} 8s; /* Firefox */
   -webkit-animation: ${fadeIn} 8s; /* Safari and Chrome */

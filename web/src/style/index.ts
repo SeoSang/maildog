@@ -5,6 +5,7 @@ type WrapToCardPropsType = {
 }
 
 export const WrapToCard = styled.div`
+  z-index: 1;
   background-color: ${(props: WrapToCardPropsType) =>
     props.bgColor ?? 'whitesmoke'};
   padding: 2rem;

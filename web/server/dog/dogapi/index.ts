@@ -4,7 +4,6 @@ import { Breed } from './breed'
 import daxios from './interceptor'
 import { BreedParams } from './type'
 
-// TODO : api 대신 json 바탕으로 보기
 export const getAllBreeds = async (): Promise<BreedParams[]> => {
   if (process.env.NODE_ENV === 'test') {
     const fs = require('fs')
