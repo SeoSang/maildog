@@ -1,18 +1,17 @@
 import Image from 'next/image'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import MainForm from 'src/components/MainForm'
+import { BackgroundDiv } from '@/src/style/div'
+import LogoutButton from '@/src/components/LogoutButton'
 
 import InputModal from '../components/InputModal'
 
-const MainImageContainer = styled.div`
+const MainImageContainer = styled(BackgroundDiv)`
   display: flex;
-  min-width: 100vw;
-  min-height: 100vh;
   font-size: 30px;
   z-index: -1;
   align-items: center;
   justify-content: center;
-  /* background-color: pink; */
 `
 const TitleContainer = styled.div`
   width: 100%;
@@ -22,9 +21,27 @@ const TitleContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.6;
+  }
+`
 
 const MainImage: any = styled(Image)`
-  z-index: -1;
+  z-index: 0;
+  animation: ${fadeIn} 8s;
+  -moz-animation: ${fadeIn} 8s; /* Firefox */
+  -webkit-animation: ${fadeIn} 8s; /* Safari and Chrome */
+  -o-animation: ${fadeIn} 8s; /* Opera */
   opacity: 0.6;
 `
 
@@ -32,6 +49,7 @@ export default function Index() {
   return (
     <>
       <InputModal />
+      <LogoutButton />
       <MainImageContainer>
         <MainImage
           src="/main.jpg"
