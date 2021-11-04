@@ -1,5 +1,6 @@
 import { error } from 'console'
-import { getAllBreeds, upsertAllBreedsInfoToDB } from '.'
+
+import { getAllBreeds, upsertAllBreedsInfoToDB } from '../index'
 // import { upsertAllBreedsInfoToDB } from '.'
 
 describe('dogapi/index test', () => {
@@ -7,7 +8,6 @@ describe('dogapi/index test', () => {
     const breeds = await getAllBreeds()
     console.log(breeds)
     console.log(breeds[0])
-    return
   })
   test('upsert all breeds', async () => {
     try {

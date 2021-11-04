@@ -1,8 +1,9 @@
 import fs from 'fs'
 import path from 'path'
-import { parseBreedDataToDictionary, parseTemperaments } from './parse'
-import breedsJSON from '../../db/json/breeds.json'
-import { Breed } from './breed'
+
+import { parseBreedDataToDictionary, parseTemperaments } from '../parse'
+import breedsJSON from '../../../db/json/breeds.json'
+import { Breed } from '../breed'
 
 const temperamentExamples = [
   'Aloof, Clownish, Dignified, Independent, Happy',
@@ -39,7 +40,7 @@ test('parse local breeds json to id-name Dictionary', async () => {
       .toString(),
   )
   console.log(idToNameBreeds[1])
-  expect(idToNameBreeds[1] === resultJSON[1])
+  expect(idToNameBreeds[1] === resultJSON[1]).toBeTruthy()
 })
 
 test('parse local breeds json to name-id Dictionary', async () => {
@@ -60,7 +61,7 @@ test('parse local breeds json to name-id Dictionary', async () => {
   )
   const testBreed = 'Akita'
   console.log(nameToIdBreeds[testBreed])
-  expect(nameToIdBreeds[testBreed] === resultJSON[testBreed])
+  expect(nameToIdBreeds[testBreed] === resultJSON[testBreed]).toBeTruthy()
 })
 
 // FIXME : https://stackoverflow.com/questions/49996456/importing-json-file-in-typescript
