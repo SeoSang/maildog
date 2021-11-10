@@ -1,15 +1,13 @@
 import { Breed } from '@/server/dog/dogapi/breed'
 import { JustifiedGrid } from '@egjs/react-grid'
 import React, { useEffect, useState } from 'react'
-import windowSize from 'react-window-size'
+import { useWindowSize } from 'rooks'
 
 import DogCard from './DogCard'
 
 type Props = {
   breeds: Breed[]
   clickable?: boolean
-  windowWidth?: number
-  windowHeight?: number
 }
 
 type RowRange = {
@@ -17,27 +15,29 @@ type RowRange = {
   max: number
 }
 
-const DogGrid = ({ breeds, windowWidth, windowHeight, clickable }: Props) => {
+const DogGrid = ({ breeds, clickable }: Props) => {
   const [gridRowRange, setGridRowRange] = useState<RowRange>({ min: 3, max: 4 })
 
+  const { innerWidth } = useWindowSize()
+
   useEffect(() => {
-    if (!windowHeight || !windowWidth) {
+    if (!innerWidth) {
       return
     }
     switch (true) {
-      case windowWidth > 1200:
+      case innerWidth > 1200:
         setGridRowRange({ min: 4, max: 5 })
         break
-      case windowWidth > 992:
+      case innerWidth > 992:
         setGridRowRange({ min: 3, max: 4 })
         break
-      case windowWidth > 768:
+      case innerWidth > 768:
         setGridRowRange({ min: 2, max: 3 })
         break
       default:
         setGridRowRange({ min: 2, max: 2 })
     }
-  }, [windowWidth, windowHeight])
+  }, [innerWidth])
 
   return (
     <JustifiedGrid
@@ -57,4 +57,4 @@ const DogGrid = ({ breeds, windowWidth, windowHeight, clickable }: Props) => {
   )
 }
 
-export default windowSize(DogGrid)
+export default DogGrid

@@ -15,7 +15,7 @@ describe('download Images', () => {
             return new Promise((resolve, reject) => {
               downloadImage(
                 breed?.image?.url,
-                path.resolve(__dirname, '../../public'),
+                path.resolve(__dirname, '../../public/dog'),
                 `${breed.name}.jpg`,
               )
                 .then((suc) => resolve(suc))
