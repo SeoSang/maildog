@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import styled, { keyframes } from 'styled-components'
-import MainForm from 'src/components/MainForm'
+import MainForm from '@/src/components/MainForm'
 import { BackgroundDiv } from '@/src/style/div'
 import LogoutButton from '@/src/components/LogoutButton'
 
-import InputModal from '../components/InputModal'
+import InputModal from '../src/components/InputModal'
 
 const MainImageContainer = styled(BackgroundDiv)`
   display: flex;

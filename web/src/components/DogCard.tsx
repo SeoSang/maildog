@@ -1,7 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Breed } from '@/server/dog/dogapi/breed'
 import { Tooltip, useToast } from '@chakra-ui/react'
 import styled from 'styled-components'
+import Image from 'next/image'
 
 import { SELECTED_BREEDS_MAX } from '../constants'
 import { MainFormContext } from '../hooks/useMainFormContext'
@@ -34,11 +35,8 @@ const DogCard = ({
   const toast = useToast()
 
   const [clicked, setClicked] = useState(false)
-  const {
-    selectedBreeds,
-    addSelectedBreeds,
-    removeSelectedBreeds,
-  } = useContext(MainFormContext)
+  const { selectedBreeds, addSelectedBreeds, removeSelectedBreeds } =
+    useContext(MainFormContext)
 
   useEffect(() => {
     setClicked(false)
@@ -79,7 +77,7 @@ const DogCard = ({
         data-grid-content-offset="5"
         onClick={onClickContainer}
         clicked={clickable && clicked}>
-        <img
+        <Image
           src={breed.image?.url}
           style={{ width: '100%' }}
           alt={`image${breed.image?.url}`}

@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import LoginForm from '../components/LoginForm'
-import { MainFormContext } from '../hooks/useMainFormContext'
-import { BackgroundDiv } from '../style/div'
+import LoginForm from '../src/components/LoginForm'
+import { MainFormContext } from '../src/hooks/useMainFormContext'
+import { BackgroundDiv } from '../src/style/div'
 
 const Login = () => {
   const { setUser, isLogined } = useContext(MainFormContext)

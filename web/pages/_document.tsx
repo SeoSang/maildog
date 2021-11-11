@@ -1,15 +1,15 @@
 import { ColorModeScript } from '@chakra-ui/react'
 import React from 'react'
 import Document, {
-  Html,
+  DocumentContext,
   Head,
+  Html,
   Main,
   NextScript,
-  DocumentContext,
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
-import { theme } from '../style/theme'
+import { theme } from '../src/style/theme'
 
 interface Props {
   styleTags: any
@@ -18,8 +18,8 @@ interface Props {
 export default class MyDocument extends Document<Props> {
   static async getInitialProps({ renderPage }: DocumentContext) {
     const sheet = new ServerStyleSheet()
-    const page = renderPage((App: any) => (props: any) =>
-      sheet.collectStyles(<App {...props} />),
+    const page = renderPage(
+      (App: any) => (props: any) => sheet.collectStyles(<App {...props} />),
     )
     const styleTags = sheet.getStyleElement()
 

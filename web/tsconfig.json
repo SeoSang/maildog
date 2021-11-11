@@ -3,7 +3,10 @@
     "target": "es6",
     "module": "commonjs",
     "jsx": "preserve",
-    "lib": ["dom", "es6"],
+    "lib": [
+      "dom",
+      "es6"
+    ],
     "moduleResolution": "node",
     "strict": true,
     "allowJs": true,
@@ -19,13 +22,30 @@
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "typeRoots": ["./typings", "./node_modules/@types"],
+    "typeRoots": [
+      "./typings",
+      "./node_modules/@types"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@": ["/"],
-      "@/*": ["./*"]
-    }
+      "@": [
+        "/"
+      ],
+      "@/*": [
+        "./*"
+      ]
+    },
+    "incremental": true
   },
-  "exclude": ["dist", ".next", "out", "next.config.js"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "exclude": [
+    "dist",
+    ".next",
+    "out",
+    "next.config.js"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

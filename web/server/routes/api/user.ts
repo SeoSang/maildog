@@ -1,5 +1,4 @@
 /* eslint-disable require-atomic-updates */
-import { Next, ParameterizedContext } from 'koa'
 import httpStatus from 'http-status'
 import Router from 'koa-router'
 import { StatusCodes } from 'http-status-codes'
@@ -8,22 +7,6 @@ import { encryptObject } from '@/src/utils/encrypt'
 import { userRepository } from '../../db/user'
 
 const router = new Router()
-
-const numericIdValidator = async (ctx: ParameterizedContext, next: Next) => {
-  const { id } = ctx.params
-  if (!id) {
-    await next()
-    return
-  }
-  if (isNaN(Number(id))) {
-    ctx.body = {
-      message: 'id 정보가 잘못되었습니다.',
-    }
-    ctx.status = 401
-    return
-  }
-  await next()
-}
 
 router.get('/', async (ctx) => {
   ctx.body = { message: 'TODO' }

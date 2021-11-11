@@ -2,13 +2,11 @@ import React, { useEffect } from 'react'
 import { AppProps } from 'next/app'
 import CSSReset from '@chakra-ui/css-reset'
 import { ThemeProvider } from '@chakra-ui/system'
-import Koa from 'koa'
 import { UserInfo } from '@/server/types/user'
-import { isNotEmptyObject, parseJSON } from '@/src/utils/objectUtils'
 import { decryptToUser } from '@/src/utils/encrypt'
+import { theme } from '@/src/style/theme'
 
-import { theme } from '../style/theme'
-import useMainFormContext from '../hooks/useMainFormContext'
+import useMainFormContext from '../src/hooks/useMainFormContext'
 
 // import 'normalize.css'
 
@@ -44,15 +42,15 @@ function App({ Component, pageProps, user }: AppProps & ServerProps) {
 
 export default App
 
-App.getInitialProps = async (ctx: Koa.Context) => {
-  const userString = ctx?.ctx?.req?.headers?.user
-  try {
-    if (userString && isNotEmptyObject(parseJSON(userString))) {
-      return { user: parseJSON(userString) }
-    }
-  } catch (e) {
-    console.log(e)
-    return {}
-  }
-  return {}
-}
+// App.getInitialProps = async (ctx: Koa.Context) => {
+//   const userString = ctx?.ctx?.req?.headers?.user
+//   try {
+//     if (userString && isNotEmptyObject(parseJSON(userString))) {
+//       return { user: parseJSON(userString) }
+//     }
+//   } catch (e) {
+//     console.log(e)
+//     return {}
+//   }
+//   return {}
+// }
