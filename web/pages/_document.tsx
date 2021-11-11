@@ -8,8 +8,7 @@ import Document, {
   NextScript,
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-
-import { theme } from '../src/style/theme'
+import { theme } from '@/src/style/theme'
 
 interface Props {
   styleTags: any

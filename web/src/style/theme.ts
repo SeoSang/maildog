@@ -1,7 +1,7 @@
 import { ColorMode, extendTheme, theme as baseTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 
-export const enum ResponsiveWidth {
+export enum ResponsiveWidth {
   sm = 320,
   md = 768,
   lg = 960,

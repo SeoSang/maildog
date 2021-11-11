@@ -3,13 +3,15 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { userRepository } from '@/server/db/user'
 import httpStatus from 'http-status'
 
-export default async function user(req: NextApiRequest, res: NextApiResponse) {
+export default async function user(
+  { query: { id }, method, body }: NextApiRequest,
+  res: NextApiResponse,
+) {
   try {
     let result
     let user
     let statusCode = 200
-    const { id } = req.query
-    switch (req.method) {
+    switch (method) {
       case 'GET':
         user = await userRepository.findById(Number(id))
         if (user) {
@@ -25,7 +27,7 @@ export default async function user(req: NextApiRequest, res: NextApiResponse) {
         }
         return res.status(404).json(result)
       case 'PUT':
-        const { email, name, phone, favorite, password } = req.body
+        const { email, name, phone, favorite, password } = body
         if (!email || !password) {
           result = {
             message: 'Email and password needed.',

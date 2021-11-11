@@ -10,7 +10,6 @@ export default async function user(req: NextApiRequest, res: NextApiResponse) {
         result = { message: '모든 종 데이터 로드 완료', breeds }
         return res.status(200).json(result)
       case 'POST':
-        result = await UserModel.create(req.body)
         return res.status(200).json(result)
       default:
         return res.status(501).json({ alertText: 'Unexpected request Method!' })

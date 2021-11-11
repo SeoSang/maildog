@@ -28,8 +28,6 @@
     }
   },
   "dependencies": {
-    "-": "^0.0.1",
-    "@babel/runtime": "^7.15.4",
     "@chakra-ui/icons": "^1.0.15",
     "@chakra-ui/react": "^1.6.8",
     "@egjs/react-grid": "^1.5.0",
@@ -50,14 +48,10 @@
     "react-dom": "^17.0.2",
     "react-query": "^3.31.0",
     "rooks": "^5.7.3",
-    "s": "^1.0.0",
     "sqlite3": "^4.2.0",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
-    "@babel/plugin-transform-runtime": "^7.15.0",
-    "@babel/preset-env": "^7.15.6",
     "@types/bcrypt": "^5.0.0",
     "@types/crypto-js": "^4.0.2",
     "@types/http-status": "^1.1.2",
@@ -75,8 +69,6 @@
     "lint-staged": "^11.0.0",
     "nodemon": "^2.0.7",
     "prettier": "2.4.1",
-    "ts-interface-builder": "^0.3.0",
-    "ts-interface-checker": "^1.0.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.3.2"
   }
