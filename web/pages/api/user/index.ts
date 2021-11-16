@@ -1,21 +1,52 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { findAll } from '@/server/db/breed'
+import { userRepository } from '@/server/db/user'
+import httpStatus from 'http-status'
+import { encryptObject } from '@/src/utils/encrypt'
+import { setCookie } from '@/src/utils'
 
-export default async function user(req: NextApiRequest, res: NextApiResponse) {
+export default async function user(
+  { method, body }: NextApiRequest,
+  res: NextApiResponse,
+) {
   try {
-    let result, breeds
-    switch (req.method) {
+    let result = { message: 'Success' }
+    let statusCode = 200
+    switch (method) {
       case 'GET':
-        breeds = await findAll()
-        result = { message: '모든 종 데이터 로드 완료', breeds }
         return res.status(200).json(result)
-      case 'POST':
-        return res.status(200).json(result)
+      case 'POST': // User Login
+        const { email, password } = body
+        const { user, code } = await userRepository.validate(email, password)
+        if (code === 'NOT_EXIST') {
+          result = {
+            user,
+            message: 'Not existed e-mail.',
+          }
+          statusCode = httpStatus.NOT_FOUND
+        } else if (code === 'SUCCESS') {
+          result = {
+            user,
+            message: 'Login Success.',
+          }
+          statusCode = httpStatus.OK
+          if (!user?.id) {
+            return
+          }
+          const encryptedUserId = encryptObject(user)
+          setCookie(res, 'godliam', encryptedUserId)
+        } else {
+          result = {
+            user,
+            message: 'Login Failed',
+          }
+          statusCode = httpStatus.BAD_REQUEST
+        }
+        return res.status(statusCode).json(result)
       default:
-        return res.status(501).json({ alertText: 'Unexpected request Method!' })
+        return res.status(501).json({ message: 'Unexpected request Method!' })
     }
   } catch (err) {
     console.log(err)
-    return res.status(500).send('Unexpected Server Error')
+    return res.status(500).json({ messsage: 'Unexpected Server Error' })
   }
 }

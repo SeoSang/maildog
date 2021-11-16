@@ -35,6 +35,7 @@
     "@emotion/styled": "^11.3.0",
     "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
+    "cookie": "^0.4.1",
     "core-js": "^3.12.1",
     "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
@@ -53,6 +54,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/cookie": "^0.4.1",
     "@types/crypto-js": "^4.0.2",
     "@types/http-status": "^1.1.2",
     "@types/jest": "^27.0.1",
