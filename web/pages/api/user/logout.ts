@@ -16,7 +16,7 @@ export default async function logout(
       case 'POST': // User Login
         setCookie(res, 'godliam', '')
         statusCode = httpStatus.OK
-        return res.status(statusCode)
+        return res.status(statusCode).json({ message: 'Logout Success' })
       default:
         return res.status(501).json({ message: 'Unexpected request Method!' })
     }

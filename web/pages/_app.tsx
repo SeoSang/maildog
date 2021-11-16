@@ -5,6 +5,10 @@ import { ThemeProvider } from '@chakra-ui/system'
 import { UserInfo } from '@/server/types/user'
 import { decryptToUser } from '@/src/utils/encrypt'
 import { theme } from '@/src/style/theme'
+import { isNotEmptyObject } from '@chakra-ui/utils'
+import { parseJSON } from '@/src/utils/objectUtils'
+import { NextPageContext } from 'next'
+import cookies from 'next-cookies'
 
 import useMainFormContext from '../src/hooks/useMainFormContext'
 
@@ -42,15 +46,15 @@ function App({ Component, pageProps, user }: AppProps & ServerProps) {
 
 export default App
 
-// App.getInitialProps = async (ctx: Koa.Context) => {
-//   const userString = ctx?.ctx?.req?.headers?.user
-//   try {
-//     if (userString && isNotEmptyObject(parseJSON(userString))) {
-//       return { user: parseJSON(userString) }
-//     }
-//   } catch (e) {
-//     console.log(e)
-//     return {}
-//   }
-//   return {}
-// }
+App.getInitialProps = async ({ ctx }: { ctx: NextPageContext }) => {
+  const userString = cookies(ctx)?.['godliam']
+  try {
+    if (userString && isNotEmptyObject(parseJSON(userString))) {
+      return { user: parseJSON(userString) }
+    }
+  } catch (e) {
+    console.log(e)
+    return {}
+  }
+  return {}
+}
