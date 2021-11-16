@@ -4,6 +4,7 @@ module.exports = {
     '@typescript-eslint/naming-convention': ['off'],
     '@typescript-eslint/no-unused-vars': 'error',
     'react/react-in-jsx-scope': ['off'],
+    'no-case-declarations': ['off'],
     'no-unused-vars': 'off',
     'prettier/prettier': [
       'error',
