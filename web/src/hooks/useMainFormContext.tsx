@@ -36,7 +36,7 @@ export const MainFormContext = createContext({
 } as FormContextValues)
 
 const FIRST_PAGE = 1
-const MAX_PAGE = 4
+const MAX_PAGE = 5
 
 const useMainFormContext = () => {
   const [page, setPage] = useState<number>(1)

@@ -7,10 +7,11 @@ import Image from 'next/image'
 import { SELECTED_BREEDS_MAX } from '../constants'
 import { MainFormContext } from '../hooks/useMainFormContext'
 
-const IMAGE_DEFAULT_WIDTH = 300
+const IMAGE_DEFAULT_WIDTH = 1200
 
 type ImageContainerProps = {
   clicked: boolean
+  clickable?: boolean
 }
 
 const ImageContainer = styled.div`
@@ -25,7 +26,11 @@ const ImageContainer = styled.div`
 
   &:hover {
     border: ${(props: ImageContainerProps) =>
-      props.clicked ? '3mm ridge pink' : '1mm solid pink'};
+      props.clickable === false
+        ? 'none'
+        : props.clicked
+        ? '3mm ridge pink'
+        : '1mm solid pink'};
   }
 `
 
@@ -86,7 +91,8 @@ const DogCard = ({
         key={`breed_${breed.id}`}
         data-grid-content-offset="5"
         onClick={onClickContainer}
-        clicked={clickable && clicked}>
+        clicked={clickable && clicked}
+        clickable={clickable}>
         <Image
           alt={`image${breed.image?.url}`}
           src={`/dog/${breed.name}.jpg`}

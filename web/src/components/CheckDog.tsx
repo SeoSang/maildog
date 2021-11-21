@@ -49,7 +49,9 @@ const CheckDog = () => {
           Are these the puppies you chose?
         </Alert>
         <DogGrid
-          breeds={selectedBreeds.filter((breed) => breed.image?.url)}
+          breeds={selectedBreeds.filter(
+            (breed) => breed?.name || breed.image?.url,
+          )}
           clickable={false}
         />
         <FlexDiv style={{ gap: '5px', marginTop: '10px' }}>
