@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { MAIN_PINK, MAIN_SKY_BLUE } from '@/src/style/theme'
 
 interface FlexDivProps {
   background?: string
@@ -36,5 +37,9 @@ export const BackgroundDiv = styled.div`
   min-width: 100vw;
   min-height: 100vh;
   background-color: #ffc0cb;
-  background-image: linear-gradient(45deg, #ffc0cb 22%, #81f7f2 98%);
+  background-image: linear-gradient(
+    45deg,
+    ${MAIN_SKY_BLUE} 22%,
+    ${MAIN_PINK} 98%
+  );
 `

@@ -1,6 +1,9 @@
 import { ColorMode, extendTheme, theme as baseTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 
+export const MAIN_PINK = '#FFC0CBFF'
+export const MAIN_SKY_BLUE = '#81F7F2FF'
+
 export enum ResponsiveWidth {
   sm = 320,
   md = 768,

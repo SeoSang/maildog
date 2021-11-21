@@ -3,17 +3,13 @@ import { useMediaQuery } from '@chakra-ui/media-query'
 import { ResponsiveWidth } from '../style/theme'
 
 const useResponisveWidth = () => {
-  const [
-    isLargerThanSM,
-    isLargerThanMD,
-    isLargerThanLG,
-    isLargerThanXL,
-  ] = useMediaQuery([
-    `(min-width: ${ResponsiveWidth.sm}px)`,
-    `(min-width: ${ResponsiveWidth.md}px)`,
-    `(min-width: ${ResponsiveWidth.lg}px)`,
-    `(min-width: ${ResponsiveWidth.xl}px)`,
-  ])
+  const [isLargerThanSM, isLargerThanMD, isLargerThanLG, isLargerThanXL] =
+    useMediaQuery([
+      `(min-width: ${ResponsiveWidth.sm}px)`,
+      `(min-width: ${ResponsiveWidth.md}px)`,
+      `(min-width: ${ResponsiveWidth.lg}px)`,
+      `(min-width: ${ResponsiveWidth.xl}px)`,
+    ])
   return {
     isLargerThanSM,
     isLargerThanMD,

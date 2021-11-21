@@ -34,8 +34,6 @@ const GridContainer = styled.div`
     margin: 30px;
   }
 `
-// TODO : 이미지 미리 로드하거나, 로딩 바 구현하기
-// TODO : 페이지 몇페이지인지 표시
 
 const DogForm = () => {
   const [loading, setLoading] = useState(false)
