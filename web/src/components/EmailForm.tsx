@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Input,
   Button,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Input,
 } from '@chakra-ui/react'
 
 import PageContainer from './PageContainer'
@@ -48,7 +48,7 @@ const EmailForm = () => {
         />
         <FormHelperText>We will never share your email.</FormHelperText>
         <Button style={{ marginTop: '0.5rem' }} onClick={onClickRegisterButton}>
-          Resgister
+          Register
         </Button>
       </FormControl>
       <PageContainer
