@@ -51,7 +51,6 @@ const DogCard = ({
 
   useEffect(() => {
     setClicked(false)
-    console.log({ selectedBreeds })
     if (selectedBreeds?.some((b) => b.id === breed.id)) {
       setClicked(true)
     }
@@ -76,8 +75,6 @@ const DogCard = ({
     addSelectedBreeds(breed)
     setClicked((prev) => !prev)
   }
-
-  console.log({ breed })
 
   if (!breed) {
     return <div />

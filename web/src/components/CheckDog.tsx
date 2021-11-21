@@ -25,9 +25,8 @@ const GridContainer = styled.div`
 `
 
 const CheckDog = () => {
-  const { selectedBreeds, email, nextPage, prevPage } = useContext(
-    MainFormContext,
-  )
+  const { selectedBreeds, email, nextPage, prevPage } =
+    useContext(MainFormContext)
 
   // TODO : 컴퍼넌트에 적용
   const onClickYes = async () => {

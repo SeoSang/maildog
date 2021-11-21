@@ -27,7 +27,6 @@ function App({ Component, pageProps, user }: AppProps & ServerProps) {
     }
     const localUser = window.localStorage.getItem('godliamUser')
     localUser && setUser(decryptToUser(localUser))
-    // console.log(decryptToUser(localUser))
   }, [setUser, user])
 
   return (

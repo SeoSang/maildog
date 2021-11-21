@@ -50,7 +50,6 @@ const DogForm = () => {
     const getAllBreedsData = async () => {
       setLoading(true)
       const res = await beAxios('/dog')
-      console.log(res.data)
       setBreeds(res.data.breeds)
       setLoading(false)
       return res.data
