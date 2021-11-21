@@ -7,23 +7,34 @@ import Image from 'next/image'
 import { SELECTED_BREEDS_MAX } from '../constants'
 import { MainFormContext } from '../hooks/useMainFormContext'
 
+const IMAGE_DEFAULT_WIDTH = 300
+
 type ImageContainerProps = {
   clicked: boolean
 }
 
 const ImageContainer = styled.div`
+  width: 300px;
+  height: auto;
+  position: relative;
   cursor: pointer;
   border-radius: ${(props: ImageContainerProps) =>
     props.clicked ? '10%' : '0'};
   border: ${(props: ImageContainerProps) =>
     props.clicked ? '3mm ridge pink' : 'none'};
-  height: auto;
 
   &:hover {
     border: ${(props: ImageContainerProps) =>
       props.clicked ? '3mm ridge pink' : '1mm solid pink'};
   }
 `
+
+const getImageHeightRatio = (breed: Breed) => {
+  return (
+    (breed?.image?.height || IMAGE_DEFAULT_WIDTH) /
+    (breed?.image?.width || IMAGE_DEFAULT_WIDTH)
+  )
+}
 
 const DogCard = ({
   breed,
@@ -66,8 +77,10 @@ const DogCard = ({
     setClicked((prev) => !prev)
   }
 
+  console.log({ breed })
+
   if (!breed) {
-    return <div></div>
+    return <div />
   }
   return (
     <Tooltip label={breed.name}>
@@ -78,9 +91,10 @@ const DogCard = ({
         onClick={onClickContainer}
         clicked={clickable && clicked}>
         <Image
-          src={breed.image?.url}
-          style={{ width: '100%' }}
           alt={`image${breed.image?.url}`}
+          src={`/dog/${breed.name}.jpg`}
+          width={IMAGE_DEFAULT_WIDTH}
+          height={IMAGE_DEFAULT_WIDTH * getImageHeightRatio(breed)}
         />
       </ImageContainer>
     </Tooltip>

@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react'
-import { Table, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react'
-import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
+import React, { useContext, useState } from 'react'
+import { Button, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import styled from 'styled-components'
 
 import { MainFormContext } from '../hooks/useMainFormContext'
