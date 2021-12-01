@@ -1,9 +1,11 @@
 import fs from 'fs'
 import path from 'path'
 
+import { getBreedsById } from '@/server/dog/dogapi'
+
 import { parseBreedDataToDictionary, parseTemperaments } from '../parse'
-import breedsJSON from '../../../db/json/breeds.json'
 import { Breed } from '../breed'
+import breedsJSON from '../../../db/json/breeds.json'
 
 const temperamentExamples = [
   'Aloof, Clownish, Dignified, Independent, Happy',
@@ -62,4 +64,8 @@ test('parse local breeds json to name-id Dictionary', async () => {
   const testBreed = 'Akita'
   console.log(nameToIdBreeds[testBreed])
   expect(nameToIdBreeds[testBreed] === resultJSON[testBreed]).toBeTruthy()
+})
+
+test('test', async () => {
+  console.log(getBreedsById(1))
 })

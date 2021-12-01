@@ -31,6 +31,7 @@
     "@chakra-ui/icons": "^1.0.15",
     "@chakra-ui/react": "^1.6.8",
     "@egjs/react-grid": "^1.5.0",
+    "@swc-node/jest": "^1.4.1",
     "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
     "cookie": "^0.4.1",
@@ -47,6 +48,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rooks": "^5.7.3",
+    "sqlite3": "^5.0.2",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
