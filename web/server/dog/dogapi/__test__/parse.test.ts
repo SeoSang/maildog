@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-import { getBreedsById } from '@/server/dog/dogapi'
+import { getBreedNameById } from '@/server/dog/dogapi'
 
 import { parseBreedDataToDictionary, parseTemperaments } from '../parse'
 import { Breed } from '../breed'
@@ -67,5 +67,5 @@ test('parse local breeds json to name-id Dictionary', async () => {
 })
 
 test('test', async () => {
-  console.log(getBreedsById(1))
+  console.log(getBreedNameById(1))
 })

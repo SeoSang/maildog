@@ -3,6 +3,7 @@ import path from 'path'
 import { Breed } from './breed'
 import daxios from './interceptor'
 import { BreedParams } from './type'
+import idToNameBreedsJSON from '../../db/json/idToNameBreeds.json'
 
 export const getAllBreeds = async (): Promise<BreedParams[]> => {
   if (process.env.NODE_ENV === 'test') {
@@ -16,8 +17,13 @@ export const getAllBreeds = async (): Promise<BreedParams[]> => {
   return res.data
 }
 
-// TODO:  ID 바탕으로 Breed 반환
-export const getBreedsById = async (): Promise<any> => {}
+export const getBreedNameById = (id: number | string): string => {
+  const keyId = typeof id === 'number' ? id.toString() : id
+  if (parseInt(keyId) > Object.keys(idToNameBreedsJSON).length) {
+    return ''
+  }
+  return (idToNameBreedsJSON as any)[keyId]
+}
 
 export const upsertAllBreedsInfoToDB = async () => {
   const breeds = await getAllBreeds()
