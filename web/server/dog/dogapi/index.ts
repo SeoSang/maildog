@@ -2,7 +2,7 @@ import path from 'path'
 
 import { Breed } from './breed'
 import daxios from './interceptor'
-import { BreedParams } from './type'
+import { BreedImageParam, BreedParams } from './type'
 import idToNameBreedsJSON from '../../db/json/idToNameBreeds.json'
 
 export const getAllBreeds = async (): Promise<BreedParams[]> => {
@@ -13,8 +13,13 @@ export const getAllBreeds = async (): Promise<BreedParams[]> => {
     )
     return JSON.parse(rawBreeds)
   }
-  const res = await daxios.get('/breeds')
-  return res.data
+  try {
+    const res = await daxios.get('/breeds')
+    return res.data
+  } catch (e) {
+    console.error(e)
+    return []
+  }
 }
 
 export const getBreedNameById = (id: number | string): string => {
@@ -23,6 +28,20 @@ export const getBreedNameById = (id: number | string): string => {
     return ''
   }
   return (idToNameBreedsJSON as any)[keyId]
+}
+
+export const getBreedImagesById = async (
+  imageParam: BreedImageParam,
+): Promise<string[]> => {
+  try {
+    const res = await daxios.get('/images/search', {
+      params: imageParam,
+    })
+    return res.data.map((breedData: any) => breedData['url'])
+  } catch (e) {
+    console.error(e)
+    return []
+  }
 }
 
 export const upsertAllBreedsInfoToDB = async () => {

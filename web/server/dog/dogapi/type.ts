@@ -36,6 +36,14 @@ export interface BreedParams {
   created_at?: Knex.Raw | string
 }
 
+export interface BreedImageParam {
+  size?: 'full' | 'med' | 'small' | 'thumb'
+  order?: 'RANDOM' | 'ASC' | 'DESC'
+  limit?: number
+  page?: number
+  breed_id: number
+}
+
 export interface BreedDBParams extends Omit<BreedParams, JsonParam> {
   weight: string
   height: string
