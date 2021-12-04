@@ -2,7 +2,7 @@ import { error } from 'console'
 
 import {
   getAllBreeds,
-  getBreedImagesById,
+  getBreedImageUrlsById,
   upsertAllBreedsInfoToDB,
 } from '../index'
 // import { upsertAllBreedsInfoToDB } from '.'
@@ -22,7 +22,7 @@ describe('dogapi/index test', () => {
   })
 
   test('getBreedImagesById test', async () => {
-    const test = await getBreedImagesById({ breed_id: 1 })
+    const test = await getBreedImageUrlsById({ breed_id: 1 })
     console.log(test)
   })
 })

@@ -30,7 +30,7 @@ export const getBreedNameById = (id: number | string): string => {
   return (idToNameBreedsJSON as any)[keyId]
 }
 
-export const getBreedImagesById = async (
+export const getBreedImageUrlsById = async (
   imageParam: BreedImageParam,
 ): Promise<string[]> => {
   try {
