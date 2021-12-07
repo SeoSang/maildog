@@ -6,7 +6,7 @@ dotenv.config()
 const daxios = axios.create({
   baseURL: 'https://api.thedogapi.com/v1',
   timeout: 2000,
-  headers: { 'x-api-key': process.env.API_KEY },
+  headers: { 'x-api-key': process.env.API_KEY_DOGAPI },
 })
 
 daxios.interceptors.request.use(
