@@ -9,7 +9,7 @@ export default async function user(
   res: NextApiResponse,
 ) {
   try {
-    let result = { message: 'Success' }
+    let result: any = { message: 'Success' }
     let statusCode = 200
     switch (method) {
       case 'GET':
