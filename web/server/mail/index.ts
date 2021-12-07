@@ -13,12 +13,16 @@ const transporter = nodemailer.createTransport(
   }),
 )
 
-export const sendMail = async (imgUrls: string[], alt = 'image') => {
+export const sendMail = async (
+  fromEmail = '"MailDog ð" <foo@example.com>',
+  targetEmail: string,
+  imgUrls: string[],
+  alt = 'image',
+) => {
   const info = await transporter.sendMail({
-    from: '"MailDog ð" <foo@example.com>', // sender address
-    to: 'ddrrpg@naver.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world?', // plain text body
+    from: fromEmail, // sender address
+    to: targetEmail, // list of receivers
+    subject: 'Here is Mail Dog 📧 🐕 !  ', // Subject line
     html: generatePhotoFrame(imgUrls, alt), // html body
   })
 
