@@ -1,11 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getBreedImageUrlsById } from '@/server/dog/dogapi'
 import { BreedImageParam } from '@/server/dog/dogapi/type'
+import { authorizator } from '@/pages/api/interceptor'
 
-export default async function images(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+const images = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     let result
     switch (req.method) {
@@ -26,3 +24,5 @@ export default async function images(
       .send({ message: 'Unexpected server Error!', breeds: [] })
   }
 }
+
+export default authorizator(images)

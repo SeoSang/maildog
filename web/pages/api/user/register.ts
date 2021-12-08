@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import httpStatus from 'http-status'
 import { userRepository } from '@/server/db/user'
+import { authorizator } from '@/pages/api/interceptor'
 
-export default async function register(
+const register = async (
   { method, body }: NextApiRequest,
   res: NextApiResponse,
-) {
+) => {
   try {
     let result
     let statusCode = 200
@@ -42,3 +43,5 @@ export default async function register(
     return res.status(500).json({ messsage: 'Unexpected Server Error' })
   }
 }
+
+export default authorizator(register)

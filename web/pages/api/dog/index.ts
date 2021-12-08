@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { findAll } from '@/server/db/breed'
+import { authorizator } from '@/pages/api/interceptor'
 
-export default async function dog(req: NextApiRequest, res: NextApiResponse) {
+const dog = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     let result, breeds
     switch (req.method) {
@@ -21,3 +22,5 @@ export default async function dog(req: NextApiRequest, res: NextApiResponse) {
       .send({ message: 'Unexpected server Error!', breeds: [] })
   }
 }
+
+export default authorizator(dog)

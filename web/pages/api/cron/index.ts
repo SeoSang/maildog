@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { authorizator } from '@/pages/api/interceptor'
 
-export default async function cron(req: NextApiRequest, res: NextApiResponse) {
+const cron = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     switch (req.method) {
       case 'GET':
@@ -11,3 +12,5 @@ export default async function cron(req: NextApiRequest, res: NextApiResponse) {
     return res.status(500).send('Unexpected Server Error')
   }
 }
+
+export default authorizator(cron)

@@ -3,11 +3,9 @@ import { userRepository } from '@/server/db/user'
 import httpStatus from 'http-status'
 import { encryptObject } from '@/src/utils/encrypt'
 import { setCookie } from '@/src/utils'
+import { authorizator } from '@/pages/api/interceptor'
 
-export default async function user(
-  { method, body }: NextApiRequest,
-  res: NextApiResponse,
-) {
+const user = async ({ method, body }: NextApiRequest, res: NextApiResponse) => {
   try {
     let result: any = { message: 'Success' }
     let statusCode = 200
@@ -50,3 +48,5 @@ export default async function user(
     return res.status(500).json({ messsage: 'Unexpected Server Error' })
   }
 }
+
+export default authorizator(user)

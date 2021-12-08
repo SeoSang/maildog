@@ -2,11 +2,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { userRepository } from '@/server/db/user'
 import httpStatus from 'http-status'
+import { authorizator } from '@/pages/api/interceptor'
 
-export default async function user(
+const email = async (
   { method, body }: NextApiRequest,
   res: NextApiResponse,
-) {
+) => {
   try {
     let result
     let statusCode = 200
@@ -34,3 +35,5 @@ export default async function user(
     return res.status(500).send('Unexpected Server Error')
   }
 }
+
+export default authorizator(email)

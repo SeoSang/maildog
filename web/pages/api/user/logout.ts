@@ -1,11 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import httpStatus from 'http-status'
 import { setCookie } from '@/src/utils'
+import { authorizator } from '@/pages/api/interceptor'
 
-export default async function logout(
-  { method }: NextApiRequest,
-  res: NextApiResponse,
-) {
+const logout = async ({ method }: NextApiRequest, res: NextApiResponse) => {
   try {
     const result = { message: 'Success' }
     let statusCode = 200
@@ -25,3 +23,5 @@ export default async function logout(
     return res.status(500).json({ messsage: 'Unexpected Server Error' })
   }
 }
+
+export default authorizator(logout)
