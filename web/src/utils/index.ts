@@ -17,7 +17,11 @@ export const alertErrorMessage = (error: AxiosError): void => {
     alert('Server Error occur!')
     return
   }
-  alert(error.response?.data?.message ?? 'Unexpected Error occur!')
+  alert(
+    error.response?.data?.message ||
+      error.response?.data ||
+      'Unexpected Error occur!',
+  )
 }
 
 export const setCookie = (
