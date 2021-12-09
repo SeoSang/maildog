@@ -1,7 +1,7 @@
 import path from 'path'
 
 import { Breed } from './breed'
-import daxios from './interceptor'
+import daxios from './daxios'
 import { BreedImageParam, BreedParams } from './type'
 import idToNameBreedsJSON from '../../db/json/idToNameBreeds.json'
 
