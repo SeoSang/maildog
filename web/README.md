@@ -18,5 +18,6 @@ SMTP 기반 메일 스케쥴러 (UI 없음)
 강아지 사진 구독을 제공하는 웹 서비스
 
 - next JS, TS
-- React,
+- React
 - nodemailer
+- easy cron
