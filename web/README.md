@@ -1,21 +1,20 @@
-# Maildog v2
+# Maildog v2.0.0
 
-리뉴얼중
-
-## AS-IS
-
-SMTP 기반 메일 스케쥴러 (UI 없음)
-
-#### 기술 스택
-
-- python
-- linux scheduler
+It's being renewed...
 
 ## AS-IS
 
-#### 기술 스택
+SMTP-based mail scheduler (no UI)
 
-강아지 사진 구독을 제공하는 웹 서비스
+[V1 Doc](../Readme.md)
+
+## TO-BE
+
+#### Structure
+
+![main](./Structure%20of%20MailDog.drawio.png)
+
+A web service that provides dog photo subscriptions. (including UI)
 
 - next JS, TS
 - React
