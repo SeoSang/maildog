@@ -12,6 +12,9 @@
 
   <p align="center">
     Send a picture of a cute dog by random to your friend every day. 💌
+    It's being renewed. Please refer to the document below.
+    <br />
+    <a href="https://github.com/SeoSang/maildog/tree/master/web#readme">MailDog Version 2</a>
     <br />
     <!-- <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a> -->
     <br />
