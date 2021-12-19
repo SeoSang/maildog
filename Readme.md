@@ -5,10 +5,10 @@
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.jpeg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Mail-Dog🐶</h3>
+<h3 align="center">Mail-Dog🐶</h3>
 
   <p align="center">
     Send a picture of a cute dog by random to your friend every day. 💌
@@ -27,16 +27,16 @@
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-  - [About The Project](#about-the-project)
-    - [Reference](#reference)
-    - [Demo](#demo)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-  - [Usage](#usage)
-  - [Contributing](#contributing)
-  - [License](#license)
-  - [Contact](#contact)
+    - [About The Project](#about-the-project)
+        - [Reference](#reference)
+        - [Demo](#demo)
+    - [Getting Started](#getting-started)
+        - [Prerequisites](#prerequisites)
+        - [Installation](#installation)
+    - [Usage](#usage)
+    - [Contributing](#contributing)
+    - [License](#license)
+    - [Contact](#contact)
 
 <!-- ABOUT THE PROJECT -->
 
@@ -66,7 +66,7 @@ An email that looks like this will be sent to the target email address !
 
 - Install python
 - Email IMAP preferences
-  - [See here](https://support.google.com/mail/answer/7126229?hl=en)
+    - [See here](https://support.google.com/mail/answer/7126229?hl=en)
 
 > If you want to execute everyday automatically, recommends running on Linux or Mac OS.
 
@@ -121,36 +121,38 @@ An email that looks like this will be sent to the target email address !
 
 - `%s` will be put a breed of dog images.
 - `breed_to_exclude` : The breed that you don't want to mail.
-- `breed_to_select` : If you want to send only certain breeds, activate this option. If it is [], this option will be disabled.
+- `breed_to_select` : If you want to send only certain breeds, activate this option. If it is [], this option will be
+  disabled.
 
 <!-- USAGE EXAMPLES -->
 
 ## Usage
 
 - Send email by random breed once
-  - `random.sh`
-    ```sh
-    $ python3 maildog.py random
-    ```
+    - `random.sh`
+      ```sh
+      $ python3 maildog.py random
+      ```
 - Send email by random breed once
-  - `breed.sh`
-    ```sh
-    $ python3 maildog.py breed <breed_name> <img_cnt>
-    ```
+    - `breed.sh`
+      ```sh
+      $ python3 maildog.py breed <breed_name> <img_cnt>
+      ```
 - Send email by random breed at particular time everyday.
-  - `run_everyday.sh`
-    ```sh
-    $ python3 maildog.py run_everyday 22:30
-    ```
-  - To run by daemon on linux
-    ```sh
-    $ nohup ./run_everyday.sh &
-    ```
-    > Warning : The time will be on the device you run.
+    - `run_everyday.sh`
+      ```sh
+      $ python3 maildog.py run_everyday 22:30
+      ```
+    - To run by daemon on linux
+      ```sh
+      $ nohup ./run_everyday.sh &
+      ```
+      > Warning : The time will be on the device you run.
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any
+contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -175,10 +177,15 @@ SeoSang
 - Email : ddrrpg@naver.com
 
 [seosang-icon]: https://img.shields.io/static/v1?label=madeby&message=seosang&color=blue
+
 [seosang-url]: https://github.com/SeoSang
+
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg
+
 [license-url]: #license
+
 [python-icon]: https://img.shields.io/static/v1?label=python&message=>=3.6&color=yellow
+
 [python-url]: https://docs.python.org/3/
 
 ---
