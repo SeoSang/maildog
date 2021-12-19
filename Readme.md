@@ -4,14 +4,13 @@
 
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.jpeg" alt="Logo" width="240">
-  </a>
 
-<h3 align="center">Mail-Dog🐶</h3>
+  <img src="images/logo.jpeg" alt="Logo" width="240"/> 
+  <h3 align="center">Mail-Dog🐶</h3>
 
   <p align="center">
     Send a picture of a cute dog by random to your friend every day. 💌
+    <br />
     It's being renewed. Please refer to the document below.
     <br />
     <a href="https://github.com/SeoSang/maildog/tree/master/web#readme">MailDog Version 2</a>
