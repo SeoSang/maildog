@@ -53,8 +53,25 @@ export const createCronsTable = async () => {
     tbl.timestamps() // created_at
     tbl.integer('user_id').references('id').inTable('users')
     tbl.text('expressions').notNullable()
+    tbl.integer('period').notNullable().defaultTo(1) // 1 : 하루에 1번, 2: 3일에 1번, 3: 7일에 1번
+    tbl.integer('type').notNullable().defaultTo(1) // 1 : 이메일, 2: 카카오톡
     tbl.json('count')
     tbl.integer('priority').defaultTo(2)
+    tbl.boolean('valid').notNullable().defaultTo(true)
+  })
+}
+
+export const createSubscribesTable = async () => {
+  const exist = await db.schema.hasTable('subscribes')
+  if (exist) {
+    console.log('subscribes already exists')
+    return
+  }
+  await db.schema.createTable('subscribes', (tbl) => {
+    tbl.increments() // id auto_increment
+    tbl.timestamps() // created_at
+    tbl.integer('cron_id').references('id').inTable('crons')
+    tbl.integer('breed_id').references('id').inTable('breeds')
     tbl.boolean('valid').notNullable().defaultTo(true)
   })
 }

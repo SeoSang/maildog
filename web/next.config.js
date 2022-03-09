@@ -3,8 +3,7 @@ module.exports = {
   images: {
     domains: ['cdn2.thedogapi.com'],
   },
-  experimental: {
-    // Enables the styled-components SWC transform
+  compiler: {
     styledComponents: true,
   },
 }

@@ -15,7 +15,6 @@ import { isValidEmail } from '../utils'
 
 const EmailForm = () => {
   const { email, setEmail, prevPage, nextPage } = useContext(MainFormContext)
-  // TODO : 이메일 체크 백엔드로 받기
   const [emailChecked, setEmailChecked] = useState(false)
 
   const onClickRegisterButton = async () => {

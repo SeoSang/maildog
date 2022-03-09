@@ -1,8 +1,9 @@
 import { findAll } from '../breed'
 import {
   createBreedsTable,
-  createUsersTable,
   createCronsTable,
+  createSubscribesTable,
+  createUsersTable,
 } from '../create'
 
 test('create breeds table', async () => {
@@ -13,6 +14,9 @@ test('create users table', async () => {
 })
 test('create crons table', async () => {
   await createCronsTable()
+})
+test('create subscribes table', async () => {
+  await createSubscribesTable()
 })
 test('is table exists', async () => {
   const a = await findAll()

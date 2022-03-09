@@ -9,7 +9,7 @@ describe('cronapi/index test', () => {
 
   test('addCron test', async () => {
     const res = await addCron({
-      url: 'https://www.naver.com/',
+      url: 'https://www.naver.com',
       cron_expression: '* * * * * *',
     })
     console.log(res)

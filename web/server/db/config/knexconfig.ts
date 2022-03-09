@@ -2,6 +2,8 @@ import path from 'path'
 
 const PATH_PREFIX = process.cwd()
 
+console.log(path.resolve(__dirname, './server/db/config/dev.sqlite3'))
+
 export const config = {
   development: {
     client: 'sqlite3',
@@ -13,7 +15,7 @@ export const config = {
   test: {
     client: 'sqlite3',
     connection: {
-      filename: path.resolve(__dirname, './server/db/config/dev.sqlite3'),
+      filename: path.resolve(__dirname, './dev.sqlite3'),
     },
     useNullAsDefault: true,
   },

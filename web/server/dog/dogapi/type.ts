@@ -41,7 +41,7 @@ export interface BreedImageParam {
   order?: 'RANDOM' | 'ASC' | 'DESC'
   limit?: number
   page?: number
-  breed_id: number
+  breed_id?: number
 }
 
 export interface BreedDBParams extends Omit<BreedParams, JsonParam> {
