@@ -8,6 +8,7 @@ const cron = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(200).json({})
       case 'POST':
         const { userId, type, breedIdList, schedule, count } = req.body
+        cronRepose
         return res.status(200).json({})
     }
   } catch (err) {

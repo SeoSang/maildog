@@ -53,7 +53,7 @@ export const createCronsTable = async () => {
     tbl.timestamps() // created_at
     tbl.integer('userId').references('id').inTable('users')
     tbl.text('expressions').notNullable()
-    tbl.text('period').notNullable().defaultTo('Daily') // 1 : 하루에 1번, 2: 3일에 1번, 3: 7일에 1번
+    tbl.text('schedule').notNullable().defaultTo('Daily') // 1 : 하루에 1번, 2: 3일에 1번, 3: 7일에 1번
     tbl.text('type').notNullable().defaultTo('Email') // 1 : 이메일, 2: 카카오톡
     tbl.json('count')
     tbl.integer('priority').defaultTo(2)

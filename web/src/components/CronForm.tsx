@@ -3,20 +3,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import { MAIN_PINK } from '@/src/style/theme'
 import PageContainer from '@/src/components/PageContainer'
 import useResponisveWidth from '@/src/hooks/useResponisveWidth'
+import { Schedule, Service } from '@/server/types/constant'
 
 import { MainFormContext } from '../hooks/useMainFormContext'
 import { WrapToCard } from '../style'
-
-enum Service {
-  Email = 'Email',
-  KakaoTalk = 'KakaoTalk',
-}
-
-enum Schedule {
-  Daily = 'Daily',
-  ThreeDaily = 'ThreeDaily',
-  Weekly = 'Weekly',
-}
 
 const CronForm = () => {
   const { selectedBreeds, prevPage } = useContext(MainFormContext)
@@ -57,7 +47,7 @@ const CronForm = () => {
             bg={MAIN_PINK}
             style={{ width: isLargerThanSM ? 300 : 200 }}
             borderColor={MAIN_PINK}
-            placeholder="Service"
+            // placeholder={Service.Email}
             variant="filled"
             onChange={onChangeService}>
             <option value={Service.Email}>{Service.Email}</option>
@@ -68,7 +58,6 @@ const CronForm = () => {
             bg={MAIN_PINK}
             style={{ width: isLargerThanSM ? 300 : 200 }}
             borderColor={MAIN_PINK}
-            placeholder="Schedule"
             variant="filled"
             onChange={onChangeSchedule}>
             <option value={Schedule.Daily}>{Schedule.Daily}</option>
@@ -81,7 +70,6 @@ const CronForm = () => {
             bg={MAIN_PINK}
             style={{ width: isLargerThanSM ? 300 : 200 }}
             borderColor={MAIN_PINK}
-            placeholder="count"
             variant="filled"
             onChange={onChangeCount}>
             <option value={1}>{1}</option>
