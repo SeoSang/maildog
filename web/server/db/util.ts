@@ -1,9 +1,9 @@
-import { RepositoryResult } from '@/server/types'
+import { BeAxiosResult } from '@/server/types'
 
 export const mapSuccessResult = (
   data: any,
   message?: string,
-): RepositoryResult => {
+): BeAxiosResult => {
   return {
     data,
     success: true,
