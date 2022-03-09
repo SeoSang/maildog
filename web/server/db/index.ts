@@ -1,18 +1,28 @@
 import type { Knex } from 'knex'
 
 export type DeleteResult = 1 | 0
+
 interface Writer<T> {
   create(item: Omit<T, 'id'>): Promise<T | undefined>
+
   createMany(item: Omit<T, 'id'>[]): Promise<boolean>
+
   update(id: number, item: Partial<T>): Promise<T>
+
   upsert(item: Partial<T>): Promise<T[]>
+
   delete(column: string, value: any): Promise<DeleteResult>
+
   deleteById(id: number): Promise<boolean>
 }
+
 interface Reader<T> {
   find(item: Partial<T>): Promise<T[]>
+
   findAll(limit: number): Promise<T[]>
+
   findById(id: number | Partial<T>): Promise<T>
+
   exist(id: number | Partial<T>): Promise<boolean>
 }
 
@@ -23,7 +33,8 @@ interface TimeStampData {
 }
 
 export abstract class KnexRepository<T extends TimeStampData>
-  implements BaseRepository<T> {
+  implements BaseRepository<T>
+{
   // eslint-disable-next-line no-useless-constructor
   constructor(readonly knex: Knex, readonly tableName: string) {}
 

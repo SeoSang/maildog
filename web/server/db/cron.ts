@@ -39,4 +39,4 @@ class CronRepository extends KnexRepository<CronInfo> {
   }
 }
 
-export const userRepository = new CronRepository(db, 'crons')
+export const cronRepository = new CronRepository(db, 'crons')
