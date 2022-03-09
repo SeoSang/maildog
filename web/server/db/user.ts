@@ -50,12 +50,12 @@ class UserRepository extends KnexRepository<UserInfo> {
     if (!user?.password) {
       console.error('유저가 없거나 패스워드 데이터가 없습니다.')
       return {
-        code: 'NOT_EXIST',
+        code: UserResultType.NOT_EXIST,
       }
     }
     return bcrypt.compareSync(password, user.password)
-      ? { code: 'SUCCESS', user: { ...user, password: undefined } }
-      : { code: 'WRONG_PASSWORD' }
+      ? { code: UserResultType.SUCCESS, user: { ...user, password: undefined } }
+      : { code: UserResultType.WRONG_PASSWORD }
   }
 }
 

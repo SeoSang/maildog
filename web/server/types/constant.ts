@@ -6,9 +6,10 @@ export enum UserResultType {
   WRONG_PASSWORD = 'WRONG_PASSWORD',
 }
 
-export enum CronResultType {
+export enum CronCreateResultType {
   SUCCESS = 'SUCCESS',
-  NOT_EXIST = 'NOT_EXIST',
+  EXISTED = 'EXISTED',
+  ERROR = 'ERROR',
 }
 
 export enum Schedule {

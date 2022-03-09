@@ -1,6 +1,13 @@
+import { CronCreateResultType } from '@/server/types/constant'
+
 import { db } from './knex'
 import { KnexRepository } from '.'
 import { CronInfo } from '../types/cron'
+
+export type CronCreateResult = {
+  code: CronCreateResultType
+  cron?: CronInfo
+}
 
 class CronRepository extends KnexRepository<CronInfo> {
   async find(item: Partial<CronInfo>): Promise<CronInfo[]> {
@@ -18,13 +25,17 @@ class CronRepository extends KnexRepository<CronInfo> {
     return cron
   }
 
-  async create(item: Omit<CronInfo, 'id'>): Promise<CronInfo> {
-    const prevData = await this.find({ userId: item.userId })
-    if (prevData?.length > 0) {
-      return prevData[0]
+  async add(item: Omit<CronInfo, 'id'>): Promise<CronCreateResult> {
+    try {
+      const prevData = await this.find({ userId: item.userId })
+      if (prevData?.length > 0) {
+        return { code: CronCreateResultType.EXISTED, cron: prevData[0] }
+      }
+      const cron = await super.create(item)
+      return { code: CronCreateResultType.SUCCESS, cron }
+    } catch (e) {
+      return { code: CronCreateResultType.ERROR }
     }
-    const cron = await super.create(item)
-    return cron
   }
 }
 
