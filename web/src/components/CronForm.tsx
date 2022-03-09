@@ -4,16 +4,21 @@ import { MAIN_PINK } from '@/src/style/theme'
 import PageContainer from '@/src/components/PageContainer'
 import useResponisveWidth from '@/src/hooks/useResponisveWidth'
 import { Schedule, Service } from '@/server/types/constant'
+import { registerCron } from '@/src/request/cron'
+import { useRouter } from 'next/router'
 
 import { MainFormContext } from '../hooks/useMainFormContext'
 import { WrapToCard } from '../style'
 
 const CronForm = () => {
-  const { selectedBreeds, prevPage } = useContext(MainFormContext)
+  const router = useRouter()
+  const { selectedBreeds, prevPage, user } = useContext(MainFormContext)
   const [service, setService] = useState<Service>(Service.Email)
   const [schedule, setSchedule] = useState<Schedule>(Schedule.Daily)
   const [count, setCount] = useState<number>(1)
   const { isLargerThanSM } = useResponisveWidth()
+
+  const breedIdList = selectedBreeds.map((breed) => breed?.id)
 
   useEffect(() => {}, [])
 
@@ -29,13 +34,26 @@ const CronForm = () => {
     setCount(parseInt(event.target.value))
   }
 
-  const onClickOkButton = () => {
-    console.log({
-      type: service,
-      schedule,
-      breedIdList: selectedBreeds.map((breed) => breed?.id),
+  const onClickOkButton = async () => {
+    if (!user?.id) {
+      return alert('로그인이 안되었거나 잘못된 유저 정보입니다!')
+    }
+    if (!(breedIdList.length > 0)) {
+      return alert('강아지를 골라주세요!')
+    }
+
+    const props = {
+      userId: user.id,
       count,
-    })
+      schedule,
+      type: service,
+      breedIdList,
+    }
+    const res = await registerCron(props)
+    alert(res.message)
+    if (res.success) {
+      router.push('/')
+    }
   }
 
   return (

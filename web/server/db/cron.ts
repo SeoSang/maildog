@@ -31,7 +31,10 @@ class CronRepository extends KnexRepository<CronInfo> {
       if (prevData?.length > 0) {
         return { code: CronCreateResultType.EXISTED, cron: prevData[0] }
       }
-      const cron = await super.create(item)
+      const cron = await super.create({
+        ...item,
+        expressions: '01  *  *  *  *',
+      })
       return { code: CronCreateResultType.SUCCESS, cron }
     } catch (e) {
       return { code: CronCreateResultType.ERROR }
