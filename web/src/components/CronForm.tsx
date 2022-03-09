@@ -8,18 +8,19 @@ import { MainFormContext } from '../hooks/useMainFormContext'
 import { WrapToCard } from '../style'
 
 enum Service {
-  Mail = 'Mail',
+  Email = 'Email',
   KakaoTalk = 'KakaoTalk',
 }
 
 enum Schedule {
   Daily = 'Daily',
+  ThreeDaily = 'ThreeDaily',
   Weekly = 'Weekly',
 }
 
 const CronForm = () => {
   const { selectedBreeds, prevPage } = useContext(MainFormContext)
-  const [service, setService] = useState<Service>(Service.Mail)
+  const [service, setService] = useState<Service>(Service.Email)
   const [schedule, setSchedule] = useState<Schedule>(Schedule.Daily)
   const { isLargerThanSM } = useResponisveWidth()
 
@@ -49,7 +50,7 @@ const CronForm = () => {
             placeholder="Service"
             variant="filled"
             onChange={onChangeService}>
-            <option value={Service.Mail}>{Service.Mail}</option>
+            <option value={Service.Email}>{Service.Email}</option>
           </Select>
           <br />
           <FormLabel>Choose a Schedule</FormLabel>
@@ -61,6 +62,7 @@ const CronForm = () => {
             variant="filled"
             onChange={onChangeSchedule}>
             <option value={Schedule.Daily}>{Schedule.Daily}</option>
+            <option value={Schedule.ThreeDaily}>{Schedule.ThreeDaily}</option>
             <option value={Schedule.Weekly}>{Schedule.Weekly}</option>
           </Select>
           <Button style={{ marginTop: '0.5rem' }} onClick={onClickOkButton}>
