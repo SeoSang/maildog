@@ -30,7 +30,7 @@ export const createUsersTable = async () => {
     return
   }
   await db.schema.createTable('users', (tbl) => {
-    tbl.increments() // id auto_increment
+    tbl.increments() // id autoIncrement
     tbl.timestamps() // created_at
     tbl.text('email').notNullable().unique()
     tbl.text('name')
@@ -49,9 +49,9 @@ export const createCronsTable = async () => {
     return
   }
   await db.schema.createTable('crons', (tbl) => {
-    tbl.increments() // id auto_increment
+    tbl.increments() // id autoIncrement
     tbl.timestamps() // created_at
-    tbl.integer('user_id').references('id').inTable('users')
+    tbl.integer('userId').references('id').inTable('users')
     tbl.text('expressions').notNullable()
     tbl.text('period').notNullable().defaultTo('Daily') // 1 : 하루에 1번, 2: 3일에 1번, 3: 7일에 1번
     tbl.text('type').notNullable().defaultTo('Email') // 1 : 이메일, 2: 카카오톡
@@ -68,10 +68,10 @@ export const createSubscribesTable = async () => {
     return
   }
   await db.schema.createTable('subscribes', (tbl) => {
-    tbl.increments() // id auto_increment
+    tbl.increments() // id autoIncrement
     tbl.timestamps() // created_at
-    tbl.integer('cron_id').references('id').inTable('crons')
-    tbl.integer('breed_id').references('id').inTable('breeds')
+    tbl.integer('cronId').references('id').inTable('crons')
+    tbl.integer('breedId').references('id').inTable('breeds')
     tbl.boolean('valid').notNullable().defaultTo(true)
   })
 }

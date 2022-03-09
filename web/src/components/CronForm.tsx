@@ -1,6 +1,6 @@
 import { Button, FormControl, FormLabel, Select } from '@chakra-ui/react'
 import React, { useContext, useEffect, useState } from 'react'
-import { MAIN_PINK, MAIN_SKY_BLUE } from '@/src/style/theme'
+import { MAIN_PINK } from '@/src/style/theme'
 import PageContainer from '@/src/components/PageContainer'
 import useResponisveWidth from '@/src/hooks/useResponisveWidth'
 
@@ -22,6 +22,7 @@ const CronForm = () => {
   const { selectedBreeds, prevPage } = useContext(MainFormContext)
   const [service, setService] = useState<Service>(Service.Email)
   const [schedule, setSchedule] = useState<Schedule>(Schedule.Daily)
+  const [count, setCount] = useState<number>(1)
   const { isLargerThanSM } = useResponisveWidth()
 
   useEffect(() => {}, [])
@@ -34,8 +35,17 @@ const CronForm = () => {
     setSchedule(event.target.value as Schedule)
   }
 
+  const onChangeCount = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setCount(parseInt(event.target.value))
+  }
+
   const onClickOkButton = () => {
-    console.log({ service, schedule, selectedBreeds })
+    console.log({
+      type: service,
+      schedule,
+      breedIdList: selectedBreeds.map((breed) => breed?.id),
+      count,
+    })
   }
 
   return (
@@ -44,9 +54,9 @@ const CronForm = () => {
         <FormControl id="CronForm">
           <FormLabel>Choose a Service</FormLabel>
           <Select
-            bg={MAIN_SKY_BLUE}
-            style={{ width: isLargerThanSM ? 270 : 200 }}
-            borderColor={MAIN_SKY_BLUE}
+            bg={MAIN_PINK}
+            style={{ width: isLargerThanSM ? 300 : 200 }}
+            borderColor={MAIN_PINK}
             placeholder="Service"
             variant="filled"
             onChange={onChangeService}>
@@ -64,6 +74,19 @@ const CronForm = () => {
             <option value={Schedule.Daily}>{Schedule.Daily}</option>
             <option value={Schedule.ThreeDaily}>{Schedule.ThreeDaily}</option>
             <option value={Schedule.Weekly}>{Schedule.Weekly}</option>
+          </Select>
+          <br />
+          <FormLabel>Choose how-many picture per Dog</FormLabel>
+          <Select
+            bg={MAIN_PINK}
+            style={{ width: isLargerThanSM ? 300 : 200 }}
+            borderColor={MAIN_PINK}
+            placeholder="count"
+            variant="filled"
+            onChange={onChangeCount}>
+            <option value={1}>{1}</option>
+            <option value={2}>{2}</option>
+            <option value={3}>{3}</option>
           </Select>
           <Button style={{ marginTop: '0.5rem' }} onClick={onClickOkButton}>
             OK

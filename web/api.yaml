@@ -96,7 +96,7 @@ definitions:
     properties:
       id:
         type: 'number'
-      user_id:
+      userId:
         type: 'number'
       expressions:
         type: 'string'
