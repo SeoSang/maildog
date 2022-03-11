@@ -1,35 +1,140 @@
 module.exports = {
-  extends: ['eslint-config-yceffort/typescript'],
+  plugins: ['@typescript-eslint', 'prettier'],
+  extends: [
+    'next',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jest-dom/recommended',
+    'prettier',
+  ],
+  env: {
+    node: true,
+    browser: true,
+    jest: true,
+  },
+  parserOptions: {
+    project: './tsconfig.eslint.json',
+  },
   rules: {
-    '@typescript-eslint/naming-convention': ['off'],
-    '@typescript-eslint/no-unused-vars': 'error',
-    'react/react-in-jsx-scope': ['off'],
-    'no-case-declarations': ['off'],
-    'no-unused-vars': 'off',
-    'prettier/prettier': [
+    'react-hooks/rules-of-hooks': 'error',
+    'prettier/prettier': 'error',
+    'arrow-body-style': 'off',
+    'prefer-arrow-callback': 'off',
+    'react/display-name': 'warn',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'import/no-default-export': 'warn',
+    'import/prefer-default-export': 'off',
+    'import/no-cycle': 'off',
+    'no-multi-assign': 'off',
+    'no-param-reassign': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/no-array-index-key': 'warn',
+    'jsx-a11y/anchor-is-valid': 'off',
+    '@typescript-eslint/triple-slash-reference': 'warn',
+    '@typescript-eslint/no-var-requires': 'warn',
+    '@typescript-eslint/no-shadow': 'warn',
+    '@typescript-eslint/no-empty-interface': 'warn',
+    '@typescript-eslint/no-empty-function': 'warn',
+    '@typescript-eslint/no-namespace': 'warn',
+    '@typescript-eslint/no-redeclare': 'warn',
+    '@typescript-eslint/no-unsafe-return': 'warn',
+    '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/no-unsafe-member-access': 'warn',
+    '@typescript-eslint/no-unsafe-call': 'warn',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/ban-types': 'warn',
+    '@typescript-eslint/no-floating-promises': 'warn',
+    '@typescript-eslint/restrict-template-expressions': 'warn',
+    '@typescript-eslint/no-misused-promises': 'warn',
+    '@typescript-eslint/restrict-plus-operands': 'warn',
+    '@typescript-eslint/unbound-method': 'warn',
+    '@typescript-eslint/no-unused-expressions': [
       'error',
+      { allowShortCircuit: true, allowTernary: true },
+    ],
+    'no-empty': ['error', { allowEmptyCatch: true }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '^_', ignoreRestSiblings: true },
+    ],
+    '@typescript-eslint/naming-convention': [
+      'warn',
       {
-        endOfLine: 'auto',
+        selector: 'parameter',
+        format: ['strictCamelCase'], // Change if you want to.
+        leadingUnderscore: 'allow',
       },
     ],
-  },
-  overrides: [
-    {
-      files: ['**/*.test.ts'],
-      env: {
-        jest: true, // now **/*.test.js files' env has both es6 *and* jest
+    'import/no-extraneous-dependencies': ['error', { devDependencies: false }],
+    'jsx-a11y/click-events-have-key-events': 'off',
+    '@typescript-eslint/prefer-optional-chain': 'error',
+    '@typescript-eslint/prefer-nullish-coalescing': 'error',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelComponents: ['CustomInputLabel'],
+        labelAttributes: ['label'],
+        controlComponents: ['CustomInput'],
+        depth: 3,
       },
-      // Can't extend in overrides: https://github.com/eslint/eslint/issues/8813
-      // "extends": ["plugin:jest/recommended"]
-      plugins: ['jest'],
-      rules: {
-        'jest/no-disabled-tests': 'warn',
-        'jest/no-unused-vars': 'off',
-        'jest/no-focused-tests': 'error',
-        'jest/no-identical-title': 'error',
-        'jest/prefer-to-have-length': 'warn',
-        'jest/valid-expect': 'error',
+    ],
+    'no-continue': 'off',
+    'no-shadow': 'off',
+    'array-callback-return': 'off',
+    'no-case-declarations': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    'no-await-in-loop': 'off',
+    'no-restricted-syntax': 'off',
+    'no-underscore-dangle': 'warn',
+    'consistent-return': 'off',
+    'guard-for-in': 'off',
+    'import/export': 'off',
+    'no-redeclare': 'off',
+    'max-classes-per-file': 'off',
+    'react/jsx-no-target-blank': 'off',
+    'prefer-destructuring': 'warn',
+    'import/no-named-as-default': 'warn',
+    'import/order': [
+      'warn',
+      {
+        groups: [
+          ['builtin', 'external'],
+          'internal',
+          ['parent', 'sibling', 'index'],
+        ],
+        pathGroups: [
+          {
+            pattern: 'react',
+            group: 'external',
+            position: 'before',
+          },
+          {
+            pattern: '@/**',
+            group: 'external',
+            position: 'after',
+          },
+          {
+            pattern: './*.scss',
+            group: 'sibling',
+            position: 'after',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['builtin'],
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+      },
+    ],
+    '@next/next/no-html-link-for-pages': 'off',
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {
+        project: 'packages/*/tsconfig.json',
       },
     },
-  ],
+  },
 }

@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import styled, { keyframes } from 'styled-components'
+
 import MainForm from '@/src/components/MainForm'
 import { BackgroundDiv } from '@/src/style/div'
 import LogoutButton from '@/src/components/LogoutButton'
+import HomeButton from '@/src/components/HomeButton'
 
 import InputModal from '../src/components/InputModal'
 
@@ -49,6 +51,7 @@ export default function Index() {
     <>
       <InputModal />
       <LogoutButton />
+      <HomeButton />
       <MainImageContainer>
         <MainImage
           src="/main.jpg"

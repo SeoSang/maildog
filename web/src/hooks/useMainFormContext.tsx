@@ -5,6 +5,11 @@ import { useToast } from '@chakra-ui/react'
 
 import { SELECTED_BREEDS_MAX } from '../constants'
 
+export const notLoginUser: UserInfo = {
+  id: -1,
+  email: 'dummy@naver.com',
+}
+
 type FormContextValues = {
   page: number
   user: UserInfo | null
@@ -117,6 +122,10 @@ const useMainFormContext = () => {
   )
 
   return { MainFormContext, formValues, setUser }
+}
+
+export const isNotLogined = (user: UserInfo | null) => {
+  return user?.id === notLoginUser.id
 }
 
 export default useMainFormContext

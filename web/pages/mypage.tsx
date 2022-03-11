@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useMediaQuery } from '@chakra-ui/media-query'
 import { Box, Flex, Text } from '@chakra-ui/layout'
 import Icon from '@chakra-ui/icon'
@@ -7,9 +7,28 @@ import { FaDog, FaUserEdit } from 'react-icons/Fa'
 import Image from 'next/image'
 import { BackgroundDiv } from '@/src/style/div'
 import styled from 'styled-components'
+import { isNotLogined, MainFormContext } from '@/src/hooks/useMainFormContext'
+import { useRouter } from 'next/router'
 
 const Profile = () => {
+  const router = useRouter()
+  const { user } = useContext(MainFormContext)
   const [isNotSmallerScreen] = useMediaQuery('(min-width:600px)')
+  // const [user, setUser] = useState(null)
+  useEffect(() => {
+    if (isNotLogined(user)) {
+      alert('You need to login!')
+      router.push('/login')
+    }
+  }, [router, user?.id])
+
+  if (!user) {
+    return (
+      <BackgroundDiv>
+        <span>Login Please</span>
+      </BackgroundDiv>
+    )
+  }
 
   return (
     <BackgroundDiv>
@@ -20,13 +39,13 @@ const Profile = () => {
         <Box alignSelf="center" px="32" py="16">
           {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
           <ImageWrapper>
-            <Image src={'/dog/Akita.jpg'} width={260} height={260} />
+            <Image src={`/dog/${user.favorite}.jpg`} width={260} height={260} />
           </ImageWrapper>
-          <Text fontSize="2xl" color="gray.600" marginTop={3}>
-            닉네임
+          <Text fontSize="2xl" color="gray.600" marginTop={3} isTruncated>
+            {user.name}
           </Text>
-          <Text fontSize="xl" color="gray.400">
-            ddrrpg@naver.com
+          <Text fontSize="xl" color="gray.400" isTruncated>
+            {user.email}
           </Text>
         </Box>
         <Box alignSelf="center" px="32" py="16">

@@ -10,7 +10,7 @@ import { MainFormContext } from '../hooks/useMainFormContext'
 const Container = styled.div`
   position: fixed;
   top: 10px;
-  left: 65px;
+  left: 120px;
   z-index: 100;
 `
 

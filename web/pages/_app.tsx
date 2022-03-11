@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react'
-import { AppProps } from 'next/app'
+
 import CSSReset from '@chakra-ui/css-reset'
 import { ThemeProvider } from '@chakra-ui/system'
-import { UserInfo } from '@/server/types/user'
-import { decryptToUser } from '@/src/utils/encrypt'
-import { theme } from '@/src/style/theme'
 import { isNotEmptyObject } from '@chakra-ui/utils'
-import { parseJSON } from '@/src/utils/objectUtils'
 import { NextPageContext } from 'next'
 import cookies from 'next-cookies'
+import { AppProps } from 'next/app'
 
-import useMainFormContext from '../src/hooks/useMainFormContext'
+import { UserInfo } from '@/server/types/user'
+import { theme } from '@/src/style/theme'
+import { decryptToUser } from '@/src/utils/encrypt'
+import { parseJSON } from '@/src/utils/objectUtils'
+
+import useMainFormContext, {
+  notLoginUser,
+} from '../src/hooks/useMainFormContext'
 
 // import 'normalize.css'
 
@@ -26,7 +30,7 @@ function App({ Component, pageProps, user }: AppProps & ServerProps) {
       return
     }
     const localUser = window.localStorage.getItem('godliamUser')
-    localUser && setUser(decryptToUser(localUser))
+    setUser(localUser ? decryptToUser(localUser) : notLoginUser)
   }, [setUser, user])
 
   return (
