@@ -7,9 +7,9 @@ import Image from 'next/image'
 import styled, { keyframes } from 'styled-components'
 
 import { isMainInputModalOpenAtom } from '@/src/atom/modal'
+import MainForm from '@/src/components/form/MainForm'
 import HomeButton from '@/src/components/HomeButton'
 import LogoutButton from '@/src/components/LogoutButton'
-import MainForm from '@/src/components/MainForm'
 import { BackgroundDiv } from '@/src/style/div'
 
 import InputModal from '../src/components/InputModal'

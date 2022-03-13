@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+
 import {
   Button,
   FormControl,
@@ -7,11 +8,11 @@ import {
   Input,
 } from '@chakra-ui/react'
 
-import PageContainer from './PageContainer'
-import { WrapToCard } from '../style'
-import { MainFormContext } from '../hooks/useMainFormContext'
-import beAxios from '../utils/axios'
-import { isValidEmail } from '../utils'
+import { MainFormContext } from '../../hooks/useMainFormContext'
+import { WrapToCard } from '../../style'
+import { isValidEmail } from '../../utils'
+import beAxios from '../../utils/axios'
+import PageContainer from '../PageContainer'
 
 const EmailForm = () => {
   const { email, setEmail, prevPage, nextPage } = useContext(MainFormContext)

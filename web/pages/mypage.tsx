@@ -12,6 +12,7 @@ import styled from 'styled-components'
 import { loadUserCronBreeds } from '@/server/cron'
 import { SubscribeBreedInfo } from '@/server/types/subscribe'
 import { resizeImage } from '@/src/components/DogCard'
+import DogForm from '@/src/components/form/DogForm'
 import { isNotLogined, MainFormContext } from '@/src/hooks/useMainFormContext'
 import { BackgroundDiv } from '@/src/style/div'
 
@@ -142,6 +143,7 @@ const Profile = () => {
           </Flex>
         </Box>
       </Flex>
+      <DogForm />
     </BackgroundDiv>
   )
 }

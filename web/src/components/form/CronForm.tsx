@@ -1,14 +1,16 @@
-import { Button, FormControl, FormLabel, Select } from '@chakra-ui/react'
 import React, { useContext, useEffect, useState } from 'react'
-import { MAIN_PINK } from '@/src/style/theme'
-import PageContainer from '@/src/components/PageContainer'
-import useResponisveWidth from '@/src/hooks/useResponisveWidth'
-import { Schedule, Service } from '@/server/types/constant'
-import { registerCron } from '@/src/request/cron'
+
+import { Button, FormControl, FormLabel, Select } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
-import { MainFormContext } from '../hooks/useMainFormContext'
-import { WrapToCard } from '../style'
+import { Schedule, Service } from '@/server/types/constant'
+import PageContainer from '@/src/components/PageContainer'
+import useResponisveWidth from '@/src/hooks/useResponisveWidth'
+import { registerCron } from '@/src/request/cron'
+import { MAIN_PINK } from '@/src/style/theme'
+
+import { MainFormContext } from '../../hooks/useMainFormContext'
+import { WrapToCard } from '../../style'
 
 const CronForm = () => {
   const router = useRouter()

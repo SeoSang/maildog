@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
-import CronForm from '@/src/components/CronForm'
 
-import { MainFormContext } from '../hooks/useMainFormContext'
-import CheckDog from './CheckDog'
+import CronForm from '@/src/components/form/CronForm'
+
+import { MainFormContext } from '../../hooks/useMainFormContext'
+import CheckDog from '../CheckDog'
+import Hello from '../Hello'
 import DogForm from './DogForm'
 import EmailForm from './EmailForm'
-import Hello from './Hello'
 
 const MainForm = () => {
   const { page } = useContext(MainFormContext)

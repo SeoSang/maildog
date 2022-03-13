@@ -1,3 +1,5 @@
+import React, { useContext, useEffect, useState } from 'react'
+
 import {
   Alert,
   AlertIcon,
@@ -6,16 +8,16 @@ import {
   Spinner,
   useToast,
 } from '@chakra-ui/react'
-import React, { useContext, useEffect, useState } from 'react'
-import beAxios from 'src/utils/axios'
-import { Breed } from 'server/dog/dogapi/breed'
 import styled from 'styled-components'
 
-import { WrapToCard } from '../style'
-import DogGrid from './DogGrid'
-import SelectedDogListCard from './SelectedDogListCard'
-import { MainFormContext } from '../hooks/useMainFormContext'
-import { ResponsiveWidth } from '../style/theme'
+import { Breed } from '@/server/dog/dogapi/breed'
+import beAxios from '@/src/utils/axios'
+
+import { MainFormContext } from '../../hooks/useMainFormContext'
+import { WrapToCard } from '../../style'
+import { ResponsiveWidth } from '../../style/theme'
+import DogGrid from '../DogGrid'
+import SelectedDogListCard from '../SelectedDogListCard'
 
 const IMAGE_PER_PAGE = 20
 
