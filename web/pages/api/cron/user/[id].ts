@@ -13,7 +13,7 @@ const user = async (
     let result
     switch (method) {
       case 'GET':
-        const cron = await db
+        const crons = await db
           .from('crons')
           .where('userId', id)
           .join('subscribes', 'crons.id', 'subscribes.cronId')
@@ -22,7 +22,9 @@ const user = async (
           .select('*')
 
         result = {
-          cron: mapObjectValueToJSON(cron, ['weight, height, image']),
+          cron: crons.map((cron) =>
+            mapObjectValueToJSON(cron, ['weight', 'height', 'image']),
+          ),
           message: 'Load cron Success.',
         }
         return res.status(200).json(result)

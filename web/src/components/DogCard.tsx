@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Breed } from '@/server/dog/dogapi/breed'
+
 import { Tooltip, useToast } from '@chakra-ui/react'
-import styled from 'styled-components'
 import Image from 'next/image'
+import styled from 'styled-components'
+
+import { Breed } from '@/server/dog/dogapi/breed'
+import { DogImage } from '@/server/dog/dogapi/type'
 
 import { SELECTED_BREEDS_MAX } from '../constants'
 import { MainFormContext } from '../hooks/useMainFormContext'
@@ -34,11 +37,41 @@ const ImageContainer = styled.div`
   }
 `
 
-const getImageHeightRatio = (breed: Breed) => {
+export const getImageHeightRatio = (image?: DogImage): number => {
+  const height = image?.height
+  const width = image?.width
+  if (!height || !width || !image) {
+    return 1
+  }
   return (
-    (breed?.image?.height || IMAGE_DEFAULT_WIDTH) /
-    (breed?.image?.width || IMAGE_DEFAULT_WIDTH)
+    (typeof height === 'number' ? height : parseInt(height)) /
+    (typeof width === 'number' ? width : parseInt(width))
   )
+}
+
+export const resizeImage = ({
+  image,
+  targetWidth,
+  targetHeight,
+}: {
+  image?: DogImage
+  targetWidth?: number
+  targetHeight?: number
+}) => {
+  if (!image) return { width: targetWidth, height: targetWidth }
+  if (targetWidth) {
+    return {
+      width: targetWidth,
+      height: targetWidth * getImageHeightRatio(image),
+    }
+  }
+  if (targetHeight) {
+    return {
+      width: targetHeight / getImageHeightRatio(image),
+      height: targetHeight,
+    }
+  }
+  return { width: targetWidth, height: targetHeight }
 }
 
 const DogCard = ({
@@ -53,6 +86,11 @@ const DogCard = ({
   const [clicked, setClicked] = useState(false)
   const { selectedBreeds, addSelectedBreeds, removeSelectedBreeds } =
     useContext(MainFormContext)
+
+  const { width, height } = resizeImage({
+    image: breed?.image,
+    targetWidth: IMAGE_DEFAULT_WIDTH,
+  })
 
   useEffect(() => {
     setClicked(false)
@@ -84,6 +122,7 @@ const DogCard = ({
   if (!breed) {
     return <div />
   }
+
   return (
     <Tooltip label={breed.name}>
       <ImageContainer
@@ -96,8 +135,8 @@ const DogCard = ({
         <Image
           alt={`image${breed.image?.url}`}
           src={`/dog/${breed.name}.jpg`}
-          width={IMAGE_DEFAULT_WIDTH}
-          height={IMAGE_DEFAULT_WIDTH * getImageHeightRatio(breed)}
+          width={width}
+          height={height}
         />
       </ImageContainer>
     </Tooltip>

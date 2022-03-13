@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import Icon from '@chakra-ui/icon'
 import { Box, Flex, Text } from '@chakra-ui/layout'
@@ -9,6 +9,9 @@ import { FaDog, FaUserEdit } from 'react-icons/Fa'
 import { GiDogBowl } from 'react-icons/gi'
 import styled from 'styled-components'
 
+import { loadUserCronBreeds } from '@/server/cron'
+import { SubscribeBreedInfo } from '@/server/types/subscribe'
+import { resizeImage } from '@/src/components/DogCard'
 import { isNotLogined, MainFormContext } from '@/src/hooks/useMainFormContext'
 import { BackgroundDiv } from '@/src/style/div'
 
@@ -16,12 +19,22 @@ const Profile = () => {
   const router = useRouter()
   const { user } = useContext(MainFormContext)
   const [isNotSmallerScreen] = useMediaQuery('(min-width:600px)')
-  // const [user, setUser] = useState(null)
+  const [breeds, setBreeds] = useState<SubscribeBreedInfo[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   useEffect(() => {
     if (isNotLogined(user)) {
-      console.log({ user })
       alert('You need to login!')
       router.push('/login')
+      return
+    }
+    if (breeds.length === 0 && user?.id) {
+      setIsLoading(true)
+      loadUserCronBreeds(user?.id).then((res) => {
+        console.log({ res })
+        setIsLoading(false)
+        if (res.success && res.data) setBreeds(res.data)
+      })
     }
   }, [router, user?.id])
 
@@ -53,8 +66,35 @@ const Profile = () => {
         </Box>
         <Box alignSelf="center" px="32" py="16">
           <Text fontWeight="bold" fontSize="2xl">
-            Your Dogs
+            The puppies you subscribe to.
           </Text>
+          <Flex
+            style={{ gap: 10 }}
+            direction={isNotSmallerScreen ? 'row' : 'column'}
+            mt={8}>
+            {isLoading && 'loading..'}
+            {!isLoading &&
+              breeds?.map((breed: SubscribeBreedInfo) => {
+                const { width, height } = resizeImage({
+                  image: breed?.image,
+                  targetHeight: 200,
+                })
+                console.log({ width, height })
+                return (
+                  <Flex
+                    key={`Breed_${breed?.id}`}
+                    rounded="xl"
+                    direction="row"
+                    mt={4}
+                    bg="blue.400"
+                    h={height}
+                    w={width}
+                    justify="flex-end">
+                    <img src={breed?.image?.url} />
+                  </Flex>
+                )
+              })}
+          </Flex>
           <Flex direction={isNotSmallerScreen ? 'row' : 'column'} mt={8}>
             <Flex
               rounded="xl"

@@ -28,4 +28,5 @@ export const mapObjectValueToJSON = (object: any, targetKeys: string[]) => {
       object[key] = parseJSON(object[key])
     }
   })
+  return object
 }

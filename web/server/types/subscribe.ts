@@ -10,20 +10,18 @@ export type SubscribeInfo = {
   updated_at?: string
 }
 
-export type SubscribeExtendInfo = SubscribeInfo & {
+export type SubscribeBreedInfo = SubscribeInfo & {
   userId: number
   expressions: string
   schedule: Schedule
   type: Service
   count: number
   priority: number
-  valid: number
-  cronId: number
   name: string
   temperament: string
-  life_span: string
-  alt_names: string
-  wikipedia_url: string
+  life_span: string | null
+  alt_names: string | null
+  wikipedia_url: string | null
   origin: string
   country_code: string
   bred_for: string
