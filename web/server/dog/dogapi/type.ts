@@ -12,9 +12,9 @@ export interface Height {
 
 export interface DogImage {
   id: string
-  height: number
+  height: number | string
   url: string
-  width: number
+  width: number | string
 }
 
 export type JsonParam = 'weight' | 'height' | 'image'
