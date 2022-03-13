@@ -1,14 +1,16 @@
 import React, { useContext, useEffect } from 'react'
-import { useMediaQuery } from '@chakra-ui/media-query'
-import { Box, Flex, Text } from '@chakra-ui/layout'
+
 import Icon from '@chakra-ui/icon'
-import { GiDogBowl } from 'react-icons/gi'
-import { FaDog, FaUserEdit } from 'react-icons/Fa'
+import { Box, Flex, Text } from '@chakra-ui/layout'
+import { useMediaQuery } from '@chakra-ui/media-query'
 import Image from 'next/image'
-import { BackgroundDiv } from '@/src/style/div'
-import styled from 'styled-components'
-import { isNotLogined, MainFormContext } from '@/src/hooks/useMainFormContext'
 import { useRouter } from 'next/router'
+import { FaDog, FaUserEdit } from 'react-icons/Fa'
+import { GiDogBowl } from 'react-icons/gi'
+import styled from 'styled-components'
+
+import { isNotLogined, MainFormContext } from '@/src/hooks/useMainFormContext'
+import { BackgroundDiv } from '@/src/style/div'
 
 const Profile = () => {
   const router = useRouter()
@@ -17,6 +19,7 @@ const Profile = () => {
   // const [user, setUser] = useState(null)
   useEffect(() => {
     if (isNotLogined(user)) {
+      console.log({ user })
       alert('You need to login!')
       router.push('/login')
     }

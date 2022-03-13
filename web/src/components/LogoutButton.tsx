@@ -1,18 +1,12 @@
 import React, { useContext } from 'react'
-import { Button } from '@chakra-ui/react'
+
 import { UnlockIcon } from '@chakra-ui/icons'
-import styled from 'styled-components'
-import { logoutUser } from '@/src/request/user'
+import { Button } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
-import { MainFormContext } from '../hooks/useMainFormContext'
+import { logoutUser } from '@/src/request/user'
 
-const Container = styled.div`
-  position: fixed;
-  top: 10px;
-  left: 120px;
-  z-index: 100;
-`
+import { MainFormContext } from '../hooks/useMainFormContext'
 
 const LogoutButton = () => {
   const { isLogined, setUser } = useContext(MainFormContext)
@@ -28,11 +22,9 @@ const LogoutButton = () => {
     router.push('/')
   }
   return (
-    <Container>
-      <Button onClick={onClickLogout}>
-        <UnlockIcon />
-      </Button>
-    </Container>
+    <Button onClick={onClickLogout}>
+      <UnlockIcon />
+    </Button>
   )
 }
 

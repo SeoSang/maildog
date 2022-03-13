@@ -1,12 +1,16 @@
 import React, { createContext, useCallback, useMemo, useState } from 'react'
+
+import { useToast } from '@chakra-ui/react'
+
 import { Breed } from '@/server/dog/dogapi/breed'
 import { UserInfo } from '@/server/types/user'
-import { useToast } from '@chakra-ui/react'
 
 import { SELECTED_BREEDS_MAX } from '../constants'
 
+const NOT_LOGIN_ID = -1
+
 export const notLoginUser: UserInfo = {
-  id: -1,
+  id: NOT_LOGIN_ID,
   email: 'dummy@naver.com',
 }
 
@@ -88,7 +92,10 @@ const useMainFormContext = () => {
     setPage((prevPage) => Math.min(MAX_PAGE, prevPage + 1))
   }, [setPage])
 
-  const isLogined = useMemo(() => user !== null && !!user.id, [user])
+  const isLogined = useMemo(
+    () => user !== null && user.id !== NOT_LOGIN_ID,
+    [user],
+  )
 
   const formValues = useMemo(
     () => ({

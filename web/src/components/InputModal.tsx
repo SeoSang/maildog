@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react'
-import { Button, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import React, { useContext } from 'react'
+
+import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { useAtomValue } from 'jotai'
 import styled from 'styled-components'
 
+import { isMainInputModalOpenAtom } from '@/src/atom/modal'
+
 import { MainFormContext } from '../hooks/useMainFormContext'
-import SelectedDogListCard from './SelectedDogListCard'
 import { ResponsiveWidth } from '../style/theme'
+import SelectedDogListCard from './SelectedDogListCard'
 
 const Container = styled.div`
   position: fixed;
@@ -19,7 +22,7 @@ const InputTable = styled(Table)`
   padding: 10px;
   background-color: antiquewhite;
   border-radius: 10px;
-  margin-top: 10px;
+  margin-top: 50px;
 
   width: 360px !important;
 
@@ -36,16 +39,11 @@ const InputTable = styled(Table)`
  * 입력된 input 값들을 확인하는 모달
  */
 const InputModal = () => {
-  const [visible, setVisible] = useState<boolean>(false)
+  const visible = useAtomValue(isMainInputModalOpenAtom)
   const { email, selectedBreeds } = useContext(MainFormContext)
-  const onClickTrigger = () => {
-    setVisible((prev) => !prev)
-  }
+
   return (
     <Container>
-      <Button onClick={onClickTrigger}>
-        {visible ? <ViewOffIcon /> : <ViewIcon />}
-      </Button>
       <InputTable
         variant="simple"
         style={{ opacity: visible ? 1 : 0, display: visible ? '' : 'none' }}>
