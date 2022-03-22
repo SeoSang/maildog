@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { MAIN_PINK, MAIN_SKY_BLUE } from '@/src/style/theme'
 
 interface FlexDivProps {

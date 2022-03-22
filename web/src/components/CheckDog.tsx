@@ -1,13 +1,13 @@
-import { Alert, AlertIcon, Button } from '@chakra-ui/react'
 import React, { useContext } from 'react'
+
+import { Alert, AlertIcon, Button } from '@chakra-ui/react'
 import styled from 'styled-components'
 
-import { WrapToCard } from '../style'
-import DogGrid from './DogGrid'
 import { MainFormContext } from '../hooks/useMainFormContext'
-import { ResponsiveWidth } from '../style/theme'
+import { WrapToCard } from '../style'
 import { FlexDiv } from '../style/div'
-import { registerCron } from '../request/cron'
+import { ResponsiveWidth } from '../style/theme'
+import DogGrid from './DogGrid'
 
 const GridContainer = styled.div`
   width: 90%;
@@ -25,19 +25,8 @@ const GridContainer = styled.div`
 `
 
 const CheckDog = () => {
-  const { selectedBreeds, email, nextPage, prevPage } =
-    useContext(MainFormContext)
+  const { selectedBreeds, nextPage, prevPage } = useContext(MainFormContext)
 
-  // TODO : 컴퍼넌트에 적용
-  const onClickYes = async () => {
-    await registerCron({
-      email,
-      breedIds: selectedBreeds.map((breed) => breed.id),
-      userId: 1,
-    })
-  }
-
-  console.log(onClickYes)
   return (
     <GridContainer>
       <WrapToCard>

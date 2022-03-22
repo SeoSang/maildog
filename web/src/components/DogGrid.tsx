@@ -1,7 +1,9 @@
-import { Breed } from '@/server/dog/dogapi/breed'
-import { JustifiedGrid } from '@egjs/react-grid'
 import React, { useEffect, useState } from 'react'
+
+import { JustifiedGrid } from '@egjs/react-grid'
 import { useWindowSize } from 'rooks'
+
+import { Breed } from '@/server/dog/dogapi/breed'
 
 import DogCard from './DogCard'
 

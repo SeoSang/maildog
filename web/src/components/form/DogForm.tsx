@@ -37,7 +37,7 @@ const GridContainer = styled.div`
   }
 `
 
-const DogForm = () => {
+const DogForm = ({ onClickFinish }: { onClickFinish?: () => void }) => {
   const [loading, setLoading] = useState(false)
   const [breeds, setBreeds] = useState<Breed[]>([])
   const [dogPage, setDogPages] = useState<number>(0)
@@ -122,7 +122,7 @@ const DogForm = () => {
           ▶️
         </Button>
         {selectedBreeds.length !== 0 && (
-          <Button onClick={onClickFinishButton}>Finish</Button>
+          <Button onClick={onClickFinish ?? onClickFinishButton}>Finish</Button>
         )}
         <br />
         <Badge variant="outline" colorScheme="green">

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+
 import { Button } from '@chakra-ui/button'
 import { Heading } from '@chakra-ui/layout'
 import Link from 'next/link'
@@ -17,9 +18,9 @@ const Hello = () => {
       <FlexDiv gap="6px">
         {!isLogined ? (
           <>
-            <Button size="lg" onClick={nextPage}>
-              Register
-            </Button>
+            <Link href={'/register'}>
+              <Button size="lg">Register</Button>
+            </Link>
             <Link href={'login'}>
               <Button size="lg">Login</Button>
             </Link>

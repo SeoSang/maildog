@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import { Tooltip, useToast } from '@chakra-ui/react'
+import { useAtomValue } from 'jotai'
 import Image from 'next/image'
 import styled from 'styled-components'
 
 import { Breed } from '@/server/dog/dogapi/breed'
 import { DogImage } from '@/server/dog/dogapi/type'
+import { selectedBreedsMaxAtom } from '@/src/atom/dogForm'
 
-import { SELECTED_BREEDS_MAX } from '../constants'
 import { MainFormContext } from '../hooks/useMainFormContext'
 
 const IMAGE_DEFAULT_WIDTH = 1200
@@ -84,6 +85,7 @@ const DogCard = ({
   const toast = useToast()
 
   const [clicked, setClicked] = useState(false)
+  const selectedBreedsMax = useAtomValue(selectedBreedsMaxAtom)
   const { selectedBreeds, addSelectedBreeds, removeSelectedBreeds } =
     useContext(MainFormContext)
 
@@ -108,10 +110,10 @@ const DogCard = ({
       removeSelectedBreeds(breed)
       return
     }
-    if (selectedBreeds.length >= SELECTED_BREEDS_MAX) {
+    if (selectedBreeds.length >= selectedBreedsMax) {
       toast({
         status: 'error',
-        description: `You can choose up to ${SELECTED_BREEDS_MAX}.`,
+        description: `You can choose up to ${selectedBreedsMax}.`,
       })
       return
     }

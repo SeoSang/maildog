@@ -23,10 +23,11 @@ const Profile = () => {
   const [breeds, setBreeds] = useState<SubscribeBreedInfo[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  console.log({ user })
   useEffect(() => {
     if (isNotLogined(user)) {
       alert('You need to login!')
-      router.push('/login')
+      // router.push('/login')
       return
     }
     if (breeds.length === 0 && user?.id) {

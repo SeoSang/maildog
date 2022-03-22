@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { Box } from '@chakra-ui/layout'
 import {
@@ -11,10 +11,14 @@ import {
   Input,
   useToast,
 } from '@chakra-ui/react'
+import { useUpdateAtom } from 'jotai/utils'
 
 import { UserInfo } from '@/server/types/user'
-import useResponisveWidth from '@/src/hooks/useResponisveWidth'
+import { selectedBreedsMaxAtom } from '@/src/atom/dogForm'
+import DogForm from '@/src/components/form/DogForm'
+import { MainFormContext } from '@/src/hooks/useMainFormContext'
 import { useAlreadyLogin } from '@/src/hooks/util/useAlreadyLogin'
+import { MAIN_PINK, MAIN_SKY_BLUE } from '@/src/style/theme'
 import { isValidEmail } from '@/src/utils'
 import beAxios from '@/src/utils/axios'
 
@@ -27,14 +31,18 @@ type Props = {
 
 const RegisterForm: React.FC<Props> = () => {
   useAlreadyLogin()
-  console.log(useResponisveWidth())
   const toast = useToast()
+
+  const { selectedBreeds } = useContext(MainFormContext)
+
+  const setSelectedBreedsMax = useUpdateAtom(selectedBreedsMaxAtom)
 
   const [email, setEmail] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [checked, setEmailChecked] = useState<boolean>(false)
   const [password, setPassword] = useState<string>('')
   const [passwordCheck, setPasswordCheck] = useState<string>('')
+  const [isDogFormModalOpen, setIsDogFormModalOpen] = useState<boolean>(false)
 
   const isPasswordChecked = password === passwordCheck
 
@@ -87,8 +95,34 @@ const RegisterForm: React.FC<Props> = () => {
     }
   }
 
+  const onClickSelectDog = () => {
+    setIsDogFormModalOpen(true)
+    setSelectedBreedsMax(1)
+  }
+
   return (
-    <FlexDiv style={{ minHeight: '100vh' }}>
+    <FlexDiv
+      style={{
+        minHeight: '100vh',
+        position: 'relative',
+      }}>
+      {isDogFormModalOpen && (
+        <Box
+          display="flex"
+          position="absolute"
+          style={{
+            backgroundImage: `linear-gradient(
+        45deg,
+        ${MAIN_SKY_BLUE} 22%,
+        ${MAIN_PINK} 98%
+        )`,
+          }}
+          zIndex={30}
+          width={'100%'}
+          top={'10px'}>
+          <DogForm onClickFinish={() => setIsDogFormModalOpen(false)} />
+        </Box>
+      )}
       <WrapToCard
         w={{
           base: '94%',
@@ -164,9 +198,35 @@ const RegisterForm: React.FC<Props> = () => {
             Choose your favorite Dog!
           </FormLabel>
           <Box mb={'2rem'}>
-            <Button colorScheme={'teal'} w={'100%'}>
-              Select
-            </Button>
+            {selectedBreeds?.length > 0 ? (
+              <Grid
+                templateColumns={{
+                  // sx: isLargerThanSM ? 'repeat(2, 80% 20%)' : 'repeat(1, 100%)',
+                  base: 'repeat(1, 100%)',
+                  md: 'repeat(2, 80% 20%)',
+                }}
+                gap={6}>
+                <Input
+                  id="favoriteBreed"
+                  type="text"
+                  value={selectedBreeds[0].name}
+                  disabled
+                />
+                <Button
+                  w={'100%'}
+                  colorScheme={'teal'}
+                  onClick={onClickSelectDog}>
+                  Select
+                </Button>
+              </Grid>
+            ) : (
+              <Button
+                colorScheme={'teal'}
+                w={'100%'}
+                onClick={onClickSelectDog}>
+                Select
+              </Button>
+            )}
           </Box>
         </FormControl>
         <FlexDiv>
