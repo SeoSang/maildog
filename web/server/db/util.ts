@@ -11,11 +11,12 @@ export const mapSuccessResult = (
   }
 }
 
-export const mapErrorResult = (e: any) => {
+export const mapErrorResult = (e: any, msg?: string) => {
   return (
     e.response?.data ?? {
       success: false,
-      message: 'A server error has occurred. Please contact the operator.',
+      message:
+        msg ?? 'A server error has occurred. Please contact the operator.',
     }
   )
 }

@@ -14,6 +14,7 @@ import {
 import { useUpdateAtom } from 'jotai/utils'
 
 import { UserInfo } from '@/server/types/user'
+import { register } from '@/server/user'
 import { selectedBreedsMaxAtom } from '@/src/atom/dogForm'
 import DogForm from '@/src/components/form/DogForm'
 import { MainFormContext } from '@/src/hooks/useMainFormContext'
@@ -21,6 +22,7 @@ import { useAlreadyLogin } from '@/src/hooks/util/useAlreadyLogin'
 import { MAIN_PINK, MAIN_SKY_BLUE } from '@/src/style/theme'
 import { isValidEmail } from '@/src/utils'
 import beAxios from '@/src/utils/axios'
+import { encryptObject } from '@/src/utils/encrypt'
 
 import { WrapToCard } from '../../style'
 import { FlexDiv } from '../../style/div'
@@ -32,8 +34,7 @@ type Props = {
 const RegisterForm: React.FC<Props> = () => {
   useAlreadyLogin()
   const toast = useToast()
-
-  const { selectedBreeds } = useContext(MainFormContext)
+  const { selectedBreeds, setUser } = useContext(MainFormContext)
 
   const setSelectedBreedsMax = useUpdateAtom(selectedBreedsMaxAtom)
 
@@ -46,7 +47,7 @@ const RegisterForm: React.FC<Props> = () => {
 
   const isPasswordChecked = password === passwordCheck
 
-  const onClickRegister = () => {
+  const onClickRegister = async () => {
     if (!email) {
       toast({
         status: 'error',
@@ -74,6 +75,20 @@ const RegisterForm: React.FC<Props> = () => {
         description: 'Password Check is not correct',
       })
       return
+    }
+
+    const res = await register({
+      email,
+      name,
+      phone: '01000000000',
+      favorite: selectedBreeds?.[0].name,
+      password,
+    })
+    alert(res.message)
+    if (res.success && res.data) {
+      const user = res.data
+      setUser(user)
+      window.localStorage.setItem('godliamUser', encryptObject(user))
     }
   }
 

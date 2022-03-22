@@ -1,7 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next'
 import httpStatus from 'http-status'
-import { userRepository } from '@/server/db/user'
+import { NextApiRequest, NextApiResponse } from 'next'
+
 import { authorizator } from '@/pages/api/interceptor'
+import { userRepository } from '@/server/db/user'
 
 const register = async (
   { method, body }: NextApiRequest,
@@ -11,7 +12,7 @@ const register = async (
     let result
     let statusCode = 200
     switch (method) {
-      case 'GET': // User register
+      case 'POST': // User register
         const { email, name, phone, favorite, password } = body
         const [user] = await userRepository.find({ email })
         if (user) {

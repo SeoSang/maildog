@@ -10,8 +10,8 @@ export const useAlreadyLogin = () => {
 
   useEffect(() => {
     if (isLogined) {
-      alert('You are already login.')
+      alert('You are logged in.')
       router.push('/')
     }
-  }, [isLogined, router])
+  }, [isLogined])
 }
