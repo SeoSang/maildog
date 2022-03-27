@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Tooltip, useToast } from '@chakra-ui/react'
 import { useAtomValue } from 'jotai'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { Breed } from '@/server/dog/dogapi/breed'
@@ -78,11 +79,14 @@ export const resizeImage = ({
 const DogCard = ({
   breed,
   clickable = true,
+  linking = false,
 }: {
   breed: Breed
   clickable?: boolean
+  linking?: boolean
 }) => {
   const toast = useToast()
+  const router = useRouter()
 
   const [clicked, setClicked] = useState(false)
   const selectedBreedsMax = useAtomValue(selectedBreedsMaxAtom)
@@ -102,9 +106,8 @@ const DogCard = ({
   }, [breed, breed?.name, selectedBreeds, clickable])
 
   const onClickContainer = () => {
-    if (!clickable) {
-      return
-    }
+    if (linking) return router.push(`/breed/${breed.id}`)
+    if (!clickable) return
     if (clicked) {
       setClicked((prev) => !prev)
       removeSelectedBreeds(breed)

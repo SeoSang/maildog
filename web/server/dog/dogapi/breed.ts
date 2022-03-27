@@ -1,7 +1,7 @@
 import { Knex } from 'knex'
 
-import { upsert } from '../../db/breed'
-import { BreedParams, Weight, Height, DogImage, BreedDBParams } from './type'
+import { BreedDBParams, BreedParams, DogImage, Height, Weight } from './type'
+
 export class Breed implements BreedParams {
   id: number
 
@@ -47,16 +47,6 @@ export class Breed implements BreedParams {
       (this.image = isDBBreed(breed) ? JSON.parse(breed.image) : breed.image)
     this.weight = isDBBreed(breed) ? JSON.parse(breed.weight) : breed.weight
     this.height = isDBBreed(breed) ? JSON.parse(breed.height) : breed.height
-  }
-
-  async saveToDB() {
-    const targetBreed: BreedDBParams = {
-      ...this,
-      weight: JSON.stringify(this.weight),
-      height: JSON.stringify(this.height),
-      image: JSON.stringify(this.image),
-    }
-    return upsert(targetBreed)
   }
 }
 

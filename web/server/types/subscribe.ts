@@ -19,9 +19,9 @@ export type SubscribeBreedInfo = SubscribeInfo & {
   priority: number
   name: string
   temperament: string
-  life_span: string | null
-  alt_names: string | null
-  wikipedia_url: string | null
+  life_span?: string
+  alt_names?: string
+  wikipedia_url?: string
   origin: string
   country_code: string
   bred_for: string

@@ -11,7 +11,7 @@ import styled from 'styled-components'
 
 import { loadUserCronBreeds } from '@/server/cron'
 import { SubscribeBreedInfo } from '@/server/types/subscribe'
-import { resizeImage } from '@/src/components/DogCard'
+import DogCard, { resizeImage } from '@/src/components/DogCard'
 import DogForm from '@/src/components/form/DogForm'
 import { isNotLogined, MainFormContext } from '@/src/hooks/useMainFormContext'
 import { BackgroundDiv } from '@/src/style/div'
@@ -81,7 +81,6 @@ const Profile = () => {
                   image: breed?.image,
                   targetHeight: 200,
                 })
-                console.log({ width, height })
                 return (
                   <Flex
                     key={`Breed_${breed?.id}`}
@@ -92,7 +91,7 @@ const Profile = () => {
                     h={height}
                     w={width}
                     justify="flex-end">
-                    <img src={breed?.image?.url} />
+                    <DogCard breed={breed} clickable={false} linking />
                   </Flex>
                 )
               })}

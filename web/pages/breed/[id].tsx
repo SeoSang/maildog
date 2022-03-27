@@ -17,7 +17,7 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { loadBreed } from '@/server/dog/breed'
-import { Breed } from '@/server/dog/dogapi/breed'
+import { Breed as BreedType } from '@/server/dog/dogapi/breed'
 import { resizeImage } from '@/src/components/DogCard'
 import { BackgroundDiv, FlexDiv } from '@/src/style/div'
 
@@ -27,7 +27,7 @@ const Breed = () => {
 
   const [isNotSmallerScreen] = useMediaQuery('(min-width:600px)')
 
-  const [breed, setBreed] = useState<Breed | null>(null)
+  const [breed, setBreed] = useState<BreedType | null>(null)
   const [loading, setLoading] = useState(true)
 
   console.log(breed)

@@ -6,7 +6,6 @@ import { MainFormContext } from '../../hooks/useMainFormContext'
 import CheckDog from '../CheckDog'
 import Hello from '../Hello'
 import DogForm from './DogForm'
-import EmailForm from './EmailForm'
 
 const MainForm = () => {
   const { page } = useContext(MainFormContext)
@@ -15,12 +14,10 @@ const MainForm = () => {
     case 1:
       return <Hello />
     case 2:
-      return <EmailForm />
-    case 3:
       return <DogForm />
-    case 4:
+    case 3:
       return <CheckDog />
-    case 5:
+    case 4:
       return <CronForm />
     default:
       return <></>
