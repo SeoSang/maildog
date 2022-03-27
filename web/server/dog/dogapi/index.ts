@@ -1,9 +1,9 @@
 import path from 'path'
 
+import idToNameBreedsJSON from '../../db/json/idToNameBreeds.json'
 import { Breed } from './breed'
 import daxios from './daxios'
 import { BreedImageParam, BreedParams } from './type'
-import idToNameBreedsJSON from '../../db/json/idToNameBreeds.json'
 
 export const getAllBreeds = async (): Promise<BreedParams[]> => {
   if (process.env.NODE_ENV === 'test') {
