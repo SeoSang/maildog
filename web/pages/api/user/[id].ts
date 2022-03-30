@@ -1,8 +1,10 @@
 /* eslint-disable no-case-declarations */
-import { NextApiRequest, NextApiResponse } from 'next'
-import { userRepository } from '@/server/db/user'
 import httpStatus from 'http-status'
+import { NextApiRequest, NextApiResponse } from 'next'
+
 import { authorizator } from '@/pages/api/interceptor'
+import { cronRepository } from '@/server/db/cron'
+import { userRepository } from '@/server/db/user'
 
 const user = async (
   { query: { id }, method, body }: NextApiRequest,
@@ -55,8 +57,15 @@ const user = async (
         }
         statusCode = httpStatus.OK
         return res.status(statusCode).json(result)
+      case 'DELETE':
+        const data = await cronRepository.delete('userId', id)
+        result = {
+          data,
+          message: '유저 cron 삭제에 성공했습니다.',
+        }
+        return res.status(statusCode).json(result)
       default:
-        return res.status(501).json({ alertText: 'Unexpected request Method!' })
+        return res.status(501).json({ message: 'Unexpected request Method!' })
     }
   } catch (err) {
     console.log(err)

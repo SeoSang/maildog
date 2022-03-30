@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Icon from '@chakra-ui/icon'
 import { Box, Flex, Text } from '@chakra-ui/layout'
 import { useMediaQuery } from '@chakra-ui/media-query'
+import { Link, Tooltip } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FaDog, FaUserEdit } from 'react-icons/Fa'
@@ -15,6 +16,8 @@ import DogCard, { resizeImage } from '@/src/components/DogCard'
 import DogForm from '@/src/components/form/DogForm'
 import { isNotLogined, MainFormContext } from '@/src/hooks/useMainFormContext'
 import { BackgroundDiv } from '@/src/style/div'
+
+import nameToIdBreedsMap from '../../web/server/db/json/nameToIdBreeds.json'
 
 const Profile = () => {
   const router = useRouter()
@@ -40,6 +43,8 @@ const Profile = () => {
     }
   }, [router, user?.id])
 
+  const onClickChangeDogs = () => {}
+
   if (!user) {
     return (
       <BackgroundDiv>
@@ -55,10 +60,15 @@ const Profile = () => {
         w="100%"
         maxWidth={{ base: '100vh', md: '130vh', lg: '130vh', xl: '130vh' }}>
         <Box alignSelf="center" px="32" py="16">
-          {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
-          <ImageWrapper>
-            <Image src={`/dog/${user.favorite}.jpg`} width={260} height={260} />
-          </ImageWrapper>
+          <Tooltip label={user.favorite}>
+            <ImageWrapper>
+              <Image
+                src={`/dog/${user.favorite}.jpg`}
+                width={260}
+                height={260}
+              />
+            </ImageWrapper>
+          </Tooltip>
           <Text fontSize="2xl" color="gray.600" marginTop={3} isTruncated>
             {user.name}
           </Text>
@@ -97,19 +107,26 @@ const Profile = () => {
               })}
           </Flex>
           <Flex direction={isNotSmallerScreen ? 'row' : 'column'} mt={8}>
-            <Flex
-              rounded="xl"
-              direction="column"
-              mt={4}
-              bg="blue.400"
-              h="30vh"
-              w="30vh"
-              justify="flex-end">
-              <Icon color="white" p="4" as={FaDog} w="24" h="24" />
-              <Text color="white" p="4" fontSize="xl" fontWeight="semibold">
-                About your Dogs
-              </Text>
-            </Flex>
+            <Link
+              href={`/breed/${
+                (nameToIdBreedsMap as any)[user.favorite ?? 'Akita']
+              }`}>
+              <Flex
+                rounded="xl"
+                direction="column"
+                mt={4}
+                bg="blue.400"
+                h="30vh"
+                w="30vh"
+                justify="flex-end"
+                _hover={{ bg: 'teal.400' }}>
+                <Icon color="white" p="4" as={FaDog} w="24" h="24" />
+
+                <Text color="white" p="4" fontSize="xl" fontWeight="semibold">
+                  About your Favorite
+                </Text>
+              </Flex>
+            </Link>
             <Flex
               rounded="xl"
               direction="column"
@@ -119,6 +136,7 @@ const Profile = () => {
               h="30vh"
               w="30vh"
               justify="flex-end"
+              onClick={}
               _hover={{ bg: 'teal.400' }}>
               <Icon color="black" p="4" as={GiDogBowl} w="24" h="24" />
               <Text color="black" p="4" fontSize="xl" fontWeight="semibold">
