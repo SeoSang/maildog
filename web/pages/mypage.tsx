@@ -3,17 +3,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import Icon from '@chakra-ui/icon'
 import { Box, Flex, Text } from '@chakra-ui/layout'
 import { useMediaQuery } from '@chakra-ui/media-query'
-import { Link, Tooltip } from '@chakra-ui/react'
+import { Button, Link, Tooltip } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FaDog, FaUserEdit } from 'react-icons/Fa'
 import { GiDogBowl } from 'react-icons/gi'
 import styled from 'styled-components'
 
-import { loadUserCronBreeds } from '@/server/cron'
+import { deleteCron, loadUserCronBreeds } from '@/server/cron'
 import { SubscribeBreedInfo } from '@/server/types/subscribe'
 import DogCard, { resizeImage } from '@/src/components/DogCard'
-import DogForm from '@/src/components/form/DogForm'
 import { isNotLogined, MainFormContext } from '@/src/hooks/useMainFormContext'
 import { BackgroundDiv } from '@/src/style/div'
 
@@ -43,7 +42,19 @@ const Profile = () => {
     }
   }, [router, user?.id])
 
-  const onClickChangeDogs = () => {}
+  const onClickChangeDogs = () => {
+    if (!user) return
+    if (
+      !confirm(
+        'The existing cron will be deleted. Do you still want to proceed?',
+      )
+    ) {
+      return
+    }
+    deleteCron(user?.id).then((res) => {
+      if (res.success) router.push('/')
+    })
+  }
 
   if (!user) {
     return (
@@ -77,9 +88,25 @@ const Profile = () => {
           </Text>
         </Box>
         <Box alignSelf="center" px="32" py="16">
-          <Text fontWeight="bold" fontSize="2xl">
-            The puppies you subscribe to.
-          </Text>
+          {breeds?.length > 0 ? (
+            <Text fontWeight="bold" fontSize="2xl">
+              The puppies you subscribe to.
+            </Text>
+          ) : (
+            <Flex
+              style={{ gap: 10 }}
+              direction={isNotSmallerScreen ? 'row' : 'column'}
+              mt={8}>
+              {/*<Box alignSelf="center">*/}
+              <Text fontWeight="bold" fontSize="2xl">
+                You don't have a dog you're subscribing.
+              </Text>
+              <Link href={'/'}>
+                <Button variant={'outline'}>Go</Button>
+              </Link>
+              {/*</Box>*/}
+            </Flex>
+          )}
           <Flex
             style={{ gap: 10 }}
             direction={isNotSmallerScreen ? 'row' : 'column'}
@@ -136,7 +163,7 @@ const Profile = () => {
               h="30vh"
               w="30vh"
               justify="flex-end"
-              onClick={}
+              onClick={onClickChangeDogs}
               _hover={{ bg: 'teal.400' }}>
               <Icon color="black" p="4" as={GiDogBowl} w="24" h="24" />
               <Text color="black" p="4" fontSize="xl" fontWeight="semibold">
@@ -161,7 +188,7 @@ const Profile = () => {
           </Flex>
         </Box>
       </Flex>
-      <DogForm />
+      {/*<DogForm />*/}
     </BackgroundDiv>
   )
 }

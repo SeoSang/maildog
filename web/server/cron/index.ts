@@ -14,6 +14,7 @@ export const addCron = async (param: CronAddParam): Promise<any> => {
     return false
   }
 }
+
 export const loadUserCronBreeds = async (
   userId: number,
 ): Promise<BeAxiosResult<SubscribeBreedInfo[]>> => {
@@ -23,6 +24,20 @@ export const loadUserCronBreeds = async (
       success: true,
       message: 'Load user cron success.',
       data: res.data.cron,
+    }
+  } catch (e) {
+    console.error(e)
+    return mapErrorResult(e)
+  }
+}
+
+export const deleteCron = async (userId: number): Promise<BeAxiosResult> => {
+  try {
+    const res = await beAxios.delete(`/user/${userId}`)
+    return {
+      success: true,
+      message: 'delete user cron success.',
+      data: res.data,
     }
   } catch (e) {
     console.error(e)
