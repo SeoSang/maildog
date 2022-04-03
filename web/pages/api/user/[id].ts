@@ -53,7 +53,7 @@ const user = async (
         })
         result = {
           user,
-          message: '유저 업데이트에 성공했습니다.',
+          message: 'User Update Success!',
         }
         statusCode = httpStatus.OK
         return res.status(statusCode).json(result)
@@ -61,7 +61,7 @@ const user = async (
         const data = await cronRepository.delete('userId', id)
         result = {
           data,
-          message: '유저 cron 삭제에 성공했습니다.',
+          message: 'User Cron delete Success',
         }
         return res.status(statusCode).json(result)
       default:

@@ -179,7 +179,10 @@ const Profile = () => {
               h="30vh"
               w="30vh"
               justify="flex-end"
-              _hover={{ bg: 'green.400' }}>
+              _hover={{ bg: 'green.400' }}
+              onClick={() => {
+                alert('Sorry, it will be coming soon!')
+              }}>
               <Icon as={FaUserEdit} p="4" w="24" h="24" color="black" />
               <Text color="black" p="4" fontSize="xl" fontWeight="semibold">
                 Change your Profile

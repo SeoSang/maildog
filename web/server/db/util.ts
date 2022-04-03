@@ -7,7 +7,7 @@ export const mapSuccessResult = (
   return {
     data,
     success: true,
-    message: message ?? '성공!',
+    message: message ?? 'Success!',
   }
 }
 

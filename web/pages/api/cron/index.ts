@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+
 import { authorizator } from '@/pages/api/interceptor'
 import { cronRepository } from '@/server/db/cron'
-import { CronCreateResultType } from '@/server/types/constant'
 import { subscribeRepository } from '@/server/db/subscribe'
+import { CronCreateResultType } from '@/server/types/constant'
 
 const cron = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -20,14 +21,14 @@ const cron = async (req: NextApiRequest, res: NextApiResponse) => {
         if (addCronResult.code === CronCreateResultType.ERROR) {
           return res.status(400).json({
             success: false,
-            message: '에러가 발생했습니다!',
+            message: 'Error occur',
           })
         }
         if (addCronResult.code === CronCreateResultType.EXISTED) {
           return res.status(400).json({
             success: false,
             data: addCronResult.cron ?? null,
-            message: '이미 cron이 존재합니다. cron은 1개까지만 가능합니다!',
+            message: 'Cron already exist. Cron can be single.',
           })
         }
 
@@ -40,12 +41,12 @@ const cron = async (req: NextApiRequest, res: NextApiResponse) => {
           )
           return res.status(200).json({
             success: true,
-            message: 'cron 추가 성공!',
+            message: 'Add cron success!',
           })
         } else {
           return res.status(400).json({
             success: false,
-            message: '에러가 발생했습니다!',
+            message: 'Add cron Error occur!',
           })
         }
     }
