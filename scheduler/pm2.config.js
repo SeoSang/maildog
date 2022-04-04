@@ -1,11 +1,31 @@
 module.exports = {
   apps: [
     {
-      name: "appName",
-      script: "src/index.js",
+      name: "daily",
+      script: "ts-node cron/daily.ts",
       instance_var: "INSTANCE_ID", // 편한 이름으로 설정하면 됩니다.
-      instance: 0,
-      exec_mode: "cluster",
+      min_uptime: 5000,
+      max_restarts: 5,
+      args: "",
+      env: {
+        NODE_ENV: "production",
+      },
+    },
+    {
+      name: "weekly",
+      script: "ts-node cron/weekly.ts",
+      instance_var: "weekly", // 편한 이름으로 설정하면 됩니다.
+      min_uptime: 5000,
+      max_restarts: 5,
+      args: "",
+      env: {
+        NODE_ENV: "production",
+      },
+    },
+    {
+      name: "threeDaily",
+      script: "ts-node cron/threeDaily.ts",
+      instance_var: "threeDaily", // 편한 이름으로 설정하면 됩니다.
       min_uptime: 5000,
       max_restarts: 5,
       args: "",
