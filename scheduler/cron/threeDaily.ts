@@ -1,14 +1,15 @@
-import axios from "axios";
 import { getLogger, Schedule } from "../logger";
-import { API_URL } from "../config";
+import beAxios from "../axios";
 
 const schedule = require("node-schedule");
 
 const logger = getLogger(Schedule.ThreeDaily);
 
 const threeDailyJob = schedule.scheduleJob("0 */72 * * *", function () {
-  axios
-    .post(`${API_URL}/cron`)
+  beAxios
+    .post(`/cron`, {
+      schedule: Schedule.ThreeDaily,
+    })
     .then((res) => logger.log(res))
     .catch((err) => {
       logger.error(err);

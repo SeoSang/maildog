@@ -9,6 +9,7 @@ module.exports = {
       args: "",
       env: {
         NODE_ENV: "production",
+        API_KEY_BEAXIOS: "mingmingming",
       },
     },
     {
@@ -20,6 +21,7 @@ module.exports = {
       args: "",
       env: {
         NODE_ENV: "production",
+        API_KEY_BEAXIOS: "mingmingming",
       },
     },
     {
@@ -31,6 +33,7 @@ module.exports = {
       args: "",
       env: {
         NODE_ENV: "production",
+        API_KEY_BEAXIOS: "mingmingming",
       },
     },
   ],
