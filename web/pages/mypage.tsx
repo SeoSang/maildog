@@ -124,7 +124,6 @@ const Profile = () => {
                     rounded="xl"
                     direction="row"
                     mt={4}
-                    bg="blue.400"
                     h={height}
                     w={width}
                     justify="flex-end">
