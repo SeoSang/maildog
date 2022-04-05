@@ -5,7 +5,7 @@ const API_KEY_BEAXIOS = process.env.NEXT_PUBLIC_API_KEY_BEAXIOS
 
 const beAxios = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_SERVICE_URL}/api`,
-  timeout: 2000,
+  timeout: 20000,
   headers: { 'x-api-key': API_KEY_BEAXIOS },
   withCredentials: true,
 })

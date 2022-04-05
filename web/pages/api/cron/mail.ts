@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import { authorizator } from '@/pages/api/interceptor'
 import { db } from '@/server/db/knex'
+import beAxios from '@/src/utils/axios'
 
 type SubscribeDataPerUser = {
   userId: number
@@ -44,6 +45,15 @@ const mail = async (req: NextApiRequest, res: NextApiResponse) => {
             subscribesPerUser[data.userId].breedIdList.push(data.breedId)
           }
         })
+
+        for (const [, data] of Object.entries(subscribesPerUser)) {
+          beAxios.post('/mail', {
+            imageParam: {},
+            breedIdList: data.breedIdList,
+            targetEmail: data.email,
+          })
+        }
+
         return res.status(200).json({
           success: true,
           subscribesPerUser,
