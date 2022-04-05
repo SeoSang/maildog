@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
 import smtpTransport from 'nodemailer-smtp-transport'
-import { generatePhotoFrame } from '@/server/mail/html'
+
+import { generatePhotoFrame, PhotoParam } from '@/server/mail/html'
 
 const transporter = nodemailer.createTransport(
   smtpTransport({
@@ -16,14 +17,14 @@ const transporter = nodemailer.createTransport(
 export const sendMail = async (
   fromEmail = '"MailDog ð" <foo@example.com>',
   targetEmail: string,
-  imgUrls: string[],
+  photoParams: PhotoParam[],
   alt = 'image',
 ) => {
   const info = await transporter.sendMail({
     from: fromEmail, // sender address
     to: targetEmail, // list of receivers
     subject: 'Here is Mail Dog 📧 🐕 !  ', // Subject line
-    html: generatePhotoFrame(imgUrls, alt), // html body
+    html: generatePhotoFrame(photoParams, alt), // html body
   })
 
   console.log('Message sent: %s', info.messageId)

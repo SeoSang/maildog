@@ -4,7 +4,7 @@ import { authorizator } from '@/pages/api/interceptor'
 import { getBreedImageUrlsById } from '@/server/dog/dogapi'
 import { BreedImageParam } from '@/server/dog/dogapi/type'
 import { sendMail } from '@/server/mail'
-import { generatePhotoFrame } from '@/server/mail/html'
+import { generatePhotoFrame, PhotoParam } from '@/server/mail/html'
 
 const mail = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -25,22 +25,37 @@ const mail = async (req: NextApiRequest, res: NextApiResponse) => {
         if (!targetEmail || (!imageParam?.breed_id && !breedIdList)) {
           return res.status(400).json({ message: 'Wrong parameter !' })
         }
-        let imageUrls: string[] = []
+        let photoParams: PhotoParam[] = []
         if (breedIdList && breedIdList?.length > 0) {
           for (const breedId of breedIdList) {
             const _imageUrls = await getBreedImageUrlsById({
               ...imageParam,
               breed_id: breedId,
             })
-            imageUrls = [...imageUrls, ..._imageUrls]
+            photoParams = [
+              ...photoParams,
+              ..._imageUrls.map((imageUrl) => ({ imageUrl, breedId })),
+            ]
           }
         } else {
-          imageUrls = await getBreedImageUrlsById(imageParam)
+          const __imageUrls = await getBreedImageUrlsById(imageParam)
+          if (imageParam.breed_id) {
+            photoParams = __imageUrls.map((imageUrl) => ({
+              imageUrl,
+              breedId: imageParam.breed_id ?? 1,
+            }))
+          }
         }
-        await sendMail(fromEmail, targetEmail, imageUrls)
+        if (!photoParams || photoParams.length === 0) {
+          result = {
+            message: `Photo Param Generate Fail!`,
+          }
+          return res.status(401).json(result)
+        }
+        await sendMail(fromEmail, targetEmail, photoParams)
         result = {
           message: `Email was sent to ${targetEmail}`,
-          example: generatePhotoFrame(imageUrls, 'image'),
+          example: generatePhotoFrame(photoParams, 'image'),
         }
         return res.status(200).json(result)
       default:
