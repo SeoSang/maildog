@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 
-import { Button } from '@chakra-ui/button'
-import { Heading } from '@chakra-ui/layout'
+import { Button, Heading } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import { MainFormContext } from '../hooks/useMainFormContext'

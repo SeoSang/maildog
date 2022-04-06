@@ -29,4 +29,5 @@ export type SubscribeBreedInfo = SubscribeInfo & {
   weight: Weight
   height: Height
   image: DogImage
+  saveToDB: any
 }

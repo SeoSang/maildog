@@ -1,5 +1,6 @@
-import { Button } from '@chakra-ui/button'
 import { useEffect, useState } from 'react'
+
+import { Button } from '@chakra-ui/react'
 
 const AsyncImage = (props: any) => {
   const [loadedSrc, setLoadedSrc] = useState(null)

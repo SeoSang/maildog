@@ -1,5 +1,4 @@
 import { ColorMode, extendTheme, theme as baseTheme } from '@chakra-ui/react'
-import { createBreakpoints } from '@chakra-ui/theme-tools'
 
 export const MAIN_PINK = '#FFC0CBFF'
 export const MAIN_SKY_BLUE = '#81F7F2FF'
@@ -11,12 +10,12 @@ export enum ResponsiveWidth {
   xl = 1200,
 }
 
-const breakpoints = createBreakpoints({
+const breakpoints = {
   sm: `${ResponsiveWidth.sm}px`,
   md: `${ResponsiveWidth.md}px`,
   lg: `${ResponsiveWidth.lg}px`,
   xl: `${ResponsiveWidth.xl}px`,
-})
+}
 
 const config: { initialColorMode: ColorMode; useSystemColorMode: boolean } = {
   initialColorMode: 'light',

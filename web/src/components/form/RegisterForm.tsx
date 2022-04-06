@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 
-import { Box } from '@chakra-ui/layout'
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,

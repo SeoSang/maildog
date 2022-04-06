@@ -1,3 +1,5 @@
+import { SubscribeBreedInfo } from '@/server/types/subscribe'
+
 import { Breed } from './breed'
 
 export const parseTemperaments = (temperament: string): string[] => {
@@ -10,7 +12,7 @@ type Dictionary = {
 }
 
 export const parseBreedDataToDictionary = (
-  breed: Breed[],
+  breed: (Breed | SubscribeBreedInfo)[],
   idToName = true,
 ): Dictionary => {
   if (idToName) {

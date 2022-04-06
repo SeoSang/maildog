@@ -11,6 +11,7 @@ import {
 import styled from 'styled-components'
 
 import { Breed } from '@/server/dog/dogapi/breed'
+import { SubscribeBreedInfo } from '@/server/types/subscribe'
 import beAxios from '@/src/utils/axios'
 
 import { MainFormContext } from '../../hooks/useMainFormContext'
@@ -39,7 +40,7 @@ const GridContainer = styled.div`
 
 const DogForm = ({ onClickFinish }: { onClickFinish?: () => void }) => {
   const [loading, setLoading] = useState(false)
-  const [breeds, setBreeds] = useState<Breed[]>([])
+  const [breeds, setBreeds] = useState<(Breed | SubscribeBreedInfo)[]>([])
   const [dogPage, setDogPages] = useState<number>(0)
 
   const { selectedBreeds, nextPage } = useContext(MainFormContext)

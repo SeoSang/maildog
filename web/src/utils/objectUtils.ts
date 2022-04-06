@@ -6,7 +6,7 @@ export const isNotEmptyObject = (obj: any) => {
   return !isEmptyObject(obj)
 }
 
-export const parseJSON = (str: string): Object => {
+export const parseJSON = (str: string): any => {
   try {
     return JSON.parse(str)
   } catch (e: any) {

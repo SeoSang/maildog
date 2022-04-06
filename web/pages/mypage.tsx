@@ -1,9 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import Icon from '@chakra-ui/icon'
-import { Box, Flex, Text } from '@chakra-ui/layout'
-import { useMediaQuery } from '@chakra-ui/media-query'
-import { Button, Link, Tooltip } from '@chakra-ui/react'
+import { Icon } from '@chakra-ui/icons'
+import {
+  Box,
+  Button,
+  Flex,
+  Link,
+  Text,
+  Tooltip,
+  useMediaQuery,
+} from '@chakra-ui/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FaDog, FaUserEdit } from 'react-icons/Fa'

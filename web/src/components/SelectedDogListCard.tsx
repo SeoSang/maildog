@@ -1,10 +1,13 @@
 import React from 'react'
-import { Breed } from '@/server/dog/dogapi/breed'
+
 import { Badge, Button, Stack } from '@chakra-ui/react'
 import styled from 'styled-components'
 
-import { FlexDiv } from '../style/div'
+import { Breed } from '@/server/dog/dogapi/breed'
+import { SubscribeBreedInfo } from '@/server/types/subscribe'
+
 import useResponisveWidth from '../hooks/useResponisveWidth'
+import { FlexDiv } from '../style/div'
 
 const Container = styled.div`
   position: sticky;
@@ -19,7 +22,7 @@ const Container = styled.div`
 `
 
 type Props = {
-  selectedBreeds: Breed[]
+  selectedBreeds: (Breed | SubscribeBreedInfo)[]
   includeTitle?: boolean
 }
 

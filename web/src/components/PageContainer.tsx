@@ -1,5 +1,6 @@
-import { Button } from '@chakra-ui/button'
 import React from 'react'
+
+import { Button } from '@chakra-ui/react'
 import styled from 'styled-components'
 
 const PageContainerDiv = styled.div`

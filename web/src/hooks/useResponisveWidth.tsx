@@ -1,4 +1,4 @@
-import { useMediaQuery } from '@chakra-ui/media-query'
+import { useMediaQuery } from '@chakra-ui/react'
 
 import { ResponsiveWidth } from '../style/theme'
 

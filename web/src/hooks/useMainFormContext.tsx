@@ -3,6 +3,7 @@ import React, { createContext, useCallback, useMemo, useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 
 import { Breed } from '@/server/dog/dogapi/breed'
+import { SubscribeBreedInfo } from '@/server/types/subscribe'
 import { UserInfo } from '@/server/types/user'
 
 import { SELECTED_BREEDS_MAX } from '../constants'
@@ -21,12 +22,12 @@ type FormContextValues = {
   isLogined: boolean
   prevPage: () => void
   nextPage: () => void
-  selectedBreeds: Breed[]
+  selectedBreeds: (Breed | SubscribeBreedInfo)[]
   setUser: (user: UserInfo | null) => void
   setEmail: React.Dispatch<React.SetStateAction<string>>
   setSelectedBreeds: React.Dispatch<React.SetStateAction<Breed[]>>
-  addSelectedBreeds: (breed: Breed) => void
-  removeSelectedBreeds: (breed: Breed) => void
+  addSelectedBreeds: (breed: Breed | SubscribeBreedInfo) => void
+  removeSelectedBreeds: (breed: Breed | SubscribeBreedInfo) => void
 }
 
 export const MainFormContext = createContext({
@@ -39,9 +40,9 @@ export const MainFormContext = createContext({
   selectedBreeds: [],
   setUser: (_: UserInfo | null) => {},
   setEmail: (_: string) => {},
-  setSelectedBreeds: (_: Breed[]) => {},
-  addSelectedBreeds: (_: Breed) => {},
-  removeSelectedBreeds: (_: Breed) => {},
+  setSelectedBreeds: (_: (Breed | SubscribeBreedInfo)[]) => {},
+  addSelectedBreeds: (_: Breed | SubscribeBreedInfo) => {},
+  removeSelectedBreeds: (_: Breed | SubscribeBreedInfo) => {},
 } as FormContextValues)
 
 const FIRST_PAGE = 1
@@ -51,12 +52,14 @@ const useMainFormContext = () => {
   const [page, setPage] = useState<number>(1)
   const [user, setUser] = useState<UserInfo | null>(null)
   const [email, setEmail] = useState<string>('')
-  const [selectedBreeds, setSelectedBreeds] = useState<Breed[]>([])
+  const [selectedBreeds, setSelectedBreeds] = useState<
+    (Breed | SubscribeBreedInfo)[]
+  >([])
 
   const toast = useToast()
 
   const addSelectedBreeds = useCallback(
-    (breed: Breed) => {
+    (breed: Breed | SubscribeBreedInfo) => {
       if (selectedBreeds.includes(breed)) {
         toast({ status: 'error', description: 'Already Selcted!' })
         return
@@ -74,7 +77,7 @@ const useMainFormContext = () => {
   )
 
   const removeSelectedBreeds = useCallback(
-    (breed: Breed) => {
+    (breed: Breed | SubscribeBreedInfo) => {
       if (selectedBreeds.some((b) => b.id === breed.id)) {
         setSelectedBreeds((prev) => prev.filter((b) => b.id !== breed.id))
         return

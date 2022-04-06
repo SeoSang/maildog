@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
-import { Box, Flex, Text } from '@chakra-ui/layout'
-import { useMediaQuery } from '@chakra-ui/media-query'
 import {
+  Box,
+  Flex,
   Spinner,
   Table,
   TableCaption,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
+  useMediaQuery,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'

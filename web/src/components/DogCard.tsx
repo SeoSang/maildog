@@ -8,6 +8,7 @@ import styled from 'styled-components'
 
 import { Breed } from '@/server/dog/dogapi/breed'
 import { DogImage } from '@/server/dog/dogapi/type'
+import { SubscribeBreedInfo } from '@/server/types/subscribe'
 import { selectedBreedsMaxAtom } from '@/src/atom/dogForm'
 
 import { MainFormContext } from '../hooks/useMainFormContext'
@@ -81,7 +82,7 @@ const DogCard = ({
   clickable = true,
   linking = false,
 }: {
-  breed: Breed
+  breed: Breed | SubscribeBreedInfo
   clickable?: boolean
   linking?: boolean
 }) => {

@@ -60,7 +60,6 @@ describe('user repository test', () => {
   })
 
   test('find and remove all dummy users', async () => {
-    const findResult = await userRepository.find({ name: '서상테스트' })
     const results = await Promise.all([
       userRepository.delete('email', 'ddrrpg@naver.com'),
       userRepository.delete('email', 'ddrrpg2@naver.com'),

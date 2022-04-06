@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 
 import CSSReset from '@chakra-ui/css-reset'
 import { ThemeProvider } from '@chakra-ui/system'
-import { isNotEmptyObject } from '@chakra-ui/utils'
 import { NextPageContext } from 'next'
 import cookies from 'next-cookies'
 import { AppProps } from 'next/app'
@@ -10,13 +9,11 @@ import { AppProps } from 'next/app'
 import { UserInfo } from '@/server/types/user'
 import { theme } from '@/src/style/theme'
 import { decryptToUser } from '@/src/utils/encrypt'
-import { parseJSON } from '@/src/utils/objectUtils'
+import { isNotEmptyObject, parseJSON } from '@/src/utils/objectUtils'
 
 import useMainFormContext, {
   notLoginUser,
 } from '../src/hooks/useMainFormContext'
-
-// import 'normalize.css'
 
 type ServerProps = {
   user: UserInfo

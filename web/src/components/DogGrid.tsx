@@ -4,11 +4,12 @@ import { JustifiedGrid } from '@egjs/react-grid'
 import { useWindowSize } from 'rooks'
 
 import { Breed } from '@/server/dog/dogapi/breed'
+import { SubscribeBreedInfo } from '@/server/types/subscribe'
 
 import DogCard from './DogCard'
 
 type Props = {
-  breeds: Breed[]
+  breeds: (Breed | SubscribeBreedInfo)[]
   clickable?: boolean
 }
 
