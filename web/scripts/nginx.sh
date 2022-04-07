@@ -2,4 +2,5 @@
 
 sudo apt update
 sudo apt install nginx
-yes | cp ../nginx.conf /etc/nginx/nginx.conf  
+yes | sudo cp ../nginx.conf /etc/nginx/nginx.conf
+sudo service nginx restart  
