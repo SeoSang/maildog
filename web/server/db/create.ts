@@ -75,3 +75,10 @@ export const createSubscribesTable = async () => {
     tbl.boolean('valid').notNullable().defaultTo(true)
   })
 }
+
+export const createAll = async () => {
+  createUsersTable()
+  createBreedsTable()
+  createCronsTable()
+  createSubscribesTable()
+}
