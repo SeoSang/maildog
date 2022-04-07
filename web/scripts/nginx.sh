@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir /var/logs
-touch /var/logs/nginx.pid
+sudo mkdir /var/logs
+sudo touch /var/logs/nginx.pid
 
 sudo apt update
 sudo apt install nginx
