@@ -74,7 +74,7 @@ const Breed = () => {
         <Box alignSelf="center" px="32" py="16">
           {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
           <ImageWrapper>
-            <Image src={breed.image?.url || ''} width={width} height={height} />
+            <Image src={breed.image?.url ?? ''} width={width} height={height} />
           </ImageWrapper>
           <Text fontSize="2xl" color="gray.600" marginTop={3} isTruncated>
             {breed.name}

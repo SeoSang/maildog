@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "set NODE_ENV=dev && next dev",
-    "build": "set NODE_ENV=prod && next build && tsc --project tsconfig.json",
-    "start": "set NODE_ENV=prod && next start",
+    "build": "set NODE_ENV=produciton && next build && tsc --project tsconfig.json",
+    "start": "set NODE_ENV=production && next start",
     "lint": "eslint '**/*.{js,ts,tsx}'",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier '**/*.{json,yaml,md}' --check",

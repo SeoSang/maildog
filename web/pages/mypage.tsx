@@ -105,7 +105,7 @@ const Profile = () => {
               mt={8}>
               {/*<Box alignSelf="center">*/}
               <Text fontWeight="bold" fontSize="2xl">
-                You don't have a dog you're subscribing.
+                You dont have a dog subscribing.
               </Text>
               <Link href={'/'}>
                 <Button variant={'outline'}>Go</Button>
