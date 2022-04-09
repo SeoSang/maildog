@@ -1,0 +1,53 @@
+name: <maildog> deploy to production
+
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+env:
+  S3_BUCKET_NAME: maildog-bucket
+  PROJECT_NAME: maildog
+
+jobs:
+  deploy:
+    name: Build, Deploy to S3 bucket
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          working-directory: ./frontend
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          working-directory: ./frontend
+          version: 6.0.2
+          run_install: true
+
+
+      - name: make zip file
+      run: zip -r ./$GITHUB_SHA.zip .
+
+        - name: Configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_IAM_MANAGER_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_IAM_MANAGER_SECRET_ACCESS_KEY }}
+            aws-region: ap-northeast-2
+
+        - name: Upload to S3
+          run: |
+            aws s3 cp \
+              --region us-west-1 \
+              ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+        - name: Code Deploy
+          run: aws deploy create-deployment --ignore-application-stop-failures --application-name ademain-client-hospital --file-exists-behavior OVERWRITE --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name admain-client-hospital-production --s3-location bucket=ademain-client-hospital,bundleType=zip,key=ademain-client-hospital-production.zip
