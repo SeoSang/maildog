@@ -1,0 +1,11 @@
+version: "3"
+services:
+  next:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    volumes:
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+      - /var/tmp/prod.sqlite3:/var/tmp/prod.sqlite3 
