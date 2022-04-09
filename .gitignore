@@ -22,5 +22,11 @@ secrets/
 # module
 
 node_modules/
-
+v3/
+web/v3/
 .env
+
+
+# log
+
+*.log
