@@ -4,9 +4,7 @@ import CSSReset from '@chakra-ui/css-reset'
 import { ThemeProvider } from '@chakra-ui/system'
 import { NextPageContext } from 'next'
 import cookies from 'next-cookies'
-import { AppProps } from 'next/app'
 
-import { UserInfo } from '@/server/types/user'
 import { theme } from '@/src/style/theme'
 import { decryptToUser } from '@/src/utils/encrypt'
 import { isNotEmptyObject, parseJSON } from '@/src/utils/objectUtils'
@@ -15,11 +13,11 @@ import useMainFormContext, {
   notLoginUser,
 } from '../src/hooks/useMainFormContext'
 
-type ServerProps = {
-  user: UserInfo
-}
+// type ServerProps = {
+//   user: UserInfo
+// }
 
-function App({ Component, pageProps, user }: AppProps & ServerProps) {
+function App({ Component, pageProps, user }: any) {
   const { MainFormContext, formValues, setUser } = useMainFormContext()
   useEffect(() => {
     if (user) {
