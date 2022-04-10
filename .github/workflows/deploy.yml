@@ -26,7 +26,7 @@ jobs:
         run: |
           npm install -g yarn
           yarn install --prefer-offline
-          yarn build
+          yarn build 
 
       - name: make zip file
         run: zip -r ./$GITHUB_SHA.zip .
