@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import { Icon } from '@chakra-ui/icons'
+import { EditIcon, InfoOutlineIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -12,8 +12,6 @@ import {
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { FaDog, FaUserEdit } from 'react-icons/Fa'
-import { GiDogBowl } from 'react-icons/gi'
 import styled from 'styled-components'
 
 import { deleteCron, loadUserCronBreeds } from '@/server/cron'
@@ -152,7 +150,7 @@ const Profile = () => {
                 w="30vh"
                 justify="flex-end"
                 _hover={{ bg: 'teal.400' }}>
-                <Icon color="white" p="4" as={FaDog} w="24" h="24" />
+                <InfoOutlineIcon color="white" p="4" w="24" h="24" />
 
                 <Text color="white" p="4" fontSize="xl" fontWeight="semibold">
                   About your Favorite
@@ -170,29 +168,29 @@ const Profile = () => {
               justify="flex-end"
               onClick={onClickChangeDogs}
               _hover={{ bg: 'teal.400' }}>
-              <Icon color="black" p="4" as={GiDogBowl} w="24" h="24" />
+              <EditIcon color="black" p="4" w="24" h="24" />
               <Text color="black" p="4" fontSize="xl" fontWeight="semibold">
                 Change your Dogs
               </Text>
             </Flex>
-            <Flex
-              rounded="xl"
-              direction="column"
-              mt={4}
-              ml={isNotSmallerScreen ? 4 : 0}
-              bg="gray.100"
-              h="30vh"
-              w="30vh"
-              justify="flex-end"
-              _hover={{ bg: 'green.400' }}
-              onClick={() => {
-                alert('Sorry, it will be coming soon!')
-              }}>
-              <Icon as={FaUserEdit} p="4" w="24" h="24" color="black" />
-              <Text color="black" p="4" fontSize="xl" fontWeight="semibold">
-                Change your Profile
-              </Text>
-            </Flex>
+            {/*<Flex*/}
+            {/*  rounded="xl"*/}
+            {/*  direction="column"*/}
+            {/*  mt={4}*/}
+            {/*  ml={isNotSmallerScreen ? 4 : 0}*/}
+            {/*  bg="gray.100"*/}
+            {/*  h="30vh"*/}
+            {/*  w="30vh"*/}
+            {/*  justify="flex-end"*/}
+            {/*  _hover={{ bg: 'green.400' }}*/}
+            {/*  onClick={() => {*/}
+            {/*    alert('Sorry, it will be coming soon!')*/}
+            {/*  }}>*/}
+            {/*  <Icon as={FaUserEdit} p="4" w="24" h="24" color="black" />*/}
+            {/*  <Text color="black" p="4" fontSize="xl" fontWeight="semibold">*/}
+            {/*    Change your Profile*/}
+            {/*  </Text>*/}
+            {/*</Flex>*/}
           </Flex>
         </Box>
       </Flex>

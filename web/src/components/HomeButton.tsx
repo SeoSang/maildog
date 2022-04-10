@@ -1,14 +1,14 @@
 import React from 'react'
 
+import { ArrowBackIcon } from '@chakra-ui/icons'
 import { Button } from '@chakra-ui/react'
 import Link from 'next/link'
-import { CgProfile } from 'react-icons/cg'
 
 const HomeButton = () => {
   return (
     <Link href={'/mypage'}>
       <Button>
-        <CgProfile />
+        <ArrowBackIcon />
       </Button>
     </Link>
   )
