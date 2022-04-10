@@ -54,7 +54,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
+    "react-icons": "^4.2.0",
     "react-is": "^18.0.0",
     "rooks": "^5.11.0",
     "sqlite3": "^5.0.2",
