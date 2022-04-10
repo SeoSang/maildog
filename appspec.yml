@@ -12,13 +12,15 @@ permissions:
     group: ubuntu
 
 hooks:
-  #  BeforeInstall:
-  #    - location: scripts/clean.sh 
   AfterInstall:
     - location: scripts/stop.sh # 엔진엑스와 연결되어 있지 않은 스프링 부트를 종료합니다.
       timeout: 60
-      runas: ec2-user
+      runas: ubuntu
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 60
+      runas: ubuntu
   ValidateService:
     - location: scripts/health.sh # 새 스프링 부트가 정상적으로 실행됐는지 확인 합니다.
       timeout: 60
-      runas: ec2-user
+      runas: ubuntu
