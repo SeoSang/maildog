@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 pm2 start web/pm2.config.js
 

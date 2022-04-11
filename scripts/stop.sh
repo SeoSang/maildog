@@ -1,3 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-pm2 kill
+ABSPATH=$(readlink -f $0)
+ABSDIR=$(dirname $ABSPATH)
+
+source ${ABSDIR}/stop.sh
