@@ -1,7 +1,10 @@
 #!/bin/sh
 
 sudo mkdir /var/logs
+
+sudo mkdir -p /var/logs/maildog
 sudo touch /var/logs/nginx.pid
+sudo touch /var/logs/maildog/error.log
 
 sudo apt update
 sudo apt install nginx
