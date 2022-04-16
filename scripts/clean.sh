@@ -7,5 +7,3 @@ if [ -d "$REPOSITORY/$PROJECT_DIR/" ]; then
     rm -rf "$REPOSITORY/$PROJECT_DIR/"
 fi
 mkdir -vp $REPOSITORY/$PROJECT_DIR/
-
-sudo rm -rf /opt/codedeploy-agent/deployment-root

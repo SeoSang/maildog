@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo rm -rf /opt/codedeploy-agent/deployment-root
+
 echo "> Health Check Start!"
 
 for RETRY_COUNT in {1..10}
