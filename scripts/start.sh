@@ -6,4 +6,8 @@ pm2 start "$REPOSITORY/web/pm2.config.js"
 
 yes | sudo cp "$REPOSITORY/nginx.conf" /etc/nginx/nginx.conf
 
-sudo nginx -s reload
+if [ -f /var/logs/nginx.pid ]; then
+  sudo nginx -s reload
+else
+  sudo nginx
+fi
