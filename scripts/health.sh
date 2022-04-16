@@ -18,5 +18,3 @@ do
   sleep 10
 done
 
-
-sudo rm -rf /opt/codedeploy-agent/deployment-root
