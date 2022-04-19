@@ -24,7 +24,7 @@ secrets/
 node_modules/
 v3/
 web/v3/
-.env
+.env*
 
 
 # log

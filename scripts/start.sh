@@ -2,6 +2,7 @@
 
 REPOSITORY=/home/ubuntu/maildog
 
+cp /home/ubuntu/.env.production "$REPOSITORY/web"
 cd "$REPOSITORY/web"
 pm2 start pm2.config.js
 
