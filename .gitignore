@@ -30,3 +30,8 @@ web/v3/
 # log
 
 *.log
+
+# 기타
+
+.DS_Store
+*.tsbuildinfo
