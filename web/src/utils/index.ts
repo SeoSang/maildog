@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios'
+import { CookieSerializeOptions, serialize } from 'cookie'
 import httpStatus from 'http-status'
 import { NextApiResponse } from 'next'
-import { CookieSerializeOptions, serialize } from 'cookie'
 
 export const isValidEmail = (email: string): boolean => {
   // eslint-disable-next-line no-useless-escape
@@ -44,3 +44,7 @@ export const setCookie = (
 
   res.setHeader('Set-Cookie', serialize(name, stringValue, options))
 }
+
+export const isProduction =
+  process.env.NODE_ENV === 'production' ||
+  process.env.DEPLOY_ENV === 'production'
