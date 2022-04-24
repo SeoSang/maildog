@@ -29,12 +29,14 @@ jobs:
           aws-region: us-west-1
 
       - name: Download ENV file
+        working-directory: ./web
         run: |
-          aws s3 cp s3://maildog-bucket/maildog/.env.production
+          aws s3 cp s3://maildog-bucket/maildog/.env.production .
 
       - name: Build frontend
         working-directory: ./web
         run: |
+          cat .env.production
           npm install -g yarn
           yarn install --prefer-offline
           yarn build 
