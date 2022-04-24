@@ -17,5 +17,6 @@ switch (process.env.NODE_ENV) {
 }
 
 console.log(`db가 연결됩니다. (환경 : ${process.env.NODE_ENV})`)
+console.log(`db 경로 : ${knexConfig?.connection?.filename}`)
 
 export const db = knex(knexConfig)
