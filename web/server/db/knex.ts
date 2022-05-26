@@ -12,7 +12,7 @@ switch (process.env.NODE_ENV) {
     knexConfig = config.test
     break
   default:
-    knexConfig = config.development
+    knexConfig = config.production
     break
 }
 

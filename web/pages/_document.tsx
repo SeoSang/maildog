@@ -1,5 +1,6 @@
-import { ColorModeScript } from '@chakra-ui/react'
 import React from 'react'
+
+import { ColorModeScript } from '@chakra-ui/react'
 import Document, {
   DocumentContext,
   Head,
@@ -8,6 +9,7 @@ import Document, {
   NextScript,
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+
 import { theme } from '@/src/style/theme'
 
 interface Props {

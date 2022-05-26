@@ -9,6 +9,7 @@ module.exports = {
       args: '',
       env: {
         NODE_ENV: 'production',
+        DB_PATH: '/var/tmp/prod.sqlite3',
       },
     },
   ],
