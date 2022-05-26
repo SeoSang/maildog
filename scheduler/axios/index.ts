@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { API_URL } from "../config"; // TODO : 브라우저에서 전송하는거라 public으로 해야된다... 어떻게 시크릿화할지
+import { API_URL } from "../config";
 
 const API_KEY_BEAXIOS = process.env.API_KEY_BEAXIOS;
 

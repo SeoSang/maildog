@@ -1,14 +1,13 @@
 import bcrypt from 'bcrypt'
 
-import { db } from './knex'
 import { KnexRepository } from '.'
-import { UserInfo } from '../types/user'
 import {
   CONSTANT_KEY_PASSWORD_ENCRYPT,
   UserResultType,
 } from '../types/constant'
+import { UserInfo } from '../types/user'
+import { db } from './knex'
 
-// TODO : 이거 해결
 const KEY_PASSWORD_ENCRYPT = CONSTANT_KEY_PASSWORD_ENCRYPT || 13
 
 export type UserValidateResult = {
