@@ -91,7 +91,7 @@ An email that looks like this will be sent to the target email address !
 
    ```json
    {
-     "my_email": "myeamil@naver.com",
+     "my_email": "myemail@naver.com",
      "password": "email_password",
      "target_emails": ["email1@naver.com", "email2@naver.com"],
      "target_name": "Friends_name"
@@ -114,7 +114,7 @@ An email that looks like this will be sent to the target email address !
        "강아지를 사랑하는 당신에게 ... %s 를 보냅니다.",
        "%s 의 러브레터 도착!"
      ],
-     "target_name": "김망디",
+     "target_name": "홍길동",
      "breed_to_exclude": ["cotondetulear"],
      "breed_to_select": [],
      "img_cnt": 4
